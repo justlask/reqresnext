@@ -6,7 +6,7 @@ export default class Navbar extends Component {
     return (
       <header>
         <div id="name">
-          <p>( req, res, next )</p>
+          <Link to="/"><p>( req, res, next )</p></Link>
         </div>
         <nav>
           <Link title="Signup" to="/signup">Signup</Link>

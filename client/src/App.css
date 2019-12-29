@@ -25,6 +25,10 @@ header {
   font-weight: bold;
 }
 
+#name a {
+  color: white;
+  text-decoration: none;
+}
 #hero {
   display: flex;
   color: #0C0C3E;
@@ -57,16 +61,18 @@ header {
 }
 
 .mainblue {
+  text-decoration: none;
   color: white;
   background-color: #0C0C3E;
   font-size: 26px;
   font-weight: bold;
+  width: 200px;
   padding: 20px 40px;
   border-radius: 32px;
   margin-bottom: 100px;
   border: 0px;
+  margin-left: 50px;
   box-shadow: 0px 10px 10px rgba(8, 8, 8, 0.33);
-  margin-left: -200px;
 }
 
 #about {

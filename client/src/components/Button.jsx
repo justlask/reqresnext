@@ -8,7 +8,7 @@ export default class Button extends Component {
   render() {
     return (
       <div>
-        <button className={this.props.style} >{this.props.title}</button>
+        <button className={this.props.style} onClick={this.props.onClick}>{this.props.title}</button>
       </div>
     )
   }

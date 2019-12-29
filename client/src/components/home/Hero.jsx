@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../Button'
+import { Link } from 'react-router-dom'
 
 export default class Hero extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Hero extends Component {
           Ever get tired of endless post-its, task cards<br></br> that seem to pile on top of each other?<br></br>
           <br></br>Us too. That’s why we made this.
           </p>
-          <Button style="mainblue" title="c'mon it's free"/>
+          <Link to="/signup" className="mainblue">c'mon it's free</Link>
         </div>
         <img src="./MessyDoodle.svg" alt="c/o palblo stanley"/>
       </div>
