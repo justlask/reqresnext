@@ -2,24 +2,27 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import { Link } from 'react-router-dom';
+import Button from '../Button'
 
 class Signup extends Component {
   constructor(props){
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { name: '', email: '', password: '' };
     this.service = new AuthService();
   }
 
   // handleChange() and handleSubmit() will be added here
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
+    const name = this.state.name;
+    const email = this.state.email;
+    const password = this.state.password
   
-    this.service.signup(username, password)
+    this.service.signup(name, email, password)
     .then( response => {
         this.setState({
-            username: "", 
+            name: "",
+            email: "",
             password: "",
         });
         this.props.getUser(response)
@@ -28,6 +31,7 @@ class Signup extends Component {
   }
   
   handleChange = (event) => {  
+    console.log(this.state)
     const {name, value} = event.target;
     this.setState({[name]: value});
   }
@@ -35,22 +39,23 @@ class Signup extends Component {
   render(){
     return(
       // more code will be added here
-      <div>
-      <form onSubmit={this.handleFormSubmit}>
-        <label>Username:</label>
-        <input type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
-        
-        <label>Password:</label>
-        <textarea name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
-        
-        <input type="submit" value="Signup" />
-      </form>
-
-      <p>Already have account? 
-          <Link to={"/"}> Login</Link>
-      </p>
-
-    </div>
+      <main className="signup">
+        <div>
+          <h1>Let's get started.</h1>
+          <p>These projects aren't going to start and organize themselves.</p>
+        </div>
+        <form className="signupform">
+          <h1>Signup</h1>
+          <label>Name</label>
+          <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)}/>
+          <label>Email</label>
+          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
+          <label>Password</label>
+          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+          <Button title="join" className="signupbtn" onClick={this.handleFormSubmit}/>
+          {/* <input type="submit" className="signupbtn" value="Signup" /> */}
+        </form>
+    </main>
     )
   }
 }

@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default class Navbar extends Component {
   render() {
     return (
       <header>
         <div id="name">
-          <Link to="/"><p>( req, res, next )</p></Link>
+          <NavLink to="/"><p>( req, res, next )</p></NavLink>
         </div>
         <nav>
-          <Link title="Signup" to="/signup">Signup</Link>
-          <Link title="Login" to="/login">Login</Link>
+          <NavLink activeClassName='is-active' title="Signup" to="/signup">Signup</NavLink>
+          <NavLink activeClassName='is-active' title="Login" to="/login">Login</NavLink>
         </nav>
       </header>
     )

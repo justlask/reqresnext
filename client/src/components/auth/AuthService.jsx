@@ -9,8 +9,8 @@ class AuthService {
     this.service = service;
   }
 
-  signup = (username, password) => {
-    return this.service.post('/auth/signup', {username, password})
+  signup = (name, email, password) => {
+    return this.service.post('/auth/signup', {name, email, password})
     .then(response => response.data)
   }
 
@@ -19,8 +19,8 @@ class AuthService {
     .then(response => response.data)
   }
 
-  login = (username, password) => {
-    return this.service.post('/auth/login', {username, password})
+  login = (email, password) => {
+    return this.service.post('/auth/login', {email, password})
     .then(response => response.data)
   }
   
