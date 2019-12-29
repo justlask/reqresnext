@@ -1,10 +1,77 @@
 @import url('https://fonts.googleapis.com/css?family=Prompt:400,700&display=swap');
-
+* {
+  margin: 0;
+  padding: 0;
+}
 
 .App {
   text-align: center;
-  background-color: #0C0C3E;
   min-height: 100vh;
-  color: white;
   font-family: 'Prompt'
+}
+
+header {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #0C0C3E;
+  box-shadow: 0px 8px 8px rgba(8, 8, 8, 0.33);
+}
+
+#name {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#hero {
+  display: flex;
+  color: #0C0C3E;
+  padding: 100px;
+}
+
+#herotext {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#herotext h1 {
+  font-size: 48px;
+  text-align: left;
+}
+
+#herotext p {
+  font-size: 22px;
+  text-align: left;
+  padding-bottom: 50px;
+}
+
+#hero img {
+  width: 60%;
+}
+
+.mainblue {
+  color: white;
+  background-color: #0C0C3E;
+  font-size: 28px;
+  padding: 10px 30px;
+  border-radius: 22px;
+  margin-bottom: 100px;
+}
+
+nav a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
 }
