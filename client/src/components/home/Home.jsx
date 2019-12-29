@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Navbar from '../../Navbar'
 import Hero from '../home/Hero'
 import About from '../home/About'
+import Mockups from '../home/Mockups'
 
 export default class Home extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ export default class Home extends Component {
   render() {
     return (
       <main>
-        <Navbar />
         <Hero />
         <About />
+        <Mockups />
       </main>
     )
   }
