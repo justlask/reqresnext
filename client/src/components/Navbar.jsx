@@ -27,7 +27,9 @@ export default class Navbar extends Component {
             <NavLink to="/"><p>( req, res, next )</p></NavLink>
           </div>
           <nav>
-            <Button onClick={this.logout} title="logout"></Button>
+            <NavLink to="/newproject" activeClassName='is-active'>New Project</NavLink>
+            <NavLink to="/dashboard" activeClassName='is-active'>Dashboard</NavLink>
+            <Button className="noButton" onClick={this.logout} title="logout"></Button>
           </nav>
         </header>
       )

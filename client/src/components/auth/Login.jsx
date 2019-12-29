@@ -32,7 +32,7 @@ class Login extends Component {
     
   render(){
     return(
-      <main className="signup">
+      <div className="signup">
         <div>
           <h1>Let's get back to work.</h1>
           <p>These projects aren't going to finish themselves.</p>
@@ -47,7 +47,7 @@ class Login extends Component {
           {/* <input type="submit" value="Login" /> */}
           <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
         </form>
-      </main>
+      </div>
     )
   }
 }

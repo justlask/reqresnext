@@ -163,7 +163,9 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 200px;
+  min-width: 100px;
+  width: 100%;
+  max-width: 400px;
 }
 
 footer {
@@ -235,3 +237,26 @@ footer {
   box-shadow: 0px 10px 10px rgba(8, 8, 8, 0.33);
 }
 
+
+.noButton {
+  color: white;
+  padding:0; 
+  margin:0;
+  border:0;
+  background-color:transparent;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+main {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.flexrow {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}

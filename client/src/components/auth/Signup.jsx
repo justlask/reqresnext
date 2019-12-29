@@ -40,7 +40,7 @@ class Signup extends Component {
   render(){
     return(
       // more code will be added here
-      <main className="signup">
+      <div className="signup">
         <div>
           <h1>Let's get started.</h1>
           <p>These projects aren't going to start and organize themselves.</p>
@@ -56,7 +56,7 @@ class Signup extends Component {
           <Button title="join" className="signupbtn" onClick={this.handleFormSubmit}/>
           {/* <input type="submit" className="signupbtn" value="Signup" /> */}
         </form>
-    </main>
+    </div>
     )
   }
 }
