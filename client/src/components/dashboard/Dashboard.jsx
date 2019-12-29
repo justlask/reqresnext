@@ -3,6 +3,13 @@ import { Link, Redirect } from 'react-router-dom'
 import Button from '../Button'
 
 export default class Dashboard extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    console.log(this.props.user)
+  }
   render() {
     if (this.props.user) {
       return (

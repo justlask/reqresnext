@@ -116,5 +116,3 @@ authRoutes.get('/loggedin', (req, res, next) => {
 });
 
 module.exports = authRoutes;
-
-module.exports = authRoutes;
