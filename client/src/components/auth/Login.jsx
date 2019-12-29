@@ -10,8 +10,8 @@ class Login extends Component {
     this.service = new AuthService();
   }
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  handleFormSubmit = (e) => {
+    e.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
     
@@ -19,6 +19,7 @@ class Login extends Component {
     .then( response => {
         this.setState({ email: "", password: "" });
         this.props.getUser(response)
+        this.props.history.push('/dashboard')
     })
     .catch( error => console.log(error) )
   }
@@ -26,6 +27,7 @@ class Login extends Component {
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
+    console.log(this.state)
   }
     
   render(){
@@ -43,7 +45,7 @@ class Login extends Component {
           <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           
           {/* <input type="submit" value="Login" /> */}
-          <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit()}/>
+          <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
         </form>
       </main>
     )

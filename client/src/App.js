@@ -7,6 +7,7 @@ import Login from './components/auth/Login';
 import Home from './components/home/Home';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
 
 class App extends Component {
   constructor(props){
@@ -36,35 +37,24 @@ class App extends Component {
       loggedInUser: userObj
     })
   }
+
   render() {
     {this.fetchUser()}
-    if(this.state.loggedInUser){
-      return (
-        <div className="App">
-          <Navbar />
-          <Switch>
+    return (
+      <div className="App">
+        <Navbar  user={this.state.loggedInUser} updateUser={this.getTheUser} />
+          <Switch> 
             <Route exact path="/" render={() => <Home />} />
+            <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
+            <Route exact path='/login' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
+            <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/>
             {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>
-          <Footer />
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <Navbar user={this.state.loggedInUser} />
-            <Switch> 
-              <Route exact path="/" render={() => <Home />} />
-              <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
-              <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
-              {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
-              <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
-            </Switch>
-          <Footer />
-        </div>
-      );
-    }
-  }
-}
+        <Footer />
+      </div>
+    )
+  }}
+
+
 export default App;

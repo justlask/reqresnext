@@ -63,7 +63,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // default value for title local
-app.locals.title = 'Express API For React App - Generated with IronGenerator';
+app.locals.title = 'Backend Server';
 
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:

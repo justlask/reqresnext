@@ -67,16 +67,22 @@ authRoutes.post('/signup', (req, res, next) => {
 
 
 authRoutes.post('/login', (req, res, next) => {
+    console.log(req.body)
   passport.authenticate('local', (err, theUser, failureDetails) => {
+      console.log(theUser)
       if (err) {
           res.status(500).json({ message: 'Something went wrong authenticating user' });
+          console.log('if err')
+          console.log(err)
           return;
       }
   
       if (!theUser) {
+          console.log('if !theUser')
           // "failureDetails" contains the error messages
           // from our logic in "LocalStrategy" { message: '...' }.
           res.status(401).json(failureDetails);
+          console.log(failureDetails)
           return;
       }
 
