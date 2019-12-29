@@ -40,14 +40,16 @@ header {
 }
 
 #herotext h1 {
-  font-size: 48px;
+  font-size: 52px;
   text-align: left;
+  padding-bottom: 25px;
 }
 
 #herotext p {
   font-size: 22px;
   text-align: left;
   padding-bottom: 50px;
+  font-weight: bold;
 }
 
 #hero img {
@@ -57,10 +59,52 @@ header {
 .mainblue {
   color: white;
   background-color: #0C0C3E;
-  font-size: 28px;
-  padding: 10px 30px;
-  border-radius: 22px;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 32px;
   margin-bottom: 100px;
+  border: 0px;
+  box-shadow: 0px 10px 10px rgba(8, 8, 8, 0.33);
+  margin-left: -200px;
+}
+
+#about {
+  background-color: #0C0C3E;
+  color: white;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 100px;
+}
+
+.abouttext h1 {
+  font-size: 52px;
+  text-align: right;
+  padding-bottom: 25px;
+}
+
+.abouttext p {
+  font-size: 22px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.boxes {
+  display: flex;
+  width: 90vw;
+  justify-content: space-around;
+}
+
+.boxes > div {
+  width: 20vw;
+  height: 200px;
+  background-color: white;
+  border-radius: 32px;
+  color: #0C0C3E;
+  text-align: left;
+  padding: 32px;
 }
 
 nav a {
@@ -73,5 +117,5 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 300px;
+  width: 200px;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../../Navbar'
 import Hero from '../home/Hero'
+import About from '../home/About'
 
 export default class Home extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Home extends Component {
       <main>
         <Navbar />
         <Hero />
+        <About />
       </main>
     )
   }
