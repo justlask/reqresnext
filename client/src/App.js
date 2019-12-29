@@ -53,7 +53,7 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <Navbar />
+          <Navbar user={this.state.loggedInUser} />
             <Switch> 
               <Route exact path="/" render={() => <Home />} />
               <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>

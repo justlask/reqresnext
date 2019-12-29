@@ -14,6 +14,7 @@ class Login extends Component {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
+    
     this.service.login(email, password)
     .then( response => {
         this.setState({ email: "", password: "" });
