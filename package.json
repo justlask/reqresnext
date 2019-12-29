@@ -1,11 +1,15 @@
-{
+{ 
   "name": "reqresnext",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
+   "version": "1.0.0", 
+   "description": "ReqResNext is a project management platform as a service for solo devs or devs in small teams.",
+   "private": true, 
+   "scripts": { 
+     "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..", 
+     "start": "echo --- start --- && cd server && npm start", 
+     "dev:server": "cd server && npm run dev", 
+     "dev:client": "cd client && npm run start" 
+     }, 
+     "engines": { 
+       "node": "8.9.4" 
+      } 
+    }
