@@ -11,12 +11,15 @@ export default class About extends Component {
         <div className="boxes">
           <div>
             <h3>req</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, nulla.</p>
           </div>
           <div>
             <h3>res</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, temporibus.</p>
           </div>
           <div>
             <h3>next</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, obcaecati.</p>
           </div>
         </div>
       </div>
