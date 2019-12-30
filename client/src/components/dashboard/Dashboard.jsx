@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
         teams: data.teams,
       })
     }) 
-        this.handleCurrent();
+      this.handleCurrent();
   }
 
   handleStatusBar = (proj) => {
@@ -47,12 +47,11 @@ export default class Dashboard extends Component {
 
   showMembers = (proj) => {
     return proj.members.map((elem, i) => {
-
       if (i < 2) {
         return (
           <img src={elem.image} />
-        )
-      }
+        )}
+
       return (
       <p>+{proj.members.length-2}</p>
       )
@@ -66,7 +65,7 @@ export default class Dashboard extends Component {
           <div>
             <img src={project.image} alt=""/>
             <div className="secondaryproject">
-              <h3>{project.title}</h3>
+              <h3><Link to={`/project/${project._id}`}>{project.title}</Link></h3>
               {this.handleStatusBar(project)}
             </div>
           </div>
@@ -92,7 +91,6 @@ export default class Dashboard extends Component {
         projects: data
       })
     });
-    console.log(this.state.projects)
   }
 
   handlePast = (e) => {
@@ -109,7 +107,6 @@ export default class Dashboard extends Component {
         projects: data
       })
     });
-    console.log(this.state.projects)
   }
 
   handleTeam = (id) => {
@@ -123,7 +120,6 @@ export default class Dashboard extends Component {
         projects: data
       })
     });
-    console.log(this.state.projects)
   }
 
 
@@ -146,8 +142,6 @@ export default class Dashboard extends Component {
                 })}
               </ul>
               <div className="projectbuttons">
-              {/* <Button className={this.state.activeButtons.findFriends} name="find friends" onClick={(e) => this.findFriends(e)}></Button>
-            <Button className={this.state.activeButtons.myFriends} name="my friends" onClick={(e) => this.myFriends(e)}></Button> */}
                 <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
                 <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
               </div>

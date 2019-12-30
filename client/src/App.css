@@ -344,7 +344,10 @@ main {
   text-align: right;
 }
 
-
+.account a {
+  color: rgb(92, 92, 92);
+  text-decoration: none;
+}
 .secondaryproject {
   padding: 0px 20px;
   display: flex;
@@ -357,6 +360,11 @@ main {
   margin-left: 7px;
   text-align: left;
   font-size: 22px;
+}
+
+.secondaryproject h3 a {
+  text-decoration: none;
+  color: #0C0C3E;
 }
 
 .meter {

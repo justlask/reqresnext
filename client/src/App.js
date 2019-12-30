@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar'
 import Dashboard from './components/dashboard/Dashboard'
 import NewProject from './components/projects/NewProject'
+import Project from './components/projects/Project'
 
 class App extends Component {
   constructor(props){
@@ -50,6 +51,7 @@ class App extends Component {
             <Route exact path='/login' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
             <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/>
             <Route exact path="/newproject" render={(props) => <NewProject {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>} />
+            <Route path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } />
             {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>
