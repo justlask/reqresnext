@@ -10,19 +10,21 @@ export default class Dashboard extends Component {
     this.state = {
       user: {},
       teams: [],
-      projects: []
+      projects: [],
+      activeButtons: {current: 'activeButton', past: 'notActiveButton'},
     }
   }
 
   componentDidMount() {
+    
     this.service.getUserInfo()
     .then(data => {
       this.setState({
         user: data,
         teams: data.teams,
-        projects: data.projects
       })
     }) 
+        this.handleCurrent();
   }
 
   handleStatusBar = (proj) => {
@@ -45,7 +47,6 @@ export default class Dashboard extends Component {
 
   showMembers = (proj) => {
     return proj.members.map((elem, i) => {
-      console.log(elem)
 
       if (i < 2) {
         return (
@@ -77,6 +78,54 @@ export default class Dashboard extends Component {
     })
   }
 
+  handleCurrent = (e) => {
+    let userID = this.props.user._id
+    let select = false
+
+    this.service.getProjects(select, userID)
+    .then(data => {
+      this.setState({
+        activeButtons: {
+          current: 'activeButton',
+          past: 'notActiveButton',
+        },
+        projects: data
+      })
+    });
+    console.log(this.state.projects)
+  }
+
+  handlePast = (e) => {
+    let userID = this.props.user._id
+    let select = true
+
+    this.service.getProjects(select, userID)
+    .then(data => {
+      this.setState({
+        activeButtons: {
+          current: 'notActiveButton',
+          past: 'activeButton',
+        },
+        projects: data
+      })
+    });
+    console.log(this.state.projects)
+  }
+
+  handleTeam = (id) => {
+    let userID = this.props.user._id
+    let select = id
+    console.log(select)
+
+    this.service.getProjectsByTeam(select, userID)
+    .then(data => {
+      this.setState({
+        projects: data
+      })
+    });
+    console.log(this.state.projects)
+  }
+
 
   render() {
     if (this.props.user) {
@@ -93,12 +142,14 @@ export default class Dashboard extends Component {
               <ul>
                 Teams
                 {this.state.teams.map(team => {
-                return <li>{team.name}</li>
+                return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
                 })}
               </ul>
               <div className="projectbuttons">
-                <Button title="Current Projects" onClick={this.handleProjects}/>
-                <Button title="Past Projects" onClick={this.handleProjects} />
+              {/* <Button className={this.state.activeButtons.findFriends} name="find friends" onClick={(e) => this.findFriends(e)}></Button>
+            <Button className={this.state.activeButtons.myFriends} name="my friends" onClick={(e) => this.myFriends(e)}></Button> */}
+                <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
+                <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
               </div>
             </div>
             <div className="projects">

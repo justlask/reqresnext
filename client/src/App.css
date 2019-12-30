@@ -280,12 +280,14 @@ main {
   text-align: left;
   font-weight: bold;
   align-self: flex-start;
+  padding-bottom: 25px;
 }
 
 .usercard ul li {
   margin-left: 25px;
   font-weight: normal;
   color: rgb(54, 54, 54);
+  cursor: pointer; 
 }
 
 .usercard img {
@@ -300,7 +302,19 @@ main {
 .projectbuttons {
   display: flex;
   flex-direction: column;
+  justify-items: left;
 }
+
+.projectbuttons button {
+  margin-bottom: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
 
 .projectbox {
   display: flex;
@@ -323,6 +337,7 @@ main {
   width: 60vw;
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
 }
 
 .account {
@@ -364,7 +379,7 @@ main {
   background-color: #f7f7f7;
   background-image: linear-gradient(to right,
    rgb(0, 211, 56),
-  rgb(0, 255, 68));
+   rgb(0, 255, 68));
   position: relative;
   overflow: hidden;
 }
@@ -381,4 +396,12 @@ main {
   width: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
+}
+
+.activeButton {
+  color: #0C0C3E;
+}
+
+.notActiveButton {
+  color: rgb(92, 92, 92);
 }

@@ -32,13 +32,37 @@ router.get('/getuserinfo', (req, res, next) => {
   })
 });
 
+router.post('/projects', (req,res,next) => {
+  console.log(req.body.select)
+  console.log(req.body.userID)
+
+  Project.find({ 
+    $and: [ { members: { $in: req.body.userID } }, 
+      { complete: req.body.select}]
+    })
+    .populate('members')
+    .then(data => {
+      console.log(data)
+      res.json(data)
+    })
+});
 
 
-// User.findOne({ name: 'Val' }).populate({
-//   path: 'friends',
-//   // Get friends of friends - populate the 'friends' array for every friend
-//   populate: { path: 'friends' }
-// });
+router.post('/projectsbyteam', (req,res,next) => {
+  console.log(req.body.select)
+  console.log(req.body.userID)
+
+  Project.find({ 
+    $and: [ { members: { $in: req.body.userID } }, 
+      { team: req.body.select}]
+    })
+    .populate('members')
+    .then(data => {
+      console.log(data)
+      res.json(data)
+    })
+});
+
 
 
 module.exports = router;
