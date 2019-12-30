@@ -2,12 +2,14 @@
 * {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .App {
   text-align: center;
   min-height: 100vh;
-  font-family: 'Prompt'
+  font-family: 'Prompt';
+  width: 100vw;
 }
 
 header {
@@ -96,6 +98,8 @@ section {
   align-items: center;
   padding-bottom: 50px;
 }
+
+
 
 .abouttext h1 {
   font-size: 52px;
@@ -250,7 +254,6 @@ footer {
 }
 
 main {
-  padding: 25px;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
