@@ -4,11 +4,10 @@ const User     = require('./user-model')
 const Action   = require('./actions-model')
 const Task     = require('./tasks-model')
 const Team     = require('./teams-model')
-// const Task     = require('./tasks-model')
 
 const projectSchema = new Schema({
   title: String,
-  image: {type: String, default: 'https://www.sketchappsources.com/resources/source-image/web-wireframe-anishtalwar.png'},
+  image: {type: String, default: 'https://i.stack.imgur.com/pbW7A.png'},
   description: String,
   actions: [[{type: Schema.Types.ObjectId, ref: 'Action'}]],
   tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
