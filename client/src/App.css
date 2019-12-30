@@ -254,7 +254,7 @@ footer {
 }
 
 main {
-  min-height: 70vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   color: #0C0C3E;
@@ -346,6 +346,11 @@ main {
 .account {
   text-align: right;
 }
+
+.padding {
+  padding: 25px 50px;
+}
+
 
 .account a {
   color: rgb(92, 92, 92);

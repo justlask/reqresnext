@@ -92,7 +92,7 @@ export default class Project extends Component {
 
   render() {
     return (
-      <main>
+      <main className="padding">
         <div className="icons">
           <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
           <div className="smallimg2">

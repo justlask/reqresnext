@@ -126,7 +126,7 @@ export default class Dashboard extends Component {
   render() {
     if (this.props.user) {
       return (
-        <main>
+        <main className="padding">
           <div className="account">
             <Link to="/editaccount">Edit Account</Link>
           </div>
