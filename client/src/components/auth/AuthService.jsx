@@ -50,6 +50,12 @@ class AuthService {
     return this.service.get(`/project/${projectID}`)
     .then(response => response.data)
   }
+
+
+  getAction = (actionID) => {
+    return this.service.get(`/action/${actionID}`)
+    .then(response => response.data)
+  }
 }
 
 export default AuthService;

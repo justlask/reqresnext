@@ -20,10 +20,6 @@ router.get('/:projectID', (req,res,next) => {
     populate: {
       path: 'tasks',
        model: Task
-      },
-      populate: {
-        path: 'members',
-        model: User
       }
   })
   .then(data => {

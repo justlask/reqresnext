@@ -30,6 +30,7 @@ export default class Dashboard extends Component {
   handleStatusBar = (proj) => {
     let completed = 0
     let total = 0
+    
     proj.actions.forEach(elem => {
       if (elem[0].complete === true) return completed +=1
       else return total +=1

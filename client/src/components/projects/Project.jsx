@@ -4,6 +4,7 @@ import AuthService from '../auth/AuthService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
+import ActionModal from '../actions/ActionModal'
 
 
 export default class Project extends Component {
@@ -11,6 +12,7 @@ export default class Project extends Component {
     super(props)
     this.service = new AuthService();
     this.state = {
+      isOpen: false,
       project: {},
       members: [],
       actions: []
@@ -26,6 +28,7 @@ export default class Project extends Component {
         members: data.members,
         actions: data.actions
       })
+      console.log(this.state.project._id)
     })
   }
 
@@ -36,19 +39,14 @@ export default class Project extends Component {
   }
 
   showActions = () => {
-    console.log(this.state.project)
-    console.log(this.state.actions)
-
-    
     return (
       this.state.actions.map((elem,i) => {
         return (
         <div>
           <h3>{elem[0].title}</h3>
           <img src={elem[0].image} alt=""/>
-          {console.log(elem[0].members)}
           <div className="flexyrow">
-            <img className="statusimg" src={elem[0].members[0].image} alt=""/>
+            <img className="statusimg" src={this.state.members[0].image} alt=""/>
             <div className="meter2">
               {this.handleStatusBar(elem)}
             </div>
@@ -75,20 +73,14 @@ export default class Project extends Component {
   }
 
   handleStatusBar = (elem) => {
-    console.log(elem)
+    let total = 0;
+    let completed = 0;
 
-    //need to think about how im going to handle the status
-    // bar for tasks completed....
-
-    let completed = 0
-    let total = 0
-
-    // elem.tasks.forEach(elem => {
-    //   if (elem[0].complete === true) return completed +=1
-    //   else return total +=1
-    // })
-
-    let percent = ((completed+1)/(completed+total+2))*100
+    elem[0].tasks.forEach(elem => {
+      if (elem.complete === true) return completed +=1
+      else return total +=1
+    })
+    let percent = ((completed)/(completed+total))*100
 
     return (
           <span style={{width: percent + '%'}}></span>
@@ -96,9 +88,20 @@ export default class Project extends Component {
   }
 
 
+  // addAction = () => {
+  //   console.log('we adding this action boo')
+  // }
+
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+
   render() {
     return (
-      <main className="padding">
+      <main className="">
         <div className="icons">
           <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
           <div className="smallimg2">
@@ -107,8 +110,10 @@ export default class Project extends Component {
         </div>
           {this.loadProject()}
           <div className="addaction">
-            <Button title="add action" />
+            <Button onClick={() => this.toggleModal()} title="add action" />
           </div>
+        <ActionModal projectID={this.state.project._id} show={this.state.isOpen} onClose={this.toggleModal}>
+        </ActionModal>
       </main>
     )
   }
