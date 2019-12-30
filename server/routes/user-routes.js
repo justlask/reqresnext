@@ -24,7 +24,7 @@ router.get('/getuserinfo', (req, res, next) => {
   User.findById(req.user.id)
   .populate('teams').populate({
     path: 'projects',
-    populate: {path: 'actions', model: Action}
+    populate: {path: 'actions', model: Action, path: 'members', model: User}
   })
   .select("-password -email")
   .then(data => {

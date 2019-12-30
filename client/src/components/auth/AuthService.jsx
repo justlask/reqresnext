@@ -29,6 +29,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  getUserInfo = () => {
+    return this.service.get('/user/getuserinfo')
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;

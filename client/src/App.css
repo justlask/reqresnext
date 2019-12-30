@@ -250,13 +250,135 @@ footer {
 }
 
 main {
-  min-height: 80vh;
+  padding: 25px;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
+  color: #0C0C3E;
 }
 
 .flexrow {
   display: flex;
   justify-content: space-around;
-  width: 100vw;
+  width: 80vw;
+}
+
+.usercard {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 25px;
+}
+
+.usercard h3 {
+  font-weight: normal;
+  padding-bottom: 10px;
+}
+
+.usercard > ul {
+  text-align: left;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.usercard ul li {
+  margin-left: 25px;
+  font-weight: normal;
+  color: rgb(54, 54, 54);
+}
+
+.usercard img {
+  height: auto;
+  width: 150px;
+  border: none;
+  box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+.projectbuttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectbox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.projectbox div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.projectbox img {
+  height: 150px;
+  width: auto;
+}
+
+.projects {
+  height: 100%;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.account {
+  text-align: right;
+}
+
+
+.secondaryproject {
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+.secondaryproject h3 {
+  margin-top: 25px;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  text-align: left;
+  font-size: 22px;
+}
+
+.meter {
+	height: 30px;
+	position: relative;
+  background: #f7f7f7;
+  background-image: linear-gradient(to right,
+  rgb(212, 211, 211),
+  rgb(238, 234, 234));
+	border-radius: 25px;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);;
+}
+
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #f7f7f7;
+  background-image: linear-gradient(to right,
+   rgb(0, 211, 56),
+  rgb(0, 255, 68));
+  position: relative;
+  overflow: hidden;
+}
+
+.smallimg {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.smallimg img {
+  height: auto;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
 }
