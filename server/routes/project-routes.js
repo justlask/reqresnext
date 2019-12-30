@@ -12,13 +12,19 @@ const Action      = require('../models/actions-model');
 router.get('/:projectID', (req,res,next) => {
   Project.findById(req.params.projectID)
   .populate({
-    path: 'actions', model: Action 
-  })
-  .populate({
-    path: 'tasks', model: Task
-  })
-  .populate({
     path: 'members', model: User
+  })
+  .populate({
+    path: 'actions',
+    model: Action,
+    populate: {
+      path: 'tasks',
+       model: Task
+      },
+      populate: {
+        path: 'members',
+        model: User
+      }
   })
   .then(data => {
     res.json(data)

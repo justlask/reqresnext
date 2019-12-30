@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import AuthService from '../auth/AuthService'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faPlus, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import AuthService from '../auth/AuthService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
+import Button from '../Button'
+
 
 export default class Project extends Component {
   constructor(props) {
@@ -44,7 +46,13 @@ export default class Project extends Component {
         <div>
           <h3>{elem[0].title}</h3>
           <img src={elem[0].image} alt=""/>
-          {/* {this.handleStatusBar(elem)} */}
+          {console.log(elem[0].members)}
+          <div className="flexyrow">
+            <img className="statusimg" src={elem[0].members[0].image} alt=""/>
+            <div className="meter2">
+              {this.handleStatusBar(elem)}
+            </div>
+          </div>
         </div>
         )
       })
@@ -83,9 +91,7 @@ export default class Project extends Component {
     let percent = ((completed+1)/(completed+total+2))*100
 
     return (
-        <div className="meter">
           <span style={{width: percent + '%'}}></span>
-        </div>
     )
   }
 
@@ -100,6 +106,9 @@ export default class Project extends Component {
           </div>
         </div>
           {this.loadProject()}
+          <div className="addaction">
+            <Button title="add action" />
+          </div>
       </main>
     )
   }

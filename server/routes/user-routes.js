@@ -22,7 +22,8 @@ router.post('/upload', uploadCloud.single("image"), (req, res, next) => {
 
 router.get('/getuserinfo', (req, res, next) => {
   User.findById(req.user.id)
-  .populate('teams').populate({
+  .populate('teams')
+  .populate({
     path: 'projects',
     populate: {path: 'actions', model: Action, path: 'members', model: User}
   })

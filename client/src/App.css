@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Prompt';
 }
 
 .App {
@@ -425,7 +426,6 @@ main {
   height: auto;
   width: 50px;
   border-radius: 50%;
-  box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
 }
 
 .activeButton {
@@ -462,16 +462,78 @@ main {
   justify-content: space-around;
   padding: 20px 100px;
 }
-.actions div {
-  width: 25vw;
+.actions > div {
+  text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   padding: 16px;
+  width: 250px;
 }
 
-.actions div img {
+.actions > div > img {
   width: 250px;
   height: auto;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+}
+
+
+
+.meter2 {
+  height: 30px;
+  width: 60%;
+	position: relative;
+  background: #f7f7f7;
+  background-image: linear-gradient(to right,
+  rgb(212, 211, 211),
+  rgb(238, 234, 234));
+	border-radius: 25px;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+}
+
+
+.meter2 span {
+  display: block;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #f7f7f7;
+  background-image: linear-gradient(to right,
+   rgb(0, 211, 56),
+   rgb(0, 255, 68));
+  position: relative;
+  overflow: hidden;
+}
+
+.flexyrow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.statusimg {
+  height: auto;
+  width: 15%;
+  border-radius: 50%;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+}
+
+.addaction {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 100px;
+}
+
+.addaction button {
+  background-color: #0C0C3E;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 32px;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+  cursor: pointer;
 }
