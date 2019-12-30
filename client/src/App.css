@@ -406,10 +406,64 @@ main {
   box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
 }
 
+.smallimg2 {
+  padding-right: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.smallimg2 img {
+  height: auto;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
+}
+
 .activeButton {
   color: #0C0C3E;
 }
 
 .notActiveButton {
   color: rgb(92, 92, 92);
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 36px;
+}
+
+.alignleft {
+  text-align: left;
+  padding-left: 100px;
+}
+
+.alignleft h3 {
+  font-size: 22px;
+}
+.alignleft p {
+  margin-left: 25px;
+}
+
+.actions {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px 100px;
+}
+.actions div {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.actions div img {
+  width: 250px;
+  height: auto;
 }

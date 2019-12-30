@@ -33,9 +33,6 @@ router.get('/getuserinfo', (req, res, next) => {
 });
 
 router.post('/projects', (req,res,next) => {
-  console.log(req.body.select)
-  console.log(req.body.userID)
-
   Project.find({ 
     $and: [ { members: { $in: req.body.userID } }, 
       { complete: req.body.select}]
@@ -49,9 +46,6 @@ router.post('/projects', (req,res,next) => {
 
 
 router.post('/projectsbyteam', (req,res,next) => {
-  console.log(req.body.select)
-  console.log(req.body.userID)
-
   Project.find({ 
     $and: [ { members: { $in: req.body.userID } }, 
       { team: req.body.select}]

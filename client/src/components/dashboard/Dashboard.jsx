@@ -63,7 +63,7 @@ export default class Dashboard extends Component {
       return (
         <div className="projectbox" key={i}>
           <div>
-            <img src={project.image} alt=""/>
+            <Link to={`/project/${project._id}`}><img src={project.image} alt=""/></Link>
             <div className="secondaryproject">
               <h3><Link to={`/project/${project._id}`}>{project.title}</Link></h3>
               {this.handleStatusBar(project)}

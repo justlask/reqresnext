@@ -44,6 +44,12 @@ class AuthService {
     .then(response => response.data)
   }
 
+
+
+  getProject = (projectID) => {
+    return this.service.get(`/project/${projectID}`)
+    .then(response => response.data)
+  }
 }
 
 export default AuthService;
