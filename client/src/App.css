@@ -254,6 +254,18 @@ footer {
   cursor: pointer;
 }
 
+
+.noButtonBlue {
+  color: #0C0C3E;
+  background-color:transparent;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 25px;
+  border: none;
+}
+
 main {
   min-height: 80vh;
   display: flex;
@@ -447,6 +459,7 @@ main {
 .alignleft {
   text-align: left;
   padding-left: 100px;
+  padding-bottom: 25px;
 }
 
 .alignleft h3 {
@@ -459,23 +472,27 @@ main {
 .actions {
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
-  padding: 0px 100px;
+  flex-wrap: wrap;
+  padding-bottom: 50px;
 }
 
 .actions > div {
-  text-align: left;
-  display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 16px;
-  width: 250px;
+}
+
+.actions h3 {
+  text-align: left;
+  margin-left: 25px;
 }
 
 .actions > div > img {
   width: 250px;
   height: auto;
+  justify-self: center;
+  align-self: center;
   margin-bottom: 20px;
   box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
 }
@@ -527,6 +544,7 @@ main {
   justify-content: flex-end;
   align-items: flex-end;
   padding-right: 100px;
+  padding-bottom: 50px;
 }
 
 .addaction button {
@@ -536,34 +554,77 @@ main {
   font-weight: bold;
   padding: 10px 25px;
   border-radius: 32px;
-  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
   cursor: pointer;
 }
 
 .backdrop {
   position: fixed;
+  display: flex;
+  padding-top: 100px;
   background-color: rgba(0,0,0,0.3);
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 
 .modal {
   background-color: #fff;
   border-radius: 5px;
   max-width: 800px;
-  height: 75%;
+  height: 50%;
   overflow: hidden;
   margin: 0 auto;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 4;
 }
 
-.addactionmodal button {
+
+.addactionmodal {
+  display: flex;
+  justify-content: flex-end;
+}
+.addactionmodalbtn {
   background-color: #0C0C3E;
   color: white;
   font-size: 18px;
   font-weight: bold;
   padding: 10px 25px;
   border-radius: 32px;
-  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
   cursor: pointer;
+}
+
+.modalnames {
+  text-align: left;
+  font-weight: bold;
+}
+
+.modalnames p {
+  margin-left: 25px;
+  font-weight: normal;
+}
+
+.actionform {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-around;
+  text-align: left;
+}
+
+.actionform label {
+  text-align: left;
+  margin-left: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.actionform input {
+  border: 2px solid #0C0C3E;
+  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+  border-radius: 32px;
+  padding: 6px;
+  margin-bottom: 25px;
 }

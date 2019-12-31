@@ -14,10 +14,10 @@ export default class Action extends Component {
   componentDidMount() {
     let actionID = this.props.match.params.id
 
+    console.log(actionID)
 
 
 
-    
   }
 
 

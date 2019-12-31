@@ -7,7 +7,7 @@ const Project = require('./projects-model')
 
 const actionSchema = new Schema({
   title: String,
-  image: {type: String, default: 'https://www.sketchappsources.com/resources/source-image/web-wireframe-anishtalwar.png'},
+  image: {type: String, default: 'https://i.stack.imgur.com/pbW7A.png'},
   description: String,
   tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
   members: [{type: Schema.Types.ObjectId, ref: 'User'}],

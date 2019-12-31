@@ -12,9 +12,31 @@ const Action      = require('../models/actions-model');
 router.get('/:actionID', (req,res,next) => {
   console.log(req.params.actionID)
 
+})
 
 
 
+router.post('/:projectID/addaction', (req,res,next) => {
+
+  let newAction = {
+    title: req.body.title,
+    description: req.body.description,
+    project: req.params.projectID,
+    creator: req.user._id,
+    members: [ req.user._id ],
+  }
+
+  // add action
+  Action.create(newAction)
+  .then(action => {
+    // add actionID to project
+
+    Project.findByIdAndUpdate(req.params.projectID, { $push: { actions: action.id }})
+    .then(data => {
+      res.json(data)
+    })
+
+  })
 })
 
 

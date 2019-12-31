@@ -28,7 +28,6 @@ export default class Project extends Component {
         members: data.members,
         actions: data.actions
       })
-      console.log(this.state.project._id)
     })
   }
 
@@ -57,7 +56,6 @@ export default class Project extends Component {
     )
   }
 
-
   loadProject = () => {
     return (
       <div>
@@ -76,28 +74,29 @@ export default class Project extends Component {
     let total = 0;
     let completed = 0;
 
+    console.log(elem)
     elem[0].tasks.forEach(elem => {
       if (elem.complete === true) return completed +=1
       else return total +=1
     })
     let percent = ((completed)/(completed+total))*100
 
+    if (completed === 0 & total === 0) {
+      return (
+        <span style={{width: "0%"}}></span>
+  )
+    }
+
     return (
           <span style={{width: percent + '%'}}></span>
     )
   }
-
-
-  // addAction = () => {
-  //   console.log('we adding this action boo')
-  // }
 
   toggleModal = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
-
 
   render() {
     return (
@@ -112,7 +111,7 @@ export default class Project extends Component {
           <div className="addaction">
             <Button onClick={() => this.toggleModal()} title="add action" />
           </div>
-        <ActionModal projectID={this.state.project._id} show={this.state.isOpen} onClose={this.toggleModal}>
+        <ActionModal project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> />
         </ActionModal>
       </main>
     )
