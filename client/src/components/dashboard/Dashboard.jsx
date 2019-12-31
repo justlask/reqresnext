@@ -116,7 +116,6 @@ export default class Dashboard extends Component {
   handleTeam = (id) => {
     let userID = this.props.user._id
     let select = id
-    console.log(select)
 
     this.service.getProjectsByTeam(select, userID)
     .then(data => {

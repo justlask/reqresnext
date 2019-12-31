@@ -86,14 +86,22 @@ export default class Project extends Component {
   handleStatusBar = (elem) => {
     let total = 0;
     let completed = 0;
+    let percent
 
-    elem[0].tasks.forEach(elem => {
-      if (elem.complete === true) return completed +=1
-      else return total +=1
-    })
-    let percent = ((completed)/(completed+total))*100
+    if (elem[0].tasks.length === 0) {
+      percent = 0
+    }
+    if (elem[0].complete) {
+      percent = 100
+    }
+    else if (elem[0].complete === false && elem[0].tasks.length > 0) {
+      elem[0].tasks.forEach(elem => {
 
-
+        if (elem.complete === true) return completed +=1
+        else return total +=1
+      })
+      percent = ((completed)/(completed+total))*100
+    }
     return (
           <span style={{width: percent + '%'}}></span>
     )
