@@ -19,6 +19,19 @@ export default class Project extends Component {
     }
   }
 
+  updateProject = (newProject) => {
+    console.log('supppppppp')
+    let projectID = this.props.match.params.id
+    this.service.getProject(projectID)
+    .then(data => {
+      this.setState({
+        project: data,
+        members: data.members,
+        actions: data.actions
+      })
+    })
+  }
+
   componentDidMount() {
     let projectID = this.props.match.params.id
     this.service.getProject(projectID)
@@ -42,8 +55,8 @@ export default class Project extends Component {
       this.state.actions.map((elem,i) => {
         return (
         <div>
-          <h3>{elem[0].title}</h3>
-          <img src={elem[0].image} alt=""/>
+          <Link to={`/project/${this.props.match.params.id}/${elem[0]._id}`}><h3>{elem[0].title}</h3></Link>
+          <Link to={`/project/${this.props.match.params.id}/${elem[0]._id}`}><img src={elem[0].image} alt=""/></Link>
           <div className="flexyrow">
             <img className="statusimg" src={this.state.members[0].image} alt=""/>
             <div className="meter2">
@@ -74,18 +87,12 @@ export default class Project extends Component {
     let total = 0;
     let completed = 0;
 
-    console.log(elem)
     elem[0].tasks.forEach(elem => {
       if (elem.complete === true) return completed +=1
       else return total +=1
     })
     let percent = ((completed)/(completed+total))*100
 
-    if (completed === 0 & total === 0) {
-      return (
-        <span style={{width: "0%"}}></span>
-  )
-    }
 
     return (
           <span style={{width: percent + '%'}}></span>
@@ -111,8 +118,7 @@ export default class Project extends Component {
           <div className="addaction">
             <Button onClick={() => this.toggleModal()} title="add action" />
           </div>
-        <ActionModal project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> />
-        </ActionModal>
+        <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
       </main>
     )
   }

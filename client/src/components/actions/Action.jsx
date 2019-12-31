@@ -12,21 +12,22 @@ export default class Action extends Component {
 
 
   componentDidMount() {
-    let actionID = this.props.match.params.id
+    let projectID = this.props.match.params.projectID
+    let actionID = this.props.match.params.actionID
 
     console.log(actionID)
-
-
-
+    console.log(projectID)
   }
 
 
 
   render() {
     return (
-      <div>
-        
-      </div>
+      <main>
+        <h3>BITCH LETS DO THIS ACTION</h3>
+        <p>{this.props.match.params.projectID}</p>
+        <p>{this.props.match.params.actionID}</p>
+      </main>
     )
   }
 }

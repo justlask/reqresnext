@@ -34,6 +34,8 @@ export default class ActionModal extends Component {
           title: '',
           description: ''
         })
+
+      this.props.updateProject();
       this.props.onClose();
     })
   }
