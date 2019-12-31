@@ -10,9 +10,11 @@ const Action      = require('../models/actions-model');
 
 
 router.get('/:actionID', (req,res,next) => {
-  console.log(req.params.actionID)
-
-
+  Action.findById(req.params.actionID)
+  .populate('tasks')
+  .then(response => {
+    res.json(response)
+  })
 });
 
 

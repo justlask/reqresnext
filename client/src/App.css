@@ -449,7 +449,7 @@ main {
 
 .icons {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   font-size: 36px;
   padding: 25px 25px 0px 25px;
@@ -634,4 +634,83 @@ main {
   border-radius: 32px;
   padding: 6px;
   margin-bottom: 25px;
+}
+
+.flexrow2 {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100%;
+}
+
+.flexrow2 img {
+  width: 40vw;
+}
+
+.flexrow2 > div {
+  width: 40vw;
+}
+
+.title {
+  margin-top: -25px;
+  margin-bottom: 25px;
+}
+/* 
+.tasksform {
+} */
+
+.tasksbuttons {
+  color: #0C0C3E;
+  display: flex;
+  border: 5px solid #0C0C3E;
+}
+
+.tasksbuttons button {
+  color: #0C0C3E;
+  border-right: none;
+  font-weight: bold;
+  font-size: 16px;
+  width: 33%;
+  padding: 15px 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.addtask {
+  width: 100%;
+}
+
+.addtask input {
+  width: 60%;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 32px;
+  border: none;
+  background-color: #f7f7f7;
+  border: 2px solid #0C0C3E;
+}
+
+.addtask button {
+  background-color: #0C0C3E;
+  font-weight: bold;
+  color: white;
+  font-size: 22px;
+  border-radius: 32px;
+  width: 75px;
+  cursor: pointer;
+}
+
+.atask {
+  width: 90%;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 32px;
+  border: none;
+  background-color: #f7f7f7;
+  text-align: left;
+}
+
+.taskform {
+  height: 100%;
+  padding: 50px;
 }

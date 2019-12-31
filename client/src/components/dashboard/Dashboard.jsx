@@ -11,6 +11,7 @@ export default class Dashboard extends Component {
       user: {},
       teams: [],
       projects: [],
+      actions: [],
       activeButtons: {current: 'activeButton', past: 'notActiveButton'},
     }
   }
@@ -30,16 +31,30 @@ export default class Dashboard extends Component {
   handleStatusBar = (proj) => {
     let completed = 0
     let total = 0
+    let percent
 
+    this.service.getProject(proj._id)
+    .then(response => {
+      console.log(response.actions[0])
+      let tasks = response.actions[0]
+      let total = 0;
+      let completed = 0;
+      let percent
 
-    
-    proj.actions.forEach(elem => {
-      console.log(elem)
-      if (elem[0].complete === true) return completed +=1
-      else return total +=1
+      if (tasks.length === 0) {
+        percent = 0
+      }
+      else if (tasks.length > 0) {
+        tasks.forEach(elem => {
+          // console.log(elem)
+          if (elem.complete === true) return completed +=1
+          else return total +=1
+        })
+
+        percent = ((completed)/(completed+total))*100
+      }
+
     })
-
-    let percent = ((completed)/(completed+total))*100
 
     return (
         <div className="meter">
