@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
+import TaskCard from '../tasks/TaskCard'
 
 export default class Action extends Component {
   constructor(props) {
     super(props)
     this.service = new AuthService();
     this.state = {
-      action: {}
+      action: {},
+      popOut: 'popouthidden'
     }
   }
-
 
   componentDidMount() {
     let projectID = this.props.match.params.projectID
@@ -24,7 +25,6 @@ export default class Action extends Component {
       this.setState({
         action: response
       })
-      console.log(response)
     })
   }
 
@@ -40,14 +40,14 @@ export default class Action extends Component {
 
   }
 
+
+
   loadTasks = () => {
     console.log(this.state.action.tasks)
     if (this.state.action.tasks) {
       return this.state.action.tasks.map((task, i) => {
         return (
-        <div className="atask">
-           <p>{task.title}</p>
-        </div>
+          <TaskCard task={task} key={task._id} index={i} />
         )
       })
     }
@@ -76,7 +76,7 @@ export default class Action extends Component {
             <div className="tasks">
               <div className="addtask">
                 <input type="text" placeholder="add a task" />
-                <Button title="+"></Button>
+                <Button title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '20px' }} icon={faPlus} />}></Button>
               </div>
               <div className="thetasks">
 
