@@ -10,15 +10,19 @@ export default class addTask extends Component {
     this.service = new AuthService();
     this.state = {
       type: null,
+      title: '',
     }
   }
 
   addTask = (e) => {
     e.preventDefault();
-    console.log(this.props.action)
     if (this.state.type !== null) {
       this.service.addTask(this.props.action, this.state)
       .then(response => {
+        this.setState({
+          title: '',
+          type: null
+        })
         this.props.updateTasks(response);
       })
     }
@@ -49,7 +53,7 @@ export default class addTask extends Component {
           <option value="back-end">back-end</option>
           <option value="bug">bug</option>
         </select>
-        <input type="text" name="title" placeholder="add a task" onChange={(e) => this.handleChange(e)}/>
+        <input type="text" name="title" placeholder="add a task" value={this.state.title} onChange={(e) => this.handleChange(e)}/>
         <Button onClick={e => this.addTask(e)} title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '20px' }} icon={faPlus} />}></Button>
       </form>
     )

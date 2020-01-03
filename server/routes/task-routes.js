@@ -10,7 +10,6 @@ const Action      = require('../models/actions-model');
 
 
 router.post('/complete/:taskID', (req,res,next) => {
-  console.log(req.params.taskID)
   Task.findByIdAndUpdate(req.params.taskID, {complete: true}, {new: true})
   .then(response => {
     res.json(response)
@@ -34,7 +33,6 @@ router.post('/addtask/:actionID', (req,res,next) => {
     .populate('members')
     .populate('tasks')
     .then(response => {
-      console.log(response)
       res.json(response)
     })
   })

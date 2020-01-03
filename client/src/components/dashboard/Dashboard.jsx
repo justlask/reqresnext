@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom' 
 import Button from '../Button'
 import AuthService from '../auth/AuthService'
+import Project from '../dashboard/Project'
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -28,70 +29,11 @@ export default class Dashboard extends Component {
       this.handleCurrent();
   }
 
-  handleStatusBar = (proj) => {
-    let completed = 0
-    let total = 0
-    let percent
-
-    this.service.getProject(proj._id)
-    .then(response => {
-      console.log(response.actions[0])
-      let tasks = response.actions[0]
-      let total = 0;
-      let completed = 0;
-      let percent
-
-      if (tasks.length === 0) {
-        percent = 0
-      }
-      else if (tasks.length > 0) {
-        tasks.forEach(elem => {
-          // console.log(elem)
-          if (elem.complete === true) return completed +=1
-          else return total +=1
-        })
-
-        percent = ((completed)/(completed+total))*100
-      }
-
-    })
-
-    return (
-        <div className="meter">
-          <span style={{width: percent + '%'}}></span>
-        </div>
-    )
-  }
-
-
-  showMembers = (proj) => {
-    return proj.members.map((elem, i) => {
-      if (i < 2) {
-        return (
-          <img src={elem.image} />
-        )}
-
-      return (
-      <p>+{proj.members.length-2}</p>
-      )
-    })
-  }
 
   showProjects = () => {
     return this.state.projects.map((project, i) => {
       return (
-        <div className="projectbox" key={i}>
-          <div>
-            <Link to={`/project/${project._id}`}><img src={project.image} alt=""/></Link>
-            <div className="secondaryproject">
-              <h3><Link to={`/project/${project._id}`}>{project.title}</Link></h3>
-              {this.handleStatusBar(project)}
-            </div>
-          </div>
-          <div className="smallimg">
-              {this.showMembers(project)}
-          </div>
-        </div>
+        <Project project={project} key={i}/>
       )
     })
   }
@@ -153,12 +95,12 @@ export default class Dashboard extends Component {
               <img src={this.state.user.image} alt="profile"/>
               <h2>{this.state.user.name}</h2>
               <h3>{this.state.user.position}</h3>
-              <ul>
+              {/* <ul>
                 Teams
                 {this.state.teams.map(team => {
                 return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
                 })}
-              </ul>
+              </ul> */}
               <div className="projectbuttons">
                 <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
                 <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />

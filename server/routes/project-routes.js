@@ -28,6 +28,40 @@ router.get('/:projectID', (req,res,next) => {
 })
 
 
+router.get('/calculatestatus/:projectID', (req,res,next) => {
+  
+  Project.findById(req.params.projectID)
+  .populate({
+    path: 'members', model: User
+  })
+  .populate({
+    path: 'actions',
+    model: Action,
+    populate: {
+      path: 'tasks',
+       model: Task
+      }
+  })
+  .then(response => {
+      let completed = 0
+      let total = 0
+      let percent = 0
+      
+      response.actions.forEach(elem => {
+        elem[0].tasks.forEach(task => {
+            // console.log(task)
+
+            if (task.complete === true) {
+              return completed += 1
+            }
+            else return total += 1
+        })
+      })
+      percent = (((completed)/(completed+total))*100).toString()
+      res.json(percent)
+  })
+})
+
 
 
 module.exports = router

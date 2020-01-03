@@ -45,9 +45,13 @@ class AuthService {
   }
 
 
-
   getProject = (projectID) => {
     return this.service.get(`/project/${projectID}`)
+    .then(response => response.data)
+  }
+
+  calculatePercent = (projectID) => {
+    return this.service.get(`/project/calculatestatus/${projectID}`)
     .then(response => response.data)
   }
 
