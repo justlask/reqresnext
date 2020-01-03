@@ -62,6 +62,20 @@ class AuthService {
     .then(response => response.data)
   }
 
+  completeTask = (taskID) => {
+    return this.service.post(`/task/complete/${taskID}`, taskID)
+    .then(response => response.data)
+  }
+
+  addTask = (actionID, taskInfo) => {
+    return this.service.post(`/task/addtask/${actionID}`, taskInfo)
+    .then(response => response.data)
+  }
+
+
+
+
+  
 }
 
 export default AuthService;

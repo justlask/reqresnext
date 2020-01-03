@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import TaskCard from '../tasks/TaskCard'
+import AddTask from '../tasks/AddTask'
 
 export default class Action extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Action extends Component {
     this.service = new AuthService();
     this.state = {
       action: {},
-      popOut: 'popouthidden'
+      popOut: 'popouthidden',
     }
   }
 
@@ -41,18 +42,30 @@ export default class Action extends Component {
   }
 
 
+  taskDone = () => {
+    this.loadTasks();
+  }
+
+
+
 
   loadTasks = () => {
     console.log(this.state.action.tasks)
     if (this.state.action.tasks) {
       return this.state.action.tasks.map((task, i) => {
         return (
-          <TaskCard task={task} key={task._id} index={i} />
+          <TaskCard taskDone={this.taskDone} task={task} key={task._id} index={i} />
         )
       })
     }
   }
 
+  updateTasks = (response) => {
+    this.setState({
+      action: response
+    })
+
+  }
 
 
   render() {
@@ -74,12 +87,8 @@ export default class Action extends Component {
               <Button title="Bugs"></Button>
             </div>
             <div className="tasks">
-              <div className="addtask">
-                <input type="text" placeholder="add a task" />
-                <Button title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '20px' }} icon={faPlus} />}></Button>
-              </div>
+              <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
               <div className="thetasks">
-
                 {this.loadTasks()}
               </div>
             </div>

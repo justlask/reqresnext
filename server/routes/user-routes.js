@@ -48,7 +48,6 @@ router.post('/projects', (req,res,next) => {
     })
     .populate('members')
     .then(data => {
-      console.log(data)
       res.json(data)
     })
 });
@@ -61,7 +60,6 @@ router.post('/projectsbyteam', (req,res,next) => {
     })
     .populate('members')
     .then(data => {
-      console.log(data)
       res.json(data)
     })
 });

@@ -449,7 +449,7 @@ main {
 
 .icons {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   font-size: 36px;
   padding: 25px 25px 0px 25px;
@@ -466,6 +466,10 @@ main {
 }
 .alignleft p {
   margin-left: 25px;
+}
+
+.actionpage {
+  padding-bottom: 50px;
 }
 
 .actions {
@@ -640,12 +644,11 @@ main {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .flexrow2 img {
-  width: 40vw;
-  height: auto;
+  height: 400px;
 }
 
 .flexrow2 > div {
@@ -686,6 +689,142 @@ main {
 }
 
 .addtask input {
+  width: 60%;
+  padding: 5px 15px;
+  border-radius: 32px;
+  border: none;
+  background-color: #f7f7f7;
+  font-size: 16px;
+  box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
+  margin-bottom: 20px;
+}
+
+.addtask select {
+  width: 20%;
+  background-color: #f7f7f7;
+  text-align: center;
+  font-weight: bold;
+  color: #0C0C3E;
+  border: 2px solid black;
+  font-size: 16px;
+  border-radius: 62px;
+  padding: 20px 15px;
+  width: 20%;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.addtask button {
+  background-color: #0C0C3E;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-radius: 32px;
+  padding: 2px 15px;
+  width: 10%;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.atask {
+  color: #0C0C3E;
+  font-weight: bold;
+  width: 95%;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 32px;
+  border: none;
+  background-color: #f7f7f7;
+  text-align: left;
+  display: flex;
+  justify-items: space-around;
+}
+
+.atask button {
+  background-color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: 70px;
+  box-shadow: 0px 1px 1px rgba(8, 8, 8, 0.33);
+}
+
+
+.ataskdone {
+  color: rgb(54, 54, 54);
+  width: 95%;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 32px;
+  border: none;
+  background-color: #f7f7f7;
+  text-align: left;
+  display: flex;
+  justify-items: space-around;
+}
+
+.ataskdone button {
+  background-color: rgb(0, 211, 56);
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  height: 100%;
+  max-height: 70px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.popout {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-self: left;
+}
+
+.popout p {
+  font-weight: normal;
+}
+
+.popouthidden {
+  display: none;
+}
+
+
+
+
+
+
+.taskform {
+  height: 100%;
+  padding: 50px;
+  color: #5c5c5c;
+}
+
+
+
+
+/* .addtask {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addtask input {
   width: 75%;
   padding: 10px 15px;
   border-radius: 32px;
@@ -704,79 +843,38 @@ main {
   padding: 2px 15px;
   width: 15%;
   cursor: pointer;
-}
+} */
 
-.atask {
-  color: #0C0C3E;
-  width: 95%;
-  margin-top: 15px;
-  padding: 10px 15px;
-  border-radius: 32px;
-  border: none;
-  background-color: #f7f7f7;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-}
+.commentformbox {
 
-.atask button {
-  background-color: #5c5c5c;
-  cursor: pointer;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 50%;
-  text-align: center;
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  max-height: 70px;
-}
-
-
-.ataskdone {
-  color: rgb(54, 54, 54);
-  width: 95%;
-  margin-top: 15px;
-  padding: 10px 15px;
-  border-radius: 32px;
-  border: none;
-  background-color: #f7f7f7;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-}
-
-.taskdone button {
-  background-color: rgb(0, 211, 56);
-  cursor: pointer;
   padding: 5px 10px;
-  border: none;
-  border-radius: 50%;
-  height: 100%;
-  max-height: 70px;
-  text-align: center;
+}
+
+
+.commentform {
   display: flex;
-  justify-content: center;
+  background-color: white;
+  margin: 15px;
+  padding: 5px 10px;
+  justify-content: space-between;
   align-items: center;
+  border-radius: 16px;
+  box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
 }
 
-.popout {
-
-}
-
-.popouthidden {
-  display: none;
-}
-
-
-
-
-
-
-.taskform {
-  height: 100%;
-  padding: 50px;
+.commentform input {
   color: #5c5c5c;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: none;
+  width: 30vw;
 }
 
+.commentform button {
+  background-color: #0C0C3E;
+  width: 55px;
+  padding: 5px 10px;
+  border-radius: 16px;
+}

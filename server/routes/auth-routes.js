@@ -10,7 +10,6 @@ const User       = require('../models/user-model');
 
 
 authRoutes.post('/signup', (req, res, next) => {
-    console.log(req.body)
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -67,7 +66,6 @@ authRoutes.post('/signup', (req, res, next) => {
 
 
 authRoutes.post('/login', (req, res, next) => {
-    console.log(req.body)
   passport.authenticate('local', (err, theUser, failureDetails) => {
       console.log(theUser)
       if (err) {
