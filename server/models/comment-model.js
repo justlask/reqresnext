@@ -11,7 +11,7 @@ const commentSchema = new Schema({
   owner: {type: Schema.Types.ObjectId, ref: 'User'},
   project: {type: Schema.Types.ObjectId, ref: 'Project'},
   action: {type: Schema.Types.ObjectId, ref: 'Action'},
-  task: [{type: Schema.Types.ObjectId, ref: 'Task'}]
+  task: {type: Schema.Types.ObjectId, ref: 'Task'}
 },
 {timestamps: true});
 

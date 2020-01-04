@@ -3,6 +3,7 @@ import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
+import TaskComment from './TaskComment';
 
 export default class TaskCard extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class TaskCard extends Component {
       popOut: 'popouthidden',
       isDone: false,
       handleDone: 'atask',
-      color: '#f7f7f7'
+      color: '#f7f7f7',
+      commentAdded: false
     }
   }
 
@@ -40,6 +42,16 @@ export default class TaskCard extends Component {
     })
   }
 
+  commentAdded = () => {
+    this.setState({
+      commentAdded: true
+    })
+  }
+
+  loadComments = () => {
+    console.log(this.props.task.comments)
+  }
+
   render() {
     if (this.props.task.complete) {
       return (
@@ -50,11 +62,9 @@ export default class TaskCard extends Component {
             <div className={this.state.popOut}>
               <p> ---> hidden content</p>
               <p>{this.props.task._id}</p>
+              {this.loadComments()}
               <div className="commentformbox">
-                <form className="commentform">
-                  <input type="text" placeholder="add note..."/>
-                  <Button title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '16px' }} icon={faPlus} />}></Button>
-                </form>
+                <TaskComment project={this.props.project} action={this.props.action} task={this.props.task._id} commentAdded={this.commentAdded} />
               </div>
             </div>
           </div>

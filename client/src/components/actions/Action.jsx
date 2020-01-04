@@ -50,11 +50,10 @@ export default class Action extends Component {
 
 
   loadTasks = () => {
-    console.log(this.state.action.tasks)
     if (this.state.action.tasks) {
       return this.state.action.tasks.map((task, i) => {
         return (
-          <TaskCard taskDone={this.taskDone} task={task} key={task._id} index={i} />
+          <TaskCard project={this.props.match.params.projectID} action={this.props.match.params.actionID} taskDone={this.taskDone} task={task} key={task._id} index={i} />
         )
       })
     }

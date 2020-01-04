@@ -34,13 +34,11 @@ export default class addTask extends Component {
   handleSelect = (e) => {
     const {name, value} = e.target;
     this.setState({[name]: value});
-    console.log(this.state)
   }
 
   handleChange = (e) => {
     const {name, value} = e.target;
     this.setState({[name]: value});
-    console.log(this.state)
   }
 
 

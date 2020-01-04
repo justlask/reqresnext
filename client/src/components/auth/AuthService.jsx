@@ -76,8 +76,10 @@ class AuthService {
     .then(response => response.data)
   }
 
-
-
+  addTaskComment = (projectID, actionID, taskID, commentInfo) => {
+    return this.service.post(`/comment/add/${projectID}/${actionID}/${taskID}`, commentInfo)
+    .then(response => response.data)
+  }
 
   
 }

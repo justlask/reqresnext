@@ -82,6 +82,7 @@ app.use('/api/user', require('./routes/user-routes'));
 app.use('/api/project', require('./routes/project-routes'));
 app.use('/api/action', require('./routes/action-routes'));
 app.use('/api/task', require('./routes/task-routes'));
+app.use('/api/comment', require('./routes/comment-routes'));
 
 
 
