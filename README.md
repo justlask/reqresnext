@@ -1,28 +1,10 @@
-# this is my template
+# ReqResNext
+## ReqResNext is a project management platform for solo devs (or small teams)
 
-
-# base folders will need to be initialized with npm
-
-#  .gitignore 
-/client/build
-node_modules
-
-
-# package.json
-{
-  "name": "YOUR PROJECTS NAME",
-  "version": "2.0.0",
-  "private": true,
-  "scripts": {
-    "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
-    "start": "echo --- start --- && cd server && npm start",
-    "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run start"
-  },
-  "engines": {
-    "node": "8.9.4"
-  }
-}
-
+# How to begin
+#### first create an account
+#### then create a new project
+#### add 'actions' ie: signup page and functionality
+#### then add tasks (front-end,back-end, bugs) to that action
 
 

@@ -87,6 +87,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  getComments = (taskID) => {
+    return this.service.get(`/comment/${taskID}`)
+    .then(response => response.data)
+  }
+
   
 }
 

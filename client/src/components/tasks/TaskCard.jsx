@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import AddTaskComment from './AddTaskComment';
+import TaskComment from './TaskComment'
 
 export default class TaskCard extends Component {
   constructor(props) {
@@ -14,8 +15,20 @@ export default class TaskCard extends Component {
       isDone: false,
       handleDone: 'atask',
       color: '#f7f7f7',
-      commentAdded: false
+      commentAdded: false,
+      comments: []
     }
+  }
+
+  componentDidMount() {
+    //get the comments for the task card
+    this.service.getComments(this.props.task._id)
+    .then(response => {
+      this.setState({
+        comments: response
+      })
+    })
+    // console.log(this.state.comments)
   }
 
   showPopout = () => {
@@ -44,28 +57,33 @@ export default class TaskCard extends Component {
 
   commentAdded = (response) => {
     console.log(`you've added a comment`)
+    this.setState({
+      comments: response
+    })
+
   }
 
   loadComments = () => {
-    console.log(this.props.task.comments)
-    return this.props.task.comments.map((comment,i) => {
-      console.log(comment)
-      return (
-        <div>
-          <p>{comment.description}</p>
-          <sub>{comment.owner.name}</sub>
-        </div>
-      )
-    })
+    console.log(this.state.comments)
+    if (this.state.comments.length !== 0) {
+      return this.state.comments.map((comment,i) => {
+        console.log(comment)
+        return (
+          <TaskComment comment={comment}/>
+        )
+      })
+    }
   }
 
   render() {
     if (this.props.task.complete) {
       return (
         <div className='ataskdone' key={this.props.task._id}>
-                 <Button onClick={e => this.handleDone()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
+          <div className="buttontitle">
+            <Button onClick={e => this.handleDone()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
+            <p style={{paddingTop: '5px'}} onClick={this.showPopout}>{this.props.task.title}</p>
+          </div>
           <div>
-            <p style={{paddingTop: '5px'}}onClick={this.showPopout}>{this.props.task.title}</p>
             <div className={this.state.popOut}>
               {this.loadComments()}
               <div className="commentformbox">
@@ -79,9 +97,11 @@ export default class TaskCard extends Component {
     else {
       return (
         <div className={this.state.handleDone} key={this.props.task._id}>
-                 <Button onClick={e => this.handleDone()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
-          <div>
+          <div className="buttontitle">
+            <Button onClick={e => this.handleDone()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
             <p style={{paddingTop: '5px'}}onClick={this.showPopout}>{this.props.task.title}</p>
+          </div>
+          <div>
             <div className={this.state.popOut}>
               {this.loadComments()}
               <div className="commentformbox">

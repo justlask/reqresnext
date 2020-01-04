@@ -74,7 +74,6 @@ export default class Action extends Component {
 
 
   loadTasks = () => {
-    console.log(this.state.tasks)
     if (this.state.tasks) {
       return this.state.tasks.map((task, i) => {
         return (

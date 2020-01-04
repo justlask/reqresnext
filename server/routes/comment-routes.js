@@ -42,9 +42,21 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
         }
     })
     .then(response => {
-      res.json(response)
+      res.json(response.comments)
     })
   })
+});
+
+
+
+
+router.get(`/:taskID`, (req,res,next) => {
+  Comment.find({task: req.params.taskID})
+  .populate('owner')
+  .then(comments =>
+    // res.json(comments)
+    res.json(comments)
+  )
 })
 
 

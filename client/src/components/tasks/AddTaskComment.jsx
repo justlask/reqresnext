@@ -25,13 +25,13 @@ export default class TaskComment extends Component {
     let actionID = this.props.action
     let taskID = this.props.task
 
-    console.log(this.props)
-
-
     this.service.addTaskComment(projectID, actionID, taskID, this.state)
     .then(response => {
         console.log(response)
-        this.props.commentAdded();
+        this.setState({
+          description: ''
+        })
+        this.props.commentAdded(response);
     })
   }
 

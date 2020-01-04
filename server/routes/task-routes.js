@@ -7,6 +7,7 @@ const User        = require('../models/user-model');
 const Project     = require('../models/projects-model');
 const Task        = require('../models/tasks-model');
 const Action      = require('../models/actions-model');
+const Comment     = require('../models/comment-model')
 
 
 router.post('/complete/:taskID', (req,res,next) => {
@@ -22,7 +23,14 @@ router.get('/:actionID/:type', (req,res,next) => {
     req.params.type = 'front-end'
   }
   Task.find({ $and: [ { action: { $in: req.params.actionID } }, { type: req.params.type}]})
-  .populate('comments')
+  .populate({
+    path: 'comments',
+    model: Comment,
+    populate: {
+      path: 'owner',
+       model: User
+      }
+  })
   .sort({complete: 1})
   .then(data => {
     res.json(data)
@@ -45,7 +53,14 @@ router.post('/addtask/:actionID', (req,res,next) => {
     .then(response => {
 
     Task.find({ $and: [ { action: { $in: req.params.actionID } }, { type: req.body.type}]})
-      .populate('comments')
+      .populate({
+        path: 'comments',
+        model: Comment,
+        populate: {
+          path: 'owner',
+           model: User
+          }
+      })
       .sort({complete: 1})
       .then(data => {
         res.json(data)
