@@ -11,6 +11,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import NewProject from './components/projects/NewProject'
 import Project from './components/projects/Project'
 import Action from './components/actions/Action'
+import Profile from './components/account/Profile';
 
 class App extends Component {
   constructor(props){
@@ -54,7 +55,7 @@ class App extends Component {
             <Route exact path="/newproject" render={(props) => <NewProject {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>} />
             <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } />
             <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route>
-
+            <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route>
             {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>

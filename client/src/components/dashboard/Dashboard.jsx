@@ -88,7 +88,7 @@ export default class Dashboard extends Component {
       return (
         <main className="padding">
           <div className="account">
-            <Link to="/editaccount">Edit Account</Link>
+            <Link to="/account">Edit Account</Link>
           </div>
           <div className="flexrow">
             <div className="usercard">

@@ -15,7 +15,8 @@ export default class Action extends Component {
       action: {},
       tasks: [],
       popOut: 'popouthidden',
-      type: 'front-end'
+      type: 'front-end',
+      activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
     }
   }
 
@@ -33,7 +34,8 @@ export default class Action extends Component {
     this.service.getTasks(actionID, 'front-end')
     .then(response => {
       this.setState({
-        tasks: response
+        tasks: response,
+        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
       })
     })
   }
@@ -42,7 +44,8 @@ export default class Action extends Component {
     this.service.getTasks(this.props.match.params.actionID, 'front-end')
     .then(response => {
       this.setState({
-        tasks: response
+        tasks: response,
+        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
       })
     })
   }
@@ -51,7 +54,8 @@ export default class Action extends Component {
     this.service.getTasks(this.props.match.params.actionID, 'back-end')
     .then(response => {
       this.setState({
-        tasks: response
+        tasks: response,
+        activeButtons: {frontEnd: 'notActiveActionButton', backEnd: 'activeActionButton', bugs: 'notActiveActionButton'},
       })
     })
   }
@@ -60,7 +64,8 @@ export default class Action extends Component {
     this.service.getTasks(this.props.match.params.actionID, 'bug')
     .then(response => {
       this.setState({
-        tasks: response
+        tasks: response,
+        activeButtons: {frontEnd: 'notActiveActionButton', backEnd: 'notActiveActionButton', bugs: 'activeActionButton'},
       })
     })
   }
@@ -104,9 +109,9 @@ export default class Action extends Component {
           <img src={this.state.action.image} alt=""/>
           <div className="tasksform">
             <div className="tasksbuttons">
-              <Button onClick={e => this.getFrontEnd()} title="Front-End"></Button>
-              <Button onClick={e => this.getBackEnd()} title="Back-End"></Button>
-              <Button onClick={e => this.getBugs()} title="Bugs"></Button>
+              <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
+              <Button className={this.state.activeButtons.backEnd} onClick={e => this.getBackEnd()} title="Back-End"></Button>
+              <Button className={this.state.activeButtons.bugs} onClick={e => this.getBugs()} title="Bugs"></Button>
             </div>
             <div className="tasks">
               <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />

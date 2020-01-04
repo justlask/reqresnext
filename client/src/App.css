@@ -663,13 +663,12 @@ main {
 } */
 
 .tasksbuttons {
-  color: #0C0C3E;
   display: flex;
-  border: 5px solid #0C0C3E;
+  justify-content: space-evenly;
 }
 
 .tasksbuttons button {
-  color: #0C0C3E;
+  border: 2px solid #0C0C3E;
   border-right: none;
   font-weight: bold;
   font-size: 16px;
@@ -887,9 +886,37 @@ main {
 .taskcomment {
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  margin: 5px 35px;
 }
 
 .taskcomment sub {
   text-align: right;
+  font-weight: normal;
+}
+
+.activeActionButton {
+  background-color: #0C0C3E;
+  color: white;
+}
+
+.notActiveActionButton {
+  color: #0C0C3E;
+  background-color: white;
+}
+
+.accountpage {
+  display: flex;
+  flex-direction: row;
+}
+
+.userInfo {
+  padding: 50px;
+  width: 50vw;
+}
+
+.userInfo img {
+  height: 200px;
+  width: auto;
+  border-radius: 50%;
+  box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
 }
