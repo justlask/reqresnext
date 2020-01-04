@@ -3,7 +3,7 @@ import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
-import TaskComment from './TaskComment';
+import AddTaskComment from './AddTaskComment';
 
 export default class TaskCard extends Component {
   constructor(props) {
@@ -42,14 +42,21 @@ export default class TaskCard extends Component {
     })
   }
 
-  commentAdded = () => {
-    this.setState({
-      commentAdded: true
-    })
+  commentAdded = (response) => {
+    console.log(`you've added a comment`)
   }
 
   loadComments = () => {
     console.log(this.props.task.comments)
+    return this.props.task.comments.map((comment,i) => {
+      console.log(comment)
+      return (
+        <div>
+          <p>{comment.description}</p>
+          <sub>{comment.owner.name}</sub>
+        </div>
+      )
+    })
   }
 
   render() {
@@ -60,11 +67,9 @@ export default class TaskCard extends Component {
           <div>
             <p style={{paddingTop: '5px'}}onClick={this.showPopout}>{this.props.task.title}</p>
             <div className={this.state.popOut}>
-              <p> ---> hidden content</p>
-              <p>{this.props.task._id}</p>
               {this.loadComments()}
               <div className="commentformbox">
-                <TaskComment project={this.props.project} action={this.props.action} task={this.props.task._id} commentAdded={this.commentAdded} />
+                <AddTaskComment project={this.props.project} action={this.props.action} task={this.props.task._id} commentAdded={this.commentAdded} />
               </div>
             </div>
           </div>
@@ -78,13 +83,9 @@ export default class TaskCard extends Component {
           <div>
             <p style={{paddingTop: '5px'}}onClick={this.showPopout}>{this.props.task.title}</p>
             <div className={this.state.popOut}>
-              <p> ---> hidden content</p>
-              <p>{this.props.task._id}</p>
+              {this.loadComments()}
               <div className="commentformbox">
-                <form className="commentform">
-                  <input type="text" placeholder="add note..."/>
-                  <Button title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '16px' }} icon={faPlus} />}></Button>
-                </form>
+                <AddTaskComment project={this.props.project} action={this.props.action} task={this.props.task._id} commentAdded={this.commentAdded} />
               </div>
             </div>
           </div>

@@ -16,10 +16,22 @@ router.post('/complete/:taskID', (req,res,next) => {
   })
 })
 
+router.get('/:actionID/:type', (req,res,next) => {
+  console.log(req.body)
+  if (req.params.type === undefined) {
+    req.params.type = 'front-end'
+  }
+  Task.find({ $and: [ { action: { $in: req.params.actionID } }, { type: req.params.type}]})
+  .populate('comments')
+  .sort({complete: 1})
+  .then(data => {
+    res.json(data)
+  })
+})
+
 
 
 router.post('/addtask/:actionID', (req,res,next) => {
-
   const newTask = {
     title: req.body.title,
     owner: req.user.id,
@@ -30,10 +42,16 @@ router.post('/addtask/:actionID', (req,res,next) => {
   Task.create(newTask)
   .then(newTask => {
     Action.findByIdAndUpdate(req.params.actionID, { $push: { tasks: newTask.id }}, {new: true})
-    .populate('members')
-    .populate('tasks')
     .then(response => {
-      res.json(response)
+
+    Task.find({ $and: [ { action: { $in: req.params.actionID } }, { type: req.body.type}]})
+      .populate('comments')
+      .sort({complete: 1})
+      .then(data => {
+        res.json(data)
+      })
+      // console.log(response)
+      // res.json(response)
     })
   })
 

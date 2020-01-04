@@ -33,7 +33,14 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
   .then(comment => {
 
     Task.findByIdAndUpdate(req.params.taskID, { $push: { comments: comment.id }}, {new: true})
-    .populate('comments')
+    .populate({
+      path: 'comments',
+      model: Comment,
+      populate: {
+        path: 'owner',
+         model: User
+        }
+    })
     .then(response => {
       res.json(response)
     })

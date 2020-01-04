@@ -81,6 +81,12 @@ class AuthService {
     .then(response => response.data)
   }
 
+
+  getTasks = (actionID, type) => {
+    return this.service.get(`/task/${actionID}/${type}`)
+    .then(response => response.data)
+  }
+
   
 }
 
