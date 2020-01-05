@@ -12,7 +12,8 @@ import NewProject from './components/projects/NewProject'
 import Project from './components/projects/Project'
 import Action from './components/actions/Action'
 import Profile from './components/account/Profile';
-import AboutUs from './components/home/AboutUs'
+import AboutUs from './components/about/AboutUs'
+import Blog from './components/blog/Blog'
 
 class App extends Component {
   constructor(props){
@@ -58,6 +59,7 @@ class App extends Component {
             <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route>
             <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route>
             <Route exact path="/about" render={(props) => <AboutUs />}></Route>
+            <Route exact path="/blog" render={(props) => <Blog />}></Route>
             {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>

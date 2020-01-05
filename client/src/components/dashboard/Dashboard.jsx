@@ -82,6 +82,19 @@ export default class Dashboard extends Component {
     });
   }
 
+  handleTeams = () => {
+    if (this.state.teams.length > 0) {
+      return (
+        <ul>
+          Teams
+          {this.state.teams.map(team => {
+            return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
+          })}
+        </ul>
+      )
+    }
+  }
+
 
   render() {
     if (this.props.user) {
@@ -92,12 +105,7 @@ export default class Dashboard extends Component {
               <img src={this.state.user.image} alt="profile"/>
               <h2>{this.state.user.name}</h2>
               <h3>{this.state.user.position}</h3>
-              <ul>
-                Teams
-                {this.state.teams.map(team => {
-                return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
-                })}
-              </ul>
+              {this.handleTeams()}
               {/* <div className="projectbuttons">
                 <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
                 <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />

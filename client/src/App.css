@@ -186,10 +186,38 @@ nav {
 }
 
 footer {
+  display: flex;
   background-color: #0C0C3E;
-  padding: 25px 50px;
+  padding: 50px 0px;
   color: white;
   text-align: left;
+}
+
+footer #name {
+  padding-left: 50px;
+  width: 40%;
+  font-size: 20px;
+}
+
+.footerlinks {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerlinks hr {
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.footerlinks a {
+  color: #f7f7f7;
+  text-decoration: none;
+  width: 40%;
+}
+
+.footerlinks a:hover {
+  color: #9e9e9e;
 }
 
 .is-active {
@@ -350,23 +378,6 @@ main {
   margin-bottom: 25px;
 }
 
-/* .projectbuttons {
-  display: flex;
-  flex-direction: column;
-  justify-items: left;
-}
-
-.projectbuttons button {
-  margin-bottom: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: left;
-} */
-
-
-
 .projectbox {
   display: flex;
   width: 60vw;
@@ -507,32 +518,6 @@ main {
   align-items: center;
   justify-content: center;
 }
-
-/* .actions > div {
-  display: flex;
-  width: 40vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0px;
-  width: 25vw;
-}
-
-.actions div a  {
-  text-align: left;
-  color: #0C0C3E;
-  text-decoration: none;
-}
-
-
-.actions > div > a > img {
-  width: 150px;
-  height: auto;
-  justify-self: center;
-  align-self: center;
-  box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
-} */
 
 .actions .secondaryproject {
   width: 50%;
@@ -872,37 +857,6 @@ main {
 }
 
 
-
-
-/* .addtask {
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.addtask input {
-  width: 75%;
-  padding: 10px 15px;
-  border-radius: 32px;
-  border: none;
-  background-color: #f7f7f7;
-  font-size: 16px;
-}
-
-.addtask button {
-  background-color: #0C0C3E;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  border-radius: 32px;
-  padding: 2px 15px;
-  width: 15%;
-  cursor: pointer;
-} */
-
 .commentformbox {
   padding: 5px 10px;
 }
@@ -1075,13 +1029,3 @@ main {
   border: none;
   cursor: pointer;
 }
-
-
-
-/* .activeButton {
-  color: #0C0C3E;
-}
-
-.notActiveButton {
-  color: rgb(92, 92, 92);
-} */
