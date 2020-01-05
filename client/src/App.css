@@ -225,10 +225,10 @@ footer {
   border: 2px solid #0C0C3E;
   box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
   width: 32vw;
-  border-radius: 32px;
+  border-radius: 8px;
   padding: 6px;
   margin-left: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   font-size: 16px;
   color: #0C0C3E;
   padding: 5px 10px;
@@ -244,7 +244,7 @@ footer {
   width: 200px;
   margin-top: 15px;
   padding: 10px 20px;
-  border-radius: 32px;
+  border-radius: 8px;
   box-shadow: 0px 10px 10px rgba(8, 8, 8, 0.33);
 }
 
@@ -354,13 +354,12 @@ main {
 
 .projectbox {
   display: flex;
-  width: 40vw;
-  padding: 5px 10px;
+  width: 50vw;
+  padding: 20px 0px 10px 0px;
 }
 
 .projectbox div {
   display: flex;
-  margin-bottom: 25px;
 }
 
 .projectbox img {
@@ -469,8 +468,7 @@ main {
 }
 
 .alignleft {
-  text-align: left;
-  padding-left: 100px;
+  text-align: center;
   padding-bottom: 25px;
 }
 
@@ -486,16 +484,17 @@ main {
 }
 
 .actions {
-  width: 90vw;
+  width: 100vw;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding-bottom: 50px;
-  margin: 0px 5vw;
+  align-items: center;
+  justify-content: center;
 }
 
-.actions > div {
+/* .actions > div {
+  display: flex;
+  width: 40vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -506,19 +505,38 @@ main {
 
 .actions div a  {
   text-align: left;
-  margin-left: 25px;
   color: #0C0C3E;
   text-decoration: none;
 }
 
 
 .actions > div > a > img {
-  width: 250px;
+  width: 150px;
   height: auto;
   justify-self: center;
   align-self: center;
-  margin-bottom: 20px;
   box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
+} */
+
+.actions .secondaryproject {
+  width: 50%;
+  height: 100%;
+}
+
+.actions .projectbox > img {
+  margin-left: 75px;
+}
+
+.actions .projectbox {
+  width: 60vw;
+  padding: 10px 0px 10px 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.actions a {
+  text-decoration: none;
+  color: #0C0C3E;
 }
 
 
@@ -533,7 +551,6 @@ main {
   rgb(238, 234, 234));
 	border-radius: 4px;
   box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
-  margin-left: 10px;
 }
 
 
@@ -552,6 +569,7 @@ main {
 
 .flexyrow {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -559,7 +577,7 @@ main {
 
 .statusimg {
   height: auto;
-  width: 15%;
+  width: 30px;
   border-radius: 50%;
 }
 
@@ -577,7 +595,7 @@ main {
   font-size: 18px;
   font-weight: bold;
   padding: 10px 25px;
-  border-radius: 32px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -649,7 +667,7 @@ main {
 .actionform input {
   border: 2px solid #0C0C3E;
   box-shadow: 0px 3px 6px rgba(8, 8, 8, 0.33);
-  border-radius: 32px;
+  border-radius: 8px;
   padding: 6px;
   margin-bottom: 25px;
 }
@@ -1025,10 +1043,9 @@ main {
 
 .projectbuttons {
   display: flex;
-  width: 40vw;
+  width: 50vw;
   justify-content: space-evenly;
   background-color: #f7f7f7;
-  margin-bottom: 25px;
 }
 
 .projectbuttons button {

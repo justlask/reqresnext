@@ -18,7 +18,7 @@ export default class Project extends Component {
       let bgColor
       console.log(this.props.i)
       if (this.props.i % 2 === 1) {
-        bgColor = '#fff'
+        bgColor = '#eeeeee'
       }
       else {
         bgColor = '#f7f7f7'

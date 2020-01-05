@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import ActionModal from '../actions/ActionModal'
+import ProjectAction from './ProjectAction'
 
 
 export default class Project extends Component {
@@ -20,7 +21,6 @@ export default class Project extends Component {
   }
 
   updateProject = (newProject) => {
-    console.log('supppppppp')
     let projectID = this.props.match.params.id
     this.service.getProject(projectID)
     .then(data => {
@@ -54,16 +54,7 @@ export default class Project extends Component {
     return (
       this.state.actions.map((elem,i) => {
         return (
-        <div>
-          <Link to={`/project/${this.props.match.params.id}/${elem._id}`}><h3>{elem.title}</h3></Link>
-          <Link to={`/project/${this.props.match.params.id}/${elem._id}`}><img src={elem.image} alt=""/></Link>
-          <div className="flexyrow">
-            <img className="statusimg" src={this.state.members[0].image} alt=""/>
-            <div className="meter2">
-              {this.handleStatusBar(elem)}
-            </div>
-          </div>
-        </div>
+          <ProjectAction members={this.state.members} projectID={this.props.match.params.id} elem={elem} key={i} i={i}/>
         )
       })
     )
@@ -83,29 +74,7 @@ export default class Project extends Component {
     )
   }
 
-  handleStatusBar = (elem) => {
-    let total = 0;
-    let completed = 0;
-    let percent
 
-    if (elem.tasks.length === 0) {
-      percent = 0
-    }
-    if (elem.complete) {
-      percent = 100
-    }
-    else if (elem.complete === false && elem.tasks.length > 0) {
-      elem.tasks.forEach(elem => {
-
-        if (elem.complete === true) return completed +=1
-        else return total +=1
-      })
-      percent = ((completed)/(completed+total))*100
-    }
-    return (
-          <span style={{width: percent + '%'}}></span>
-    )
-  }
 
   toggleModal = () => {
     this.setState({
@@ -119,7 +88,7 @@ export default class Project extends Component {
         <div className="icons">
           <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
           <div className="smallimg2">
-            {this.showMembers()}
+            {/* {this.showMembers()} */}
           </div>
         </div>
           {this.loadProject()}

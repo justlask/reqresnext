@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
   showProjects = () => {
     return this.state.projects.map((project, i) => {
       return (
-        <Project project={project} key={i+1} i={i+1}/>
+        <Project project={project} key={i+1} i={i}/>
       )
     })
   }
