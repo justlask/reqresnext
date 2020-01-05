@@ -291,36 +291,41 @@ main {
   color: #0C0C3E;
 }
 
-.flexrow {
+/* .flexrow {
   display: flex;
   justify-content: space-around;
   width: 80vw;
+} */
+.flexrow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
+
 
 .usercard {
   height: 100%;
   display: flex;
-  align-items: left;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  padding: 50px 25px;
-  text-align: left;
 }
 
 .usercard h3 {
   font-weight: normal;
   padding-bottom: 10px;
-  margin-bottom: 25px;
 }
 
 .usercard > ul {
-  text-align: left;
   font-weight: bold;
-  align-self: flex-start;
   padding-bottom: 25px;
 }
 
 .usercard ul li {
-  margin-left: 25px;
+
   font-weight: normal;
   color: rgb(54, 54, 54);
   cursor: pointer; 
@@ -354,7 +359,7 @@ main {
 
 .projectbox {
   display: flex;
-  width: 50vw;
+  width: 60vw;
   padding: 10px 0px;
 }
 
@@ -369,10 +374,9 @@ main {
 
 .projects {
   height: 100%;
-  width: 60vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
   justify-content: center;
   align-items: center;
 }
@@ -382,7 +386,7 @@ main {
 }
 
 .padding {
-  padding: 25px 50px;
+  padding: 50px 0px;
 }
 
 
@@ -1047,7 +1051,7 @@ main {
 
 .projectbuttons {
   display: flex;
-  width: 50vw;
+  width: 60vw;
   justify-content: space-evenly;
   background-color: #f7f7f7;
 }
