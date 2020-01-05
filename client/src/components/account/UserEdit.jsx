@@ -26,7 +26,10 @@ export default class UserEdit extends Component {
 
   submitChange = (e) => {
     e.preventDefault();
-    console.log(this.state)
+    this.service.updateAccount(this.state)
+    .then(user => {
+      this.props.updateUser()
+    })
   }
 
   render() {

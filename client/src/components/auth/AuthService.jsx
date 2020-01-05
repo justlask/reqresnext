@@ -98,7 +98,12 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-  
+  updateAccount = (userInfo) => {
+    return this.service.post(`/user/editprofile`, userInfo)
+    .then(response => response.data)
+  }
+
+
 }
 
 export default AuthService;

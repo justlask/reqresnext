@@ -20,7 +20,6 @@ router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
     next(new Error('No file uploaded!'));
     return;
   }
-  console.log(req.file.secure_url)
 
   User.findByIdAndUpdate(req.user.id, {image: req.file.secure_url})
   .populate('teams')
@@ -55,6 +54,8 @@ router.get('/getuserinfo', (req, res, next) => {
   })
 });
 
+
+
 router.post('/projects', (req,res,next) => {
   Project.find({ 
     $and: [ { members: { $in: req.body.userID } }, 
@@ -78,6 +79,13 @@ router.post('/projectsbyteam', (req,res,next) => {
     })
 });
 
+
+router.post('/editprofile', (req,res,next) => {
+  User.findByIdAndUpdate(req.user.id, req.body, {new: true})
+  .then(updatedUser => {
+    res.json(updatedUser)
+  });
+});
 
 
 module.exports = router;

@@ -55,10 +55,21 @@ export default class Profile extends Component {
     })
   }
 
+  updateUser = () => {
+    this.service.getUserInfo(this.props.user.id)
+    .then(user => {
+      this.setState({
+        user: user,
+        image: user.image,
+        update: false
+      })
+    })
+  }
+
   handleCard = () => {
     if (this.state.update) {
       return (
-        <UserEdit user={this.state.user}/>
+        <UserEdit user={this.state.user} updateUser={this.updateUser}/>
       )
     }
     else {
@@ -78,7 +89,7 @@ export default class Profile extends Component {
             {this.handleCard()}
           </div>
         </div>
-        <div className="flexcol">
+        <div className="teams">
         <h2>Teams</h2>
           <ul>
             {this.handleTeams()}
