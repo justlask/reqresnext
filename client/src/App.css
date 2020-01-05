@@ -117,6 +117,7 @@ section {
   font-size: 52px;
   text-align: right;
   padding-bottom: 25px;
+  line-height: 0.99;
 }
 
 .abouttext p {
