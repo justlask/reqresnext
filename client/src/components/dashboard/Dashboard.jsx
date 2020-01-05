@@ -97,6 +97,22 @@ export default class Dashboard extends Component {
     }
   }
 
+  updateProject = () => {
+    let userID = this.props.user._id
+    let select = false
+    
+    this.service.getProjects(select, userID)
+    .then(data => {
+      this.setState({
+        activeButtons: {
+          current: 'activeActionButton',
+          past: 'notActiveActionButton',
+        },
+        projects: data
+      })
+    });
+  }
+
   toggleModal = () => {
     this.setState({
       isOpen: !this.state.isOpen
@@ -126,7 +142,7 @@ export default class Dashboard extends Component {
               {this.showProjects()}
             </div>
           </div>
-          <NewProjectModal show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
+          <NewProjectModal updateProject={this.updateProject} show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
         </main>
       )
     }

@@ -433,7 +433,9 @@ main {
 }
 
 .meter {
-	height: 15px;
+  height: 15px;
+  width: 100%;
+  max-width: 200px;
 	position: relative;
   background: #f7f7f7;
   background-image: linear-gradient(to right,
@@ -494,6 +496,10 @@ main {
   padding: 25px 100px 0px 100px;
 }
 
+.icons a {
+  padding: 10px;
+}
+
 .alignleft {
   text-align: center;
   padding-bottom: 25px;
@@ -502,10 +508,6 @@ main {
 .alignleft h3 {
   font-size: 22px;
 }
-.alignleft p {
-  margin-left: 25px;
-}
-
 .actionpage {
   padding-bottom: 50px;
 }
@@ -544,7 +546,8 @@ main {
 
 .meter2 {
   height: 15px;
-  width: 50%;
+  width: 100%;
+  max-width: 200px;
 	position: relative;
   background: #f7f7f7;
   background-image: linear-gradient(to right,

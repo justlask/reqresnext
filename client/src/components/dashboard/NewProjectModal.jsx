@@ -39,7 +39,7 @@ export default class NewProjectModal extends Component {
         image: '',
       })
       console.log(response)
-      // this.props.updateProject();
+      this.props.updateProject();
       this.props.onClose();
     })
 
