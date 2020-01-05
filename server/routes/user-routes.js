@@ -2,7 +2,7 @@ const express    = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const uploadCloud = require('../configs/cloudinary');
+const profileUploadCloud = require('../configs/profileCloudinary');
 
 const User       = require('../models/user-model');
 const Action     = require('../models/actions-model');
@@ -12,13 +12,27 @@ const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model')
 
 
-router.post('/upload', uploadCloud.single("image"), (req, res, next) => {
+router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
+ 
+  
+  
   if (!req.file) {
     next(new Error('No file uploaded!'));
     return;
   }
-  res.json({ secure_url: req.file.secure_url });
+  console.log(req.file.secure_url)
+
+  User.findByIdAndUpdate(req.user.id, {image: req.file.secure_url})
+  .populate('teams')
+  .select("-password -email")
+  .then(userInfo => {
+    res.json(userInfo)
+  })
+  // res.json({ secure_url: req.file.secure_url });
 });
+
+
+
 
 router.get('/getuserinfo', (req, res, next) => {
   User.findById(req.user.id)

@@ -29,6 +29,7 @@ export default class Navbar extends Component {
           <nav>
             <NavLink to="/newproject" activeClassName='is-active'>New Project</NavLink>
             <NavLink to="/dashboard" activeClassName='is-active'>Dashboard</NavLink>
+            <NavLink to="/account" activeClassName="is-active">Account</NavLink>
             <Button className="noButton" onClick={this.logout} title="logout"></Button>
           </nav>
         </header>

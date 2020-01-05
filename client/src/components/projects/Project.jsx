@@ -55,8 +55,8 @@ export default class Project extends Component {
       this.state.actions.map((elem,i) => {
         return (
         <div>
-          <Link to={`/project/${this.props.match.params.id}/${elem[0]._id}`}><h3>{elem[0].title}</h3></Link>
-          <Link to={`/project/${this.props.match.params.id}/${elem[0]._id}`}><img src={elem[0].image} alt=""/></Link>
+          <Link to={`/project/${this.props.match.params.id}/${elem._id}`}><h3>{elem.title}</h3></Link>
+          <Link to={`/project/${this.props.match.params.id}/${elem._id}`}><img src={elem.image} alt=""/></Link>
           <div className="flexyrow">
             <img className="statusimg" src={this.state.members[0].image} alt=""/>
             <div className="meter2">
@@ -88,14 +88,14 @@ export default class Project extends Component {
     let completed = 0;
     let percent
 
-    if (elem[0].tasks.length === 0) {
+    if (elem.tasks.length === 0) {
       percent = 0
     }
-    if (elem[0].complete) {
+    if (elem.complete) {
       percent = 100
     }
-    else if (elem[0].complete === false && elem[0].tasks.length > 0) {
-      elem[0].tasks.forEach(elem => {
+    else if (elem.complete === false && elem.tasks.length > 0) {
+      elem.tasks.forEach(elem => {
 
         if (elem.complete === true) return completed +=1
         else return total +=1

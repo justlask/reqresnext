@@ -44,20 +44,34 @@ router.get('/calculatestatus/:projectID', (req,res,next) => {
   })
   .then(response => {
       let completed = 0
-      let total = 0
+      let notCompleted = 0
       let percent = 0
       
-      response.actions.forEach(elem => {
-        elem[0].tasks.forEach(task => {
-            // console.log(task)
 
-            if (task.complete === true) {
-              return completed += 1
-            }
-            else return total += 1
+
+
+      response.actions.forEach(elem => {
+        // console.log(elem)
+        elem.tasks.forEach(task => {
+          if (task.complete === true) {
+            return completed += 1
+          }
+          else return notCompleted += 1
         })
       })
-      percent = (((completed)/(completed+total))*100).toString()
+      percent = (((completed)/(completed+notCompleted))*100).toString()
+      console.log(percent)
+      // response.actions.forEach(elem => {
+      //   elem[0].tasks.forEach(task => {
+      //       // console.log(task)
+
+      //       if (task.complete === true) {
+      //         return completed += 1
+      //       }
+      //       else return total += 1
+      //   })
+      // })
+      // percent = (((completed)/(completed+total))*100).toString()
       res.json(percent)
   })
 })

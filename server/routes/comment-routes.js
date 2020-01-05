@@ -10,6 +10,7 @@ const Comment    = require('../models/comment-model');
 const Project    = require('../models/projects-model');
 const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model');
+const moment     = require('moment')
 
 
 router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
@@ -25,7 +26,7 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
     owner: req.user.id,
     project: req.params.projectID,
     action: req.params.actionID,
-    task: req.params.taskID
+    task: req.params.taskID,
   }
 
 
@@ -42,6 +43,7 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
         }
     })
     .then(response => {
+
       res.json(response.comments)
     })
   })
@@ -53,10 +55,9 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
 router.get(`/:taskID`, (req,res,next) => {
   Comment.find({task: req.params.taskID})
   .populate('owner')
-  .then(comments =>
-    // res.json(comments)
+  .then(comments => {
     res.json(comments)
-  )
+  })
 })
 
 
