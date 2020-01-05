@@ -62,12 +62,13 @@ export default class Project extends Component {
 
   loadProject = () => {
     return (
-      <div>
+      <div className="projbox">
         <div className="alignleft">
           <h3>{this.state.project.title}</h3>
           <p>{this.state.project.description}</p>
         </div>
         <div className="actions">
+        <Button className="addproj" onClick={() => this.toggleModal()} title="add action" />
           {this.showActions()}
         </div>
       </div>
@@ -87,14 +88,9 @@ export default class Project extends Component {
       <main className="">
         <div className="icons">
           <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
-          <div className="smallimg2">
-            {/* {this.showMembers()} */}
-          </div>
         </div>
+  
           {this.loadProject()}
-          <div className="addaction">
-            <Button onClick={() => this.toggleModal()} title="add action" />
-          </div>
         <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
       </main>
     )

@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import Button from '../Button'
 import AuthService from '../auth/AuthService'
 import Project from '../dashboard/Project'
+import NewProjectModal from '../dashboard/NewProjectModal'
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Dashboard extends Component {
       projects: [],
       actions: [],
       activeButtons: {current: 'activeActionButton', past: 'notActiveActionButton'},
+      isOpen: false
     }
   }
 
@@ -95,6 +97,12 @@ export default class Dashboard extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
 
   render() {
     if (this.props.user) {
@@ -106,21 +114,19 @@ export default class Dashboard extends Component {
               <h2>{this.state.user.name}</h2>
               <h3>{this.state.user.position}</h3>
               {this.handleTeams()}
-              {/* <div className="projectbuttons">
-                <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
-                <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
-              </div> */}
             </div>
             <div className="projects">
-              <div className="projectbuttons">
+              <div className="projectNav">
+                <Button onClick={() => this.toggleModal()} className="addproj" title="Add Project"></Button>
+                <div className="projectbuttons">
                   <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
                   <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
-                {/* <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
-                <Button className={this.state.activeButtons.backEnd} onClick={e => this.getBackEnd()} title="Back-End"></Button> */}
+                </div>
               </div>
               {this.showProjects()}
             </div>
           </div>
+          <NewProjectModal show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
         </main>
       )
     }

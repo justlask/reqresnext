@@ -419,7 +419,7 @@ main {
   display: flex;
   padding: 0px 20px;
   flex-direction: column;
-  width: 150px;
+  min-width: 150px;
 }
 .secondaryproject h3 {
   margin-bottom: 5px;
@@ -491,7 +491,7 @@ main {
   justify-content: space-between;
   align-items: center;
   font-size: 36px;
-  padding: 25px 25px 0px 25px;
+  padding: 25px 100px 0px 100px;
 }
 
 .alignleft {
@@ -511,7 +511,7 @@ main {
 }
 
 .actions {
-  width: 100vw;
+  width: 60vw;
   display: flex;
   flex-direction: column;
   padding-bottom: 50px;
@@ -616,10 +616,11 @@ main {
 .modal {
   background-color: #fff;
   border-radius: 5px;
+  min-width: 400px;
   max-width: 800px;
   height: 50%;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -1028,4 +1029,29 @@ main {
   padding: 15px 5px;
   border: none;
   cursor: pointer;
+}
+
+.projectNav {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+}
+
+.addproj {
+  align-self: flex-end;
+  border: 2px solid #0C0C3E;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.projbox {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

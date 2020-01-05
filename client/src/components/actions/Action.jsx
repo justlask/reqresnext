@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'

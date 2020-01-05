@@ -103,6 +103,17 @@ class AuthService {
     .then(response => response.data)
   }
 
+  handleProjectUploadMainImage (theFile) {
+    return this.service.post('/project/upload/mainimage', theFile)
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
+
+  createProject = (projectInfo) => {
+    return this.service.post('/project/create', projectInfo)
+    .then(response => response.data)
+  }
+
 
 }
 
