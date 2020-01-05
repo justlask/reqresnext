@@ -272,6 +272,18 @@ footer {
   border: none;
 }
 
+
+.noButtonBlueThin {
+  color: #0C0C3E;
+  background-color:transparent;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px 25px;
+  border: none;
+}
+
 main {
   min-height: 80vh;
   display: flex;
@@ -341,7 +353,6 @@ main {
 
 .projectbox {
   display: flex;
-  justify-content: space-around;
   width: 40vw;
   padding: 5px 10px;
 }
@@ -916,13 +927,23 @@ main {
   flex-direction: row;
 }
 
-.userInfo {
-  padding: 50px;
+.accountInfo {
+  display: flex;
+  flex-direction: column;
   width: 50vw;
+}
+
+.accountInfo button {
+  align-self: flex-end;
+  justify-content: flex-start;
+  margin-top: 25px;
+}
+
+.userInfo {
+  padding: 25px 50px;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -968,9 +989,11 @@ main {
   z-index: -1;
 }
 
-.editme:hover {
-  color: #5c5c5c;
+.editbox {
+  display: flex;
+  flex-direction: column;
 }
+
 
 .editbox input {
   border: none;
@@ -979,6 +1002,8 @@ main {
   margin-bottom: 15px;
   color: #0C0C3E;
   font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #0C0C3E;
 }
 
 .editbox button {
@@ -988,6 +1013,8 @@ main {
   padding: 5px 10px;
   font-size: 16px;
   border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .userimgbox {
