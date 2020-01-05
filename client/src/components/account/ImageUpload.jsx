@@ -38,9 +38,9 @@ export default class ImageUpload extends Component {
 
   render() {
     return (
-      <label HTMLfor="image">
+      <label HTMLfor="image" className="userimgbox">
         <input type="file" name="image" id="image" style={{display: 'none'}} onChange={e => this.handleFileUpload(e)}/>
-        <span>+</span>
+        <span>update</span>
         <img src={this.props.image}/>
       </label>
     )

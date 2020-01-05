@@ -7,15 +7,26 @@ export default class Project extends Component {
     super(props)
     this.service = new AuthService();
     this.state = {
-      percent: 0
+      percent: 0,
+      color: ''
     }
   }
 
   componentDidMount() {
     this.service.calculatePercent(this.props.project._id)
     .then(response => {
+      let bgColor
+      console.log(this.props.i)
+      if (this.props.i % 2 === 1) {
+        bgColor = '#fff'
+      }
+      else {
+        bgColor = '#f7f7f7'
+      }
+
       this.setState({
-        percent: response
+        percent: response,
+        color: bgColor
       })
     })
   }
@@ -46,16 +57,16 @@ export default class Project extends Component {
 
   render() {
     return (
-      <div className="projectbox">
-      <div>
+      <div className="projectbox" style={{backgroundColor: this.state.color}}>
+      <div style={{backgroundColor: this.state.color}}>
         <Link to={`/project/${this.props.project._id}`}><img src={this.props.project.image} alt=""/></Link>
         <div className="secondaryproject">
           <h3><Link to={`/project/${this.props.project._id}`}>{this.props.project.title}</Link></h3>
           {this.handleStatusBar(this.props.project._id)}
+          <div className="smallimg">
+            {this.showMembers(this.props.project)}
+          </div>
         </div>
-      </div>
-      <div className="smallimg">
-          {this.showMembers(this.props.project)}
       </div>
     </div>
     )

@@ -46,7 +46,7 @@ export default class addTask extends Component {
     return (
       <form className="addtask">
         <select name="type" id="type" onChange={e => this.handleSelect(e)}>
-          <option selected="true" disabled="true">type</option>
+          <option selected="true" disabled="true">select one</option>
           <option value="front-end">front-end</option>
           <option value="back-end">back-end</option>
           <option value="bug">bug</option>

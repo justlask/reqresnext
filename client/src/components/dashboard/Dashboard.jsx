@@ -13,7 +13,7 @@ export default class Dashboard extends Component {
       teams: [],
       projects: [],
       actions: [],
-      activeButtons: {current: 'activeButton', past: 'notActiveButton'},
+      activeButtons: {current: 'activeActionButton', past: 'notActiveActionButton'},
     }
   }
 
@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
   showProjects = () => {
     return this.state.projects.map((project, i) => {
       return (
-        <Project project={project} key={i}/>
+        <Project project={project} key={i+1} i={i+1}/>
       )
     })
   }
@@ -46,8 +46,8 @@ export default class Dashboard extends Component {
     .then(data => {
       this.setState({
         activeButtons: {
-          current: 'activeButton',
-          past: 'notActiveButton',
+          current: 'activeActionButton',
+          past: 'notActiveActionButton',
         },
         projects: data
       })
@@ -62,8 +62,8 @@ export default class Dashboard extends Component {
     .then(data => {
       this.setState({
         activeButtons: {
-          current: 'notActiveButton',
-          past: 'activeButton',
+          current: 'notActiveActionButton',
+          past: 'activeActionButton',
         },
         projects: data
       })
@@ -87,26 +87,29 @@ export default class Dashboard extends Component {
     if (this.props.user) {
       return (
         <main className="padding">
-          <div className="account">
-            <Link to="/account">Edit Account</Link>
-          </div>
           <div className="flexrow">
             <div className="usercard">
               <img src={this.state.user.image} alt="profile"/>
               <h2>{this.state.user.name}</h2>
               <h3>{this.state.user.position}</h3>
-              {/* <ul>
+              <ul>
                 Teams
                 {this.state.teams.map(team => {
                 return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
                 })}
-              </ul> */}
-              <div className="projectbuttons">
+              </ul>
+              {/* <div className="projectbuttons">
                 <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
                 <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
-              </div>
+              </div> */}
             </div>
             <div className="projects">
+              <div className="projectbuttons">
+                  <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
+                  <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
+                {/* <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
+                <Button className={this.state.activeButtons.backEnd} onClick={e => this.getBackEnd()} title="Back-End"></Button> */}
+              </div>
               {this.showProjects()}
             </div>
           </div>

@@ -108,13 +108,13 @@ export default class Action extends Component {
         <div className="flexrow2">
           <img src={this.state.action.image} alt=""/>
           <div className="tasksform">
+            <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
             <div className="tasksbuttons">
               <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
               <Button className={this.state.activeButtons.backEnd} onClick={e => this.getBackEnd()} title="Back-End"></Button>
               <Button className={this.state.activeButtons.bugs} onClick={e => this.getBugs()} title="Bugs"></Button>
             </div>
             <div className="tasks">
-              <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
               <div className="thetasks">
                 {this.loadTasks()}
               </div>

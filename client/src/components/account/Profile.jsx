@@ -4,6 +4,8 @@ import AuthService from '../auth/AuthService'
 import Button from '../Button'
 import EditAccount from './EditAccount'
 import ImageUpload from './ImageUpload'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -49,7 +51,6 @@ export default class Profile extends Component {
   }
 
   updateName = () => {
-    console.log(this.state.user.name)
     this.setState({
       update: {
         updateName: true
@@ -57,17 +58,40 @@ export default class Profile extends Component {
     })
   }
 
-  handleUpdate = () => {
-    
+  updatePosition = () => {
+    this.setState({
+      update: {
+        updatePosition: true
+      }
+    })
   }
 
   showName = () => {
     if (this.state.update.updateName) {
-      return <input type="text" name="name" placeholder={this.state.user.name}/>
+      return (
+        <form className="editbox">
+          <input type="text" name="name" placeholder={this.state.user.name}/>
+          <Button title="save"/>
+        </form>
+      )
     }
     else {
-      return <h1 onClick={this.updateName}>{this.state.user.name}</h1>
+      return <h1 className="editme" onClick={this.updateName}>{this.state.user.name}</h1>
     } 
+  }
+
+  showPosition = () => {
+    if (this.state.update.updatePosition) {
+      return (
+        <form className="editbox">
+          <input type="text" name="position" placeholder={this.state.user.position}/>
+          <Button title="save"/>
+        </form>
+      )
+    }
+    else {
+      return <h2 className="editme" onClick={this.updatePosition}>{this.state.user.position}</h2>
+    }
   }
   // <label for="photo"><b>Profile Picture</b></label><br></br>
   // <input type="file" onChange={(e) => this.handleFileUpload(e)} /> 
@@ -80,15 +104,14 @@ export default class Profile extends Component {
           <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
           <div>
           {this.showName()}
-          <h2 onClick={this.updatePosition}>{this.state.user.position}</h2>
+          {this.showPosition()}
           </div>
+        </div>
+        <div className="flexcol">
+        <h2>Teams</h2>
           <ul>
-            Teams
             {this.handleTeams()}
           </ul>
-        </div>
-        <div>
-          <Button title="edit" onClick={e => this.loadEdit()}></Button>
         </div>
       </main>
     )
