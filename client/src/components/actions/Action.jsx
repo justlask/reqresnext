@@ -17,6 +17,7 @@ export default class Action extends Component {
       popOut: 'popouthidden',
       type: 'front-end',
       activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
+      project: ''
     }
   }
 
@@ -27,7 +28,8 @@ export default class Action extends Component {
     this.service.getAction(actionID)
     .then(response => {
       this.setState({
-        action: response
+        action: response,
+        project: response.project.title
       })
     })
 
@@ -72,7 +74,15 @@ export default class Action extends Component {
 
 
   taskDone = () => {
-    this.loadTasks();
+    let actionID = this.props.match.params.actionID
+
+    this.service.getTasks(actionID, 'front-end')
+    .then(response => {
+      this.setState({
+        tasks: response,
+        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
+      })
+    })
   }
 
 
@@ -99,7 +109,7 @@ export default class Action extends Component {
     return (
       <main className="actionpage">
           <div className="icons">
-            <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
+            <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
           </div>
           <div className="title">
             <h3>{this.state.action.title}</h3>

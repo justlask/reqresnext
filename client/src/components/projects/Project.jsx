@@ -54,7 +54,7 @@ export default class Project extends Component {
     return (
       this.state.actions.map((elem,i) => {
         return (
-          <ProjectAction members={this.state.members} projectID={this.props.match.params.id} elem={elem} key={i} i={i}/>
+          <ProjectAction projectName={this.state.project.title} members={this.state.members} projectID={this.props.match.params.id} elem={elem} key={i} i={i}/>
         )
       })
     )
@@ -87,7 +87,7 @@ export default class Project extends Component {
     return (
       <main className="">
         <div className="icons">
-          <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /></Link>
+          <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
         </div>
   
           {this.loadProject()}

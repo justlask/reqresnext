@@ -79,6 +79,7 @@ router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) =
 router.post('/create', (req,res,next) => {
   console.log(req.user.id)
   console.log(req.body)
+  
 
   let newProject = {
     title: req.body.title,

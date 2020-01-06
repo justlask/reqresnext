@@ -12,6 +12,7 @@ const Action      = require('../models/actions-model');
 router.get('/:actionID', (req,res,next) => {
   Action.findById(req.params.actionID)
   .populate('tasks')
+  .populate('project')
   .then(response => {
     res.json(response)
   })
@@ -26,7 +27,7 @@ router.post('/:projectID/addaction', (req,res,next) => {
     description: req.body.description,
     project: req.params.projectID,
     creator: req.user._id,
-    members: [ req.user._id ],
+    members: [ req.user._id ]
   }
 
   // add action

@@ -16,7 +16,6 @@ export default class Project extends Component {
     this.service.calculatePercent(this.props.project._id)
     .then(response => {
       let bgColor
-      console.log(this.props.i)
       if (this.props.i % 2 === 1) {
         bgColor = '#eeeeee'
       }

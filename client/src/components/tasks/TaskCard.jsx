@@ -56,7 +56,6 @@ export default class TaskCard extends Component {
   }
 
   commentAdded = (response) => {
-    console.log(`you've added a comment`)
     this.setState({
       comments: response
     })
@@ -98,7 +97,7 @@ export default class TaskCard extends Component {
       return (
         <div className={this.state.handleDone} key={this.props.task._id}>
           <div className="buttontitle">
-            <Button onClick={e => this.handleDone()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
+            <Button onClick={e => this.handleDone()}></Button>
             <p style={{paddingTop: '5px'}}onClick={this.showPopout}>{this.props.task.title}</p>
           </div>
           <div>

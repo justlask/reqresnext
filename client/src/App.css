@@ -6,6 +6,29 @@
   font-family: 'Prompt';
 }
 
+
+input[type=text], 
+input[type=password],
+textarea {
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  border: 2px solid #DDDDDD;
+}
+ 
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px #2d3d8b;
+  /* #7fbbca or #2d3d8b  rgba(81, 203, 238, 1)*/
+  border: 2px solid #2d3d8b;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #2d3d8b;
+}
+
+
 .downchevron {
   align-self: flex-end;
   justify-content: flex-end;
@@ -420,6 +443,8 @@ main {
   padding: 0px 20px;
   flex-direction: column;
   min-width: 150px;
+  max-width: 400px;
+  width: 100vw
 }
 .secondaryproject h3 {
   margin-bottom: 5px;
@@ -493,11 +518,21 @@ main {
   justify-content: space-between;
   align-items: center;
   font-size: 36px;
-  padding: 25px 100px 0px 100px;
+  padding: 25px
 }
 
 .icons a {
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #0C0C3E;
+}
+
+.icons a sub {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .alignleft {
@@ -662,6 +697,7 @@ main {
   text-align: left;
   justify-content: space-around;
   text-align: left;
+  padding: 10px;
 }
 
 .actionform label {
@@ -697,9 +733,18 @@ main {
   margin-top: -25px;
   margin-bottom: 25px;
 }
-/* 
-.tasksform {
-} */
+
+
+.tasksform input[type=text] {
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  border: none;
+}
+ 
+.tasksform input[type=text]:focus {
+  box-shadow: none;
+  border: none;
+}
 
 .tasksbuttons {
   display: flex;
@@ -782,7 +827,9 @@ main {
 }
 
 .atask .buttontitle button {
+  transition: all 0s;
   background-color: white;
+  margin-top: 5px;
   margin-right: 10px;
   cursor: pointer;
   padding: 8px;
@@ -792,9 +839,15 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-    height: 35px;
-    width: 35px;
-  box-shadow: 0px 1px 1px rgba(8, 8, 8, 0.33);
+  height: 30px;
+  width: 30px;
+  border: 3px solid #0C0C3E;
+}
+
+.atask .buttontitle button:focus {
+  transition: all 0s;
+  border: 2px solid #0C0C3E;
+  box-shadow: none;
 }
 
 
@@ -814,6 +867,7 @@ main {
 
 .ataskdone .buttontitle button {
   background-color: rgb(0, 211, 56);
+  color: white;
   cursor: pointer;
   padding: 8px;
   border: none;
@@ -825,6 +879,10 @@ main {
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+}
+
+.ataskdone .buttontitle button:focus {
+  box-shadow: none;
 }
 
 .buttontitle {
@@ -895,13 +953,23 @@ main {
 
 .taskcomment {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   margin: 5px 35px;
 }
 
-.taskcomment sub {
-  text-align: right;
-  font-weight: normal;
+.taskcomment div {
+  align-self: flex-start;
+  padding-left: 10px;
+}
+.taskcomment img {
+  width: auto;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.taskcomment div sub {
+  text-align: left;
+  font-weight: bold;
 }
 
 .activeActionButton {
