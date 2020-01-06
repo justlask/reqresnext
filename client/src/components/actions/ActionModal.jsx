@@ -22,7 +22,10 @@ export default class ActionModal extends Component {
 
   createAction = (e) => {
     let projectID = this.props.project._id
-    let actionInfo = this.state
+    let actionInfo = {
+      title: this.state.title,
+      description: this.state.description
+    }
     let image
 
 
@@ -32,7 +35,7 @@ export default class ActionModal extends Component {
 
     e.preventDefault();
 
-    this.service.createAction(projectID, actionInfo, image )
+    this.service.createAction(projectID, actionInfo, image)
     .then(response => {
         console.log(response)
         this.setState({

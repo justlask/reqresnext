@@ -20,12 +20,14 @@ export default class Blog extends Component {
           of what looks decent and what doesn't. I like to take the time to do some (very) Lo Fideilty mockups before I start any project.
           I find that it helps me organize information, giving me a general idea of what I'm building and how all the parts 
           should work together. And while that has made my previous projects look a little bit better, this time I wanted to make
-          a very polished project. So, I started with a two day design sprint using Adobe XD. This was what my prototype looked like
+          a very polished project. So, I started with a two day design sprint using Adobe XD.
+          <br></br><br></br>
+          This was what my prototype looked like
           once I was finished and ready to begin coding.
-          </p>
-             <video width='700px' height="auto" controls >
+          <video width='700px' height="auto" controls >
               <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578309023/rrnv1_giwnpj.mov" type="video/mp4"/>
             </video><br></br>
+          </p>
           <h2 style={{fontWeight: 500}}>The Process: Development</h2>
           <p style={{paddingBottom: '25px'}}>
             6 CRUDs (almost, eventually) and 11 component folders. I've been developing this project for 8 days according to GitHub, although I took 2 of those days off for New Years. 
@@ -50,20 +52,26 @@ export default class Blog extends Component {
             I am grateful for all UX/UI Designers for what they do, however, I am most grateful for <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a>,
             who helped steer me in the right direction when trying to style and polish this project. This project would not look as good
             without her keen attention to detail. She really helped me craft this project into something special. Thank you for answering
-            my endless questions, and for giving me your thoughts, input, and notes on what worked and what needed to be re-tooled. 
+            my endless questions, and for giving me your thoughts, input, and notes on what worked and what needed to be re-tooled.
+            <br></br><br></br>
+            The current state of ReqResNext with help from our UX/UI Design Consultant <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a> 🙌.
+            <video width='800px' height="auto" controls >
+              <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578317113/new_cnokmx.mov" type="video/mp4"/>
+            </video><br></br> 
           </p>
+
+          
           <h2 style={{fontWeight: 500}}>The Future</h2>
           <p style={{paddingBottom: '25px'}}>
-            Take her out for a spin! Drop me a line in the contact form (you can find a link in the footer) and let me know what you think!
-            This MVP is usable, but definitely is not 100% complete!
+            Take ReqResNext out for a spin!<br></br>
+            This MVP is usable, but definitely is not 100% complete! There are some features that are not included in this release, but more will be added soon, (today... tomorrow... the next day).
+            <br></br>
+            Drop me a line in the contact form (you can find a link in the footer) and let me know what you think!
           </p>
-          <h3 style={{fontWeight: 500}}>PS:</h3>
-          <p style={{paddingBottom: '25px'}}>
-          I'm currently looking for work as a developer in the Miami area. If you have work, know someone who is hiring, or like my work, drop me a line in that comment form!
-          I'd love to hear from you, even if it's just to tell me what you thought of this project or of this article.
-          </p>
+          <h3>Happy Coding and High Fives,</h3>
           <h4>Lauren Laskerr</h4>
-          <sub>Sr. Software Engineer @ ReqResNext.com (lol)</sub>
+          <sub>Software Engineer @ ReqResNext.com</sub>
+          <sub>PPS: Use our contact form, it's AWESOME, trust me.</sub>
         </div>
       </main>
     )

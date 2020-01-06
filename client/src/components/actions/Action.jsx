@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -106,32 +106,39 @@ export default class Action extends Component {
 
 
   render() {
-    return (
-      <main className="actionpage">
-          <div className="icons">
-            <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
-          </div>
-          <div className="title">
-            <h3>{this.state.action.title}</h3>
-            <p>{this.state.action.description}</p>
-          </div>
-        <div className="flexrow2">
-          <img src={this.state.action.image} alt=""/>
-          <div className="tasksform">
-            <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
-            <div className="tasksbuttons">
-              <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
-              <Button className={this.state.activeButtons.backEnd + " center"} onClick={e => this.getBackEnd()} title="Back-End"></Button>
-              <Button className={this.state.activeButtons.bugs} onClick={e => this.getBugs()} title="Bugs"></Button>
+    if (this.props.user) {
+      return (
+        <main className="actionpage">
+            <div className="icons">
+              <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
             </div>
-            <div className="tasks">
-              <div className="thetasks">
-                {this.loadTasks()}
+            <div className="title">
+              <h3>{this.state.action.title}</h3>
+              <p>{this.state.action.description}</p>
+            </div>
+          <div className="flexrow2">
+            <img src={this.state.action.image} alt=""/>
+            <div className="tasksform">
+              <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
+              <div className="tasksbuttons">
+                <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
+                <Button className={this.state.activeButtons.backEnd + " center"} onClick={e => this.getBackEnd()} title="Back-End"></Button>
+                <Button className={this.state.activeButtons.bugs} onClick={e => this.getBugs()} title="Bugs"></Button>
+              </div>
+              <div className="tasks">
+                <div className="thetasks">
+                  {this.loadTasks()}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    )
+        </main>
+      )
+    }
+    else {
+      return (
+        <Redirect to="/" />
+      )
+    }
   }
 }

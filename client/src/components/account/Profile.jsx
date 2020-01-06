@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthService from '../auth/AuthService';
 import Button from '../Button';
 import ImageUpload from './ImageUpload';
@@ -80,22 +80,29 @@ export default class Profile extends Component {
   }
 
   render() {
-    return (
-      <main className="accountpage">
-        <div className="accountInfo">
-          <Button className="noButtonBlueThin" title="edit profile" onClick={e => this.handleEdit()}></Button>
-          <div className="userInfo">
-          <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
-            {this.handleCard()}
+    if (this.props.user) {
+      return (
+        <main className="accountpage">
+          <div className="accountInfo">
+            <Button className="noButtonBlueThin" title="edit profile" onClick={e => this.handleEdit()}></Button>
+            <div className="userInfo">
+            <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
+              {this.handleCard()}
+            </div>
           </div>
-        </div>
-        <div className="teams">
-        <h2>Teams</h2>
-          <ul>
-            {this.handleTeams()}
-          </ul>
-        </div>
-      </main>
+          <div className="teams">
+          <h2>Teams</h2>
+            <ul>
+              {this.handleTeams()}
+            </ul>
+          </div>
+        </main>
+      )
+    }
+  else {
+    return (
+      <Redirect to="/" />
     )
+  }
   }
 }

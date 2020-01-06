@@ -63,8 +63,6 @@ class App extends Component {
             <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
             <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
             <Route exact path="/forgot" render={(props) => <PasswordReset {...props} />}></Route>
-            {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
-            <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>
         <Footer />
       </div>

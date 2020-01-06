@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthService from '../auth/AuthService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -84,16 +84,23 @@ export default class Project extends Component {
   }
 
   render() {
-    return (
-      <main className="">
-        <div className="icons">
-          <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
-          <Button className="editbtn" title={<FontAwesomeIcon style={{color: '#0C0C3E'}} icon={faPencilAlt} />}>edit project</Button>
-        </div>
-  
-          {this.loadProject()}
-        <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
-      </main>
-    )
+    if (this.props.user) {
+      return (
+        <main className="">
+          <div className="icons">
+            <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
+            <Button className="editbtn" title={<FontAwesomeIcon style={{color: '#0C0C3E'}} icon={faPencilAlt} />}>edit project</Button>
+          </div>
+    
+            {this.loadProject()}
+          <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
+        </main>
+      )
+    }
+    else {
+      return (
+        <Redirect to="/" />
+      )
+    }
   }
 }

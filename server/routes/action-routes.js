@@ -21,10 +21,10 @@ router.get('/:actionID', (req,res,next) => {
 
 
 router.post('/:projectID/addaction', (req,res,next) => {
-
+  console.log(req.body)
   let newAction = {
-    title: req.body.title,
-    description: req.body.description,
+    title: req.body.actionInfo.title,
+    description: req.body.actionInfo.description,
     project: req.params.projectID,
     creator: req.user._id,
     members: [ req.user._id ]
