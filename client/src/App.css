@@ -237,7 +237,7 @@ footer #name {
 }
 
 .footerlinks a {
-  color: #f7f7f7;
+  color: #e9e8e8;
   text-decoration: none;
   width: 40%;
 }
@@ -283,6 +283,7 @@ footer #name {
 .signupform h1 {
   margin-left: 25px;
   padding-bottom: 25px;
+  font-weight: normal;
 }
 
 .signupform input {
@@ -406,7 +407,7 @@ main {
 }
 
 .usercard img {
-  height: auto;
+  height: 150px;
   width: 150px;
   border: none;
   box-shadow: 0px 5px 10px rgba(8, 8, 8, 0.33);
@@ -510,7 +511,7 @@ main {
 }
 
 .smallimg img {
-  height: auto;
+  height: 30px;
   width: 30px;
   border-radius: 50%;
   box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
@@ -525,7 +526,7 @@ main {
 }
 
 .smallimg2 img {
-  height: auto;
+  height: 50px;
   width: 50px;
   border-radius: 50%;
 }
@@ -600,8 +601,12 @@ main {
   margin-left: 75px;
 }
 
-.projectbox > div > a {
+.actions .projectbox > div > a {
   width: 20vw;
+}
+
+.projectbox > div > a {
+  width: 30vw;
 }
 
 .actions .projectbox {
@@ -657,7 +662,7 @@ main {
 
 
 .statusimg {
-  height: auto;
+  height: 30px;
   width: 30px;
   border-radius: 50%;
 }
@@ -880,8 +885,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   border: 3px solid #0C0C3E;
 }
 
@@ -913,8 +918,8 @@ main {
   padding: 8px;
   border: none;
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -1060,7 +1065,7 @@ main {
 
 .userInfo img {
   height: 200px;
-  width: auto;
+  width: 200px;
   border-radius: 50%;
   box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
 }
