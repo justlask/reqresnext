@@ -351,6 +351,7 @@ footer #name {
 
 main {
   min-height: 80vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   color: #0C0C3E;
@@ -1168,4 +1169,14 @@ main {
 .center {
   border-left: 1px solid #BFBFBF !important;
   border-right: 1px solid #BFBFBF !important;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero img {
+  width: 80vw;
 }
