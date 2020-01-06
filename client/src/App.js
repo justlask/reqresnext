@@ -8,7 +8,6 @@ import Home from './components/home/Home';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
-import NewProject from './components/projects/NewProject';
 import Project from './components/projects/Project';
 import Action from './components/actions/Action';
 import Profile from './components/account/Profile';
@@ -57,7 +56,6 @@ class App extends Component {
             <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
             <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/>
-            <Route exact path="/newproject" render={(props) => <NewProject {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>} />
             <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } />
             <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route>
             <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route>

@@ -9,7 +9,6 @@ export default class addTask extends Component {
     super(props)
     this.service = new AuthService();
     this.state = {
-      type: null,
       title: '',
     }
   }
@@ -21,7 +20,6 @@ export default class addTask extends Component {
       .then(response => {
         this.setState({
           title: '',
-          type: null
         })
         this.props.updateTasks(response);
       })

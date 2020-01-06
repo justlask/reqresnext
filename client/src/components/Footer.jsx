@@ -9,10 +9,12 @@ export default class Footer extends Component {
           <p>( req, res, next )</p>
         </div>
         <div className="footerlinks">
-          <h4>Developer</h4>
+          <h4>Lauren Laskerr</h4>
+          <h5>Developer</h5>
           <a href="http://www.justlask.com" target="_blank">justlask.com</a>
           <a href="https://www.github.com/justlask" target="_blank">github.com/justlask</a><br></br>
-          <h4>Design Consultant</h4>
+          <h4>Nicole Matos</h4>
+          <h5>Design Consultant</h5>
           <a href="http://www.nicolematos.design" target="_blank">NicoleMatos.design</a>
         </div>
         <div className="footerlinks">

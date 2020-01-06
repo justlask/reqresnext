@@ -77,21 +77,25 @@ router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) =
 
 
 router.post('/create', (req,res,next) => {
-  console.log(req.user.id)
-  console.log(req.body)
-  
 
   let newProject = {
     title: req.body.title,
     description: req.body.description,
-    image: req.body.image,
     owner: req.user.id,
     members: [ req.user.id ],
   }
 
+  if (req.body.image) {
+    newProject.image = req.body.image
+  }
+
   Project.create(newProject)
   .then(project => {
-    res.json(project)
+
+    User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
+    .then(data => {
+      res.json(project)
+    })
   })
 });
 

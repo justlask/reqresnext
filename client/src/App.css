@@ -779,6 +779,7 @@ main {
 
 .flexrow2 img {
   height: 400px;
+  max-width: 600px;
 }
 
 .flexrow2 > div {

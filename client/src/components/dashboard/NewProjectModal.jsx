@@ -17,7 +17,6 @@ export default class NewProjectModal extends Component {
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
-    console.log(this.state)
   }
     
 
@@ -70,25 +69,6 @@ export default class NewProjectModal extends Component {
   }
 
 
-
-  // handleFileUpload = e => {
-  //   console.log("The file to be uploaded is: ", this.state.image);
-
-  //   const uploadData = new FormData();
-  //   uploadData.append("image", this.state.image);
-    
-  //   this.service.handleProjectUploadMainImage(uploadData)
-  //   .then(response => {
-  //     console.log(response)
-  //       // this.props.updateAccount(response);
-  //       // this.setState({ user: response,
-  //       // image: response.image });
-  //     })
-  //     .catch(err => {
-  //       console.log("Error while uploading the file: ", err);
-  //     });
-  // }
-
   handleImage = e => {
     this.setState({
       image: e.target.files[0]
@@ -109,7 +89,6 @@ export default class NewProjectModal extends Component {
         <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>
         <label>Project Description</label>
         <input type="text" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
-        {/* <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleImage(e)} /> */}
       </form>
     )
   }

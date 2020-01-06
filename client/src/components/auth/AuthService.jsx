@@ -61,8 +61,8 @@ class AuthService {
     .then(response => response.data)
   }
 
-  createAction = (projectID, actionInfo) => {
-    return this.service.post(`/action/${projectID}/addaction`, actionInfo)
+  createAction = (projectID, actionInfo, image) => {
+    return this.service.post(`/action/${projectID}/addaction`, {actionInfo, image})
     .then(response => response.data)
   }
 

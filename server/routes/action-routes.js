@@ -30,6 +30,10 @@ router.post('/:projectID/addaction', (req,res,next) => {
     members: [ req.user._id ]
   }
 
+  if (req.body.image) {
+    newAction.image = req.body.image
+  }
+
   // add action
   Action.create(newAction)
   .then(action => {
