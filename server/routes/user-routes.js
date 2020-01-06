@@ -85,8 +85,8 @@ router.post('/projectsbyteam', (req,res,next) => {
 
 router.post('/editprofile', (req,res,next) => {
   let userObj = req.body
-  if (req.body.password === '') delete userObj.password
-  if (req.body.password !== '') {
+  if (req.body.password === '' || req.body.password === undefined) delete userObj.password
+  else if (req.body.password !== '') {
     const salt     = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(req.body.password, salt);
 
