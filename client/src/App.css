@@ -464,7 +464,7 @@ main {
 .meter {
   height: 15px;
   width: 100%;
-  max-width: 200px;
+  max-width: 500px;
 	position: relative;
   background: #f7f7f7;
   background-image: linear-gradient(to right,
@@ -588,7 +588,7 @@ main {
 .meter2 {
   height: 15px;
   width: 100%;
-  max-width: 200px;
+  max-width: 500px;
 	position: relative;
   background: #f7f7f7;
   background-image: linear-gradient(to right,
