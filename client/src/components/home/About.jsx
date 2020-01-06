@@ -12,7 +12,7 @@ export default class About extends Component {
         <div className="boxes">
           <div>
             <h3>req</h3>
-            <p>Start with the user request, what actions will the user be doing.</p>
+            <p>Start with the user request, what actions will the user be doing?</p>
           </div>
           <div>
             <h3>res</h3>

@@ -7,6 +7,7 @@ const bcrypt     = require('bcryptjs');
 
 // require the user model !!!!
 const User       = require('../models/user-model');
+const nodemailer = require('nodemailer')
 
 
 authRoutes.post('/signup', (req, res, next) => {
@@ -140,33 +141,33 @@ authRoutes.post('/resetpassword', (req,res,next) => {
             const resetPass = bcrypt.hashSync(tempPass, resetSalt);
             // change password to a random hashed pass
 
-            // User.findByIdAndUpdate(foundUser._id, {
-            //     password: resetPass
-            // })
-            // .then(data => {
-            //     // email that hashed pass to that email with nodemailer
-            //     let transporter = nodemailer.createTransport({
-            //         service: 'Gmail',
-            //         auth: {
-            //           user: process.env.NODE_EMAIL,
-            //           pass: process.env.NODE_PASS
-            //         }
-            //       });
-            //       let message = `<b>Hello ${data.username}, <br><br> Your temporary password is ${tempPass}. Please Click <a href="www.dosted.herokuapp.com/${data.username}/${tempPass}">here</a> to reset your password.`
+            User.findByIdAndUpdate(foundUser._id, {
+                password: resetPass
+            })
+            .then(data => {
+                // email that hashed pass to that email with nodemailer
+                let transporter = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth: {
+                      user: process.env.NODE_EMAIL,
+                      pass: process.env.NODE_PASS
+                    }
+                  });
+                  let message = `<b>Hi ${data.name},</b> <br><br> Your temporary password is ${tempPass}.<br><br> Please click <a href="http://www.reqresnext.com/login">here</a> to login with your temporary password.<br><br> Please remember to head to your profile and change your password once you've logged in.<br><br> Security, ya know.`
 
-            //       transporter.sendMail({
-            //         from: '"crohnicles" <crohnicles@donotreply.com>',
-            //         to: email,
-            //         subject: `Your Password Reset Information for crohnicles`, 
-            //         text: message,
-            //         html: `<b>Hello ${data.username}, <br><br> Your temporary password is ${tempPass}. Please Click <a href="www.crohnic.herokuapp.com/reset/${data.username}/${resetPass}">here</a> to reset your password.`
-            //       })
-            //       .then(
-            //           res.status(200).json({message: 'we have emailed you a link to reset your password.'})
-            //       )
-            //       .catch(error => console.log(error));
+                  transporter.sendMail({
+                    from: '"ReqResNext" <reqresnext@gmail.com>',
+                    to: email,
+                    subject: `Your Temporary Password for ReqResNext`, 
+                    text: message,
+                    html: `<b>Hi ${data.name},</b> <br><br> Your temporary password is ${tempPass}.<br><br> Please click <a href="http://www.reqresnext.com">here</a> to login with your temporary password.<br><br> Please remember to head to your profile and change your password once you've logged in.<br><br> Security, ya know.`
+                  })
+                  .then(
+                      res.status(200).json({message: 'we have emailed you a link to reset your password.'})
+                  )
+                  .catch(error => console.log(error));
 
-            // })
+            })
             console.log(`the tempPass is ${tempPass}`)
             console.log(`the resetPass is ${resetPass}`)
         }
