@@ -762,7 +762,7 @@ main {
   border-right: none;
   font-weight: bold;
   font-size: 16px;
-  width: 33%;
+  width: 33.33%;
   padding: 15px 5px;
   border: none;
   cursor: pointer;
@@ -1138,4 +1138,9 @@ main {
   align-items: flex-start;
   background-color: inherit;
   border: none;
+}
+
+.center {
+  border-left: 1px solid #BFBFBF !important;
+  border-right: 1px solid #BFBFBF !important;
 }

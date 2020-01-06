@@ -7,7 +7,7 @@ const Team     = require('./teams-model')
 
 const projectSchema = new Schema({
   title: String,
-  image: {type: String, default: 'https://i.stack.imgur.com/pbW7A.png'},
+  image: {type: String, default: 'https://res.cloudinary.com/justlaskcloud/image/upload/v1578278371/ReqResNext/image.png.png'},
   description: String,
   actions: [[{type: Schema.Types.ObjectId, ref: 'Action'}]],
   tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
