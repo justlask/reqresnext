@@ -521,7 +521,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 36px;
+  font-size: 14px;
   padding: 25px
 }
 
@@ -535,6 +535,8 @@ main {
 }
 
 .icons a sub {
+  margin-top: 2px;
+  padding: 10px;
   font-size: 14px;
   font-weight: bold;
 }
