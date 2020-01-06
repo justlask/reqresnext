@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import Button from '../Button'
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props){
@@ -42,8 +43,10 @@ class Login extends Component {
           <label>Password</label>
           <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           
-          {/* <input type="submit" value="Login" /> */}
-          <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
+          <div className="loginbtns">
+            <Link to="/forgotpassword">Forgot password?</Link>
+            <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
+          </div>
         </form>
       </div>
     )
