@@ -156,9 +156,9 @@ section {
 
 .boxes div {
   background-color: white;
-  border-radius: 32px;
+  border-radius: 16px;
   color: #0C0C3E;
-  padding: 32px;
+  padding: 16px 32px 32px 32px;
   width: 20vw;
 }
 

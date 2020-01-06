@@ -7,10 +7,10 @@ export default class AboutUs extends Component {
         <div className="hero">
           <h1>
             So, you've got a project to manage.<br></br>
-            Well then, we've got a solution.
+            <span style={{fontWeight: 'normal'}}>Well then, we've got a solution.</span>
           </h1>
-          <h3>
-            Here's the process:
+          <h3 style={{paddingTop: '50px', fontWeight: 'normal'}}>
+            Here's how it works:
           </h3>
           <img src="./onboarding_bigger.png" alt=""/>
       </div>
