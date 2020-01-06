@@ -120,7 +120,7 @@ export default class NewProjectModal extends Component {
       <div className="backdrop">
         <div className="modal">
           <div className="modalnames">
-            <h3>Add A New Project</h3>
+            <h3>Add A Project</h3>
           </div>
 
          {this.createForm()}

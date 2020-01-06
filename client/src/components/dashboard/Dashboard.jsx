@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom' 
 import Button from '../Button'
 import AuthService from '../auth/AuthService'
-import Project from '../dashboard/Project'
+import ProjectCard from '../dashboard/ProjectCard'
 import NewProjectModal from '../dashboard/NewProjectModal'
 
 export default class Dashboard extends Component {
@@ -35,7 +35,7 @@ export default class Dashboard extends Component {
   showProjects = () => {
     return this.state.projects.map((project, i) => {
       return (
-        <Project project={project} key={i+1} i={i}/>
+        <ProjectCard project={project} key={i+1} i={i}/>
       )
     })
   }

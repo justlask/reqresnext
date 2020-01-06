@@ -83,7 +83,7 @@ export default class Profile extends Component {
     return (
       <main className="accountpage">
         <div className="accountInfo">
-          <Button className="noButtonBlueThin" title="edit account" onClick={e => this.handleEdit()}></Button>
+          <Button className="noButtonBlueThin" title="edit profile" onClick={e => this.handleEdit()}></Button>
           <div className="userInfo">
           <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
             {this.handleCard()}

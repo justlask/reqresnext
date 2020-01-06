@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 
-export default class Project extends Component {
+export default class ProjectCard extends Component {
   constructor(props) {
     super(props)
     this.service = new AuthService();
@@ -57,17 +57,17 @@ export default class Project extends Component {
   render() {
     return (
       <div className="projectbox" style={{backgroundColor: this.state.color}}>
-      <div style={{backgroundColor: this.state.color}}>
-        <Link to={`/project/${this.props.project._id}`}><img src={this.props.project.image} alt=""/></Link>
-        <div className="secondaryproject">
-          <h3><Link to={`/project/${this.props.project._id}`}>{this.props.project.title}</Link></h3>
-          {this.handleStatusBar(this.props.project._id)}
-          <div className="smallimg">
-            {this.showMembers(this.props.project)}
+        <div style={{backgroundColor: this.state.color}}>
+          <Link to={`/project/${this.props.project._id}`}><img src={this.props.project.image} alt=""/></Link>
+          <div className="secondaryproject">
+            <h3><Link to={`/project/${this.props.project._id}`}>{this.props.project.title}</Link></h3>
+            {this.handleStatusBar(this.props.project._id)}
+            <div className="smallimg">
+              {this.showMembers(this.props.project)}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     )
   }
 }
