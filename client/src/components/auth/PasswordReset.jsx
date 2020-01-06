@@ -13,7 +13,6 @@ class ResetPassword extends Component {
 
   handleChange = (e) => {
     this.setState({email: e.target.value})
-    console.log(this.state)
   }
 
   handleSubmit = (e) => {
@@ -24,7 +23,6 @@ class ResetPassword extends Component {
     this.service.resetPassword(this.state.email)
     .then(data => {
     })
-    console.log(this.state)
   }
 
   render() {
@@ -55,14 +53,5 @@ class ResetPassword extends Component {
     }
   }
 }
-
-// <main>
-// <h1>Lost Password?</h1>
-// <form onSubmit={(e) => this.handleSubmit(e)}>
-//   <label htmlFor="email">Email</label><br></br>
-//   <input type="text" placeholder="email" id="email" value={this.state.email} onChange={(e) => this.handleChange(e)}/>
-//   <input type="submit" value="submit"/>
-// </form>
-// </main>
 
 export default ResetPassword;

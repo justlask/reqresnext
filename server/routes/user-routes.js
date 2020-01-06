@@ -12,6 +12,7 @@ const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model');
 const bcrypt     = require('bcryptjs')
 const passport   = require('passport')
+const nodemailer = require('nodemailer')
 
 
 router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
@@ -97,6 +98,35 @@ router.post('/editprofile', (req,res,next) => {
     res.json(updatedUser)
   });
 });
+
+
+router.post('/contact', (req,res,next) => {
+  let name = req.body.name
+  let email = req.body.email
+  let message = req.body.message
+
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.NODE_EMAIL,
+      pass: process.env.NODE_PASS
+    }
+  });
+
+  let messageWithContactInfo = `${message}<br><br> ${name} @ ${email}`
+
+  transporter.sendMail({
+    from: '"ReqResNext Contact Form" <reqresnext@gmail.com>',
+    to: process.env.NODE_EMAIL,
+    subject: `${name} has sent you a message about ReqResNext`, 
+    text: messageWithContactInfo,
+    html: messageWithContactInfo
+  })
+  .then(
+      res.status(200).json({message: 'we have emailed you a link to reset your password.'})
+  )
+  .catch(error => console.log(error));
+})
 
 
 module.exports = router;

@@ -10,11 +10,19 @@ export default class ContactForm extends Component {
       name: '',
       email: '',
       message: '',
+      sent: false
     }
   }
 
-  handleFormSubmit = () => {
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      sent: true
+    })
     console.log(this.state)
+    this.service.contact(this.state.name, this.state.email, this.state.message)
+    .then(data => {
+    })
   }
 
   handleChange = (event) => {  
@@ -23,23 +31,35 @@ export default class ContactForm extends Component {
   }
 
   render() {
-    return (
-      <div className="signup">
-        <div>
-          <h1 style={{fontSize: '32px'}}>Have a comment, suggestion, issue,<br></br> or just want to reach out?</h1>
-          <p>We'd love to hear from you.</p>
-        </div>
-        <form className="signupform">
-        <label>Name*</label>
-        <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)} required/>
-        <label>Email*</label>
-        <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
-        <label>Message*</label>
-        <textarea name="message" value={this.state.message} onChange={ e => this.handleChange(e)} required/>
-        <Button title="send" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
-      </form>
-    </div>
-    )
+    if (this.state.sent === true) {
+      return (
+        <main className="emailsent">
+          <img style={{width: '150px', height: 'auto'}}src="./mail.png" alt=""/>
+      <h1 style={{fontWeight: 500, fontSize: '32px'}}>Hey {this.state.name}, your message is on it's way!</h1>
+          <p>Thank you for taking the time to reach out to us.</p>
+          <p>We look forward to reading your message. 😎</p>
+        </main>
+      )
+    }
+    else {
+      return (
+        <div className="signup">
+          <div>
+            <h1 style={{fontSize: '32px'}}>Have a comment, suggestion, issue,<br></br> or just want to reach out?</h1>
+            <p>We'd love to hear from you.</p>
+          </div>
+          <form className="signupform">
+          <label>Name*</label>
+          <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)} required/>
+          <label>Email*</label>
+          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <label>Message*</label>
+          <textarea name="message" value={this.state.message} onChange={ e => this.handleChange(e)} required/>
+          <Button title="send" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
+        </form>
+      </div>
+      )
+    }
   }
 }
 

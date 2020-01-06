@@ -119,6 +119,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  contact = (name, email, message) => {
+    return this.service.post('/user/contact', {name, email, message})
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;
