@@ -193,7 +193,8 @@ section {
 }
 
 #mockups div p {
-  width: 15vw;
+  width: 18vw;
+  font-size: 20px;
   text-align: left;
 }
 
