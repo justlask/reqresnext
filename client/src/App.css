@@ -177,23 +177,24 @@ section {
 }
 
 #mockups {
-  background-color: white;
-  color: #0C0C3E;
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
 }
 
 #mockups div {
-  background-color: #0C0C3E;
-  color: white;
-  padding: 100px;
-  font-size: 48px;
-  width: 60vw;
-  font-weight: normal;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mockups div img {
+  width: 50vw;
+  height: auto;
+}
+
+#mockups div p {
+  width: 15vw;
+  text-align: left;
 }
 
 nav a {
@@ -286,7 +287,8 @@ footer #name {
   font-weight: 500;
 }
 
-.signupform input {
+.signupform input,
+.signupform textarea {
   align-self: flex-end;
   border: 1px solid #0C0C3E;
   width: 32vw;
@@ -1227,4 +1229,11 @@ main {
   margin-left: 25px;
   margin-top: 10px;
   color: #2d3d8b;
+}
+
+.emailsent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
 }

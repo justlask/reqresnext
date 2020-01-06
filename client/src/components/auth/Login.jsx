@@ -38,13 +38,13 @@ class Login extends Component {
         </div>
         <form className="signupform">
           <h1>Login</h1>
-          <label>Email</label>
-          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
-          <label>Password</label>
-          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+          <label>Email*</label>
+          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <label>Password*</label>
+          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} required/>
           
           <div className="loginbtns">
-            <Link to="/forgotpassword">Forgot password?</Link>
+            <Link to="/forgot">Forgot password?</Link>
             <Button title="login" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
           </div>
         </form>

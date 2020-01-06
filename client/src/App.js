@@ -6,14 +6,17 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Home from './components/home/Home';
 import Footer from './components/Footer';
-import Navbar from './components/Navbar'
-import Dashboard from './components/dashboard/Dashboard'
-import NewProject from './components/projects/NewProject'
-import Project from './components/projects/Project'
-import Action from './components/actions/Action'
+import Navbar from './components/Navbar';
+import Dashboard from './components/dashboard/Dashboard';
+import NewProject from './components/projects/NewProject';
+import Project from './components/projects/Project';
+import Action from './components/actions/Action';
 import Profile from './components/account/Profile';
-import AboutUs from './components/about/AboutUs'
-import Blog from './components/blog/Blog'
+import AboutUs from './components/about/AboutUs';
+import Blog from './components/blog/Blog';
+import ContactForm from './components/contact/ContactForm';
+import PasswordReset from './components/auth/PasswordReset';
+
 
 class App extends Component {
   constructor(props){
@@ -58,8 +61,10 @@ class App extends Component {
             <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } />
             <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route>
             <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route>
-            <Route exact path="/about" render={(props) => <AboutUs />}></Route>
-            <Route exact path="/blog" render={(props) => <Blog />}></Route>
+            <Route exact path="/about" render={(props) => <AboutUs {...props} />}></Route>
+            <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
+            <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
+            <Route exact path="/forgot" render={(props) => <PasswordReset {...props} />}></Route>
             {/* <ProtectedRoute user={this.state.loggedInUser} path='/projects/:id' component={ProjectDetails} />
             <ProtectedRoute user={this.state.loggedInUser} path='/projects' component={ProjectList} /> */}
           </Switch>

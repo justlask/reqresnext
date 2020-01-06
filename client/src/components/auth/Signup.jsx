@@ -45,12 +45,12 @@ class Signup extends Component {
         </div>
         <form className="signupform">
           <h1>Signup</h1>
-          <label>Name</label>
-          <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)}/>
-          <label>Email</label>
-          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
-          <label>Password</label>
-          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+          <label>Name*</label>
+          <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)} required/>
+          <label>Email*</label>
+          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <label>Password*</label>
+          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} required />
           <Button title="join" className="signupbtn" onClick={this.handleFormSubmit}/>
           {/* <input type="submit" className="signupbtn" value="Signup" /> */}
         </form>
