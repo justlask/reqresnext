@@ -12,7 +12,7 @@ input[type=password],
 textarea {
   transition: all 0.30s ease-in-out;
   outline: none;
-  border: 2px solid #DDDDDD;
+  border: 1px solid #DDDDDD;
 }
  
 input[type=text]:focus,
@@ -20,7 +20,7 @@ input[type=password]:focus,
 textarea:focus {
   box-shadow: 0 0 5px #2d3d8b;
   /* #7fbbca or #2d3d8b  rgba(81, 203, 238, 1)*/
-  border: 2px solid #2d3d8b;
+  border: 1px solid #2d3d8b;
 }
 
 button:focus {
@@ -284,7 +284,7 @@ footer #name {
 
 .signupform input {
   align-self: flex-end;
-  border: 2px solid #0C0C3E;
+  border: 1px solid #0C0C3E;
   width: 32vw;
   border-radius: 8px;
   padding: 6px;
@@ -328,7 +328,7 @@ footer #name {
   text-decoration: none;
   cursor: pointer;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: normal;
   padding: 10px 25px;
   border: none;
 }
@@ -688,6 +688,7 @@ main {
 .modalnames {
   text-align: left;
   font-weight: bold;
+  margin-bottom: 25px;
 }
 
 .modalnames p {
@@ -712,7 +713,7 @@ main {
 }
 
 .actionform input {
-  border: 2px solid #0C0C3E;
+  border: 1px solid #0C0C3E;
   border-radius: 8px;
   padding: 6px;
   margin-bottom: 25px;
@@ -1113,7 +1114,7 @@ main {
 
 .addproj {
   align-self: flex-end;
-  border: 2px solid #0C0C3E;
+  border: 1px solid #0C0C3E;
   border-radius: 8px;
   padding: 5px 10px;
   font-weight: bold;

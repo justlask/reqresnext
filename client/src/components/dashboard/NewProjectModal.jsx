@@ -11,7 +11,6 @@ export default class NewProjectModal extends Component {
     this.state = {
       title: '',
       description: '',
-      image: '',
     }
   }
       
@@ -23,12 +22,16 @@ export default class NewProjectModal extends Component {
     
 
   createProject = (e) => {
+    e.preventDefault();
+
     let projectInfo = {
       title: this.state.title,
       description: this.state.description,
-      image: this.state.image
     }
-    e.preventDefault();
+
+    if (this.state.image) {
+      projectInfo.image = this.state.image
+    }
 
 
     this.service.createProject(projectInfo)
@@ -97,12 +100,15 @@ export default class NewProjectModal extends Component {
 
     return (
       <form className="actionform">
+        <div className="modalnames">
+          <h3>Add a Project</h3>
+        </div>
+        <label>Project Main Image</label>
+        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
         <label>Project Name</label>
         <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>
         <label>Project Description</label>
         <input type="text" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
-        <label>Project Main Image</label>
-        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
         {/* <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleImage(e)} /> */}
       </form>
     )
@@ -119,9 +125,7 @@ export default class NewProjectModal extends Component {
     return (
       <div className="backdrop">
         <div className="modal">
-          <div className="modalnames">
-            <h3>Add A Project</h3>
-          </div>
+
 
          {this.createForm()}
 
