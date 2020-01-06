@@ -6,7 +6,7 @@ export default class AboutUs extends Component {
       <main className="padding">
         <div className="hero">
           <h1>
-            So, you've got a project to manage.<br></br>
+            <span style={{fontWeight: 500}}>So, you've got a project to manage.<br></br></span>
             <span style={{fontWeight: 'normal'}}>Well then, we've got a solution.</span>
           </h1>
           <h3 style={{paddingTop: '50px', fontWeight: 'normal'}}>
