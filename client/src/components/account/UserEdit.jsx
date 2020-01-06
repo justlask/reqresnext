@@ -10,6 +10,7 @@ export default class UserEdit extends Component {
       name: '',
       position: '',
       email: '',
+      password: '',
     }
   }
 

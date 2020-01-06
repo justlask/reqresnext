@@ -16,7 +16,7 @@ export default class Hero extends Component {
           <Link to="/signup" className="mainblue">c'mon, it's free!</Link>
         </div>
         <img src="./MessyDoodle.svg" alt="c/o palblo stanley"/>
-        <FontAwesomeIcon className="downchevron" style={{color: '#0C0C3E' }}icon={faChevronDown} />
+        {/* <FontAwesomeIcon className="downchevron" style={{color: '#0C0C3E' }}icon={faChevronDown} /> */}
       </div>
     )
   }

@@ -7,6 +7,7 @@ export default class Footer extends Component {
       <footer>
         <div id="name">
           <p>( req, res, next )</p>
+          <p style={{fontSize: '12px', fontWeight: 'normal'}}>&copy; 2020 ReqResNext.com</p>
         </div>
         <div className="footerlinks">
           <h4>Lauren Laskerr</h4>
