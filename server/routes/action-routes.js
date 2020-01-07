@@ -47,6 +47,17 @@ router.post('/:projectID/addaction', (req,res,next) => {
   })
 });
 
+router.post('/update', (req,res,next) => {
+  let updatedAction = req.body.actionInfo
+
+  if (req.body.image) updatedAction.image = req.body.image
+
+  Action.findByIdAndUpdate(req.body.actionID, updatedAction)
+  .then(response => {
+    res.json(response)
+  })
+})
+
 
 
 

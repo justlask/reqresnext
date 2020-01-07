@@ -29,7 +29,6 @@ export default class ActionModal extends Component {
 
     this.service.createAction(projectID, actionInfo )
     .then(response => {
-        console.log(response)
         this.setState({
           title: '',
           description: ''

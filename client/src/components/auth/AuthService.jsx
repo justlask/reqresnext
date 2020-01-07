@@ -124,6 +124,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  updateAction = (actionID, actionInfo, image) => {
+    return this.service.post('/action/update', {actionID, actionInfo, image})
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;

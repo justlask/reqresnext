@@ -63,10 +63,8 @@ export default class TaskCard extends Component {
   }
 
   loadComments = () => {
-    console.log(this.state.comments)
     if (this.state.comments.length !== 0) {
       return this.state.comments.map((comment,i) => {
-        console.log(comment)
         return (
           <TaskComment comment={comment}/>
         )

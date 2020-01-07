@@ -37,7 +37,6 @@ export default class addTask extends Component {
   handleChange = (e) => {
     const {name, value} = e.target;
     this.setState({[name]: value});
-    console.log(this.state)
   }
 
 

@@ -27,7 +27,6 @@ export default class TaskComment extends Component {
 
     this.service.addTaskComment(projectID, actionID, taskID, this.state)
     .then(response => {
-        console.log(response)
         this.setState({
           description: ''
         })

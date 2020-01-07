@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'
+import EditActionModal from './EditActionModal'
 
 export default class Action extends Component {
   constructor(props) {
@@ -17,11 +18,33 @@ export default class Action extends Component {
       popOut: 'popouthidden',
       type: 'front-end',
       activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      project: ''
+      project: '',
+      isOpen: false
     }
   }
 
   componentDidMount() {
+    let projectID = this.props.match.params.projectID
+    let actionID = this.props.match.params.actionID
+    
+    this.service.getAction(actionID)
+    .then(response => {
+      this.setState({
+        action: response,
+        project: response.project.title
+      })
+    })
+
+    this.service.getTasks(actionID, 'front-end')
+    .then(response => {
+      this.setState({
+        tasks: response,
+        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
+      })
+    })
+  }
+
+  loadAction = () => {
     let projectID = this.props.match.params.projectID
     let actionID = this.props.match.params.actionID
 
@@ -86,8 +109,6 @@ export default class Action extends Component {
   }
 
 
-
-
   loadTasks = () => {
     if (this.state.tasks) {
       return this.state.tasks.map((task, i) => {
@@ -105,12 +126,20 @@ export default class Action extends Component {
   }
 
 
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+
   render() {
     if (this.props.user) {
       return (
         <main className="actionpage">
             <div className="icons">
               <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
+              <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button>
             </div>
             <div className="title">
               <h3>{this.state.action.title}</h3>
@@ -132,6 +161,7 @@ export default class Action extends Component {
               </div>
             </div>
           </div>
+          <EditActionModal loadAction={this.loadAction} action={this.state.action} show={this.state.isOpen} onClose={this.toggleModal}> /></EditActionModal>
         </main>
       )
     }
