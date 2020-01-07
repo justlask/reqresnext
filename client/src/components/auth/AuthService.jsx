@@ -149,6 +149,21 @@ class AuthService {
     .then(response => response.data)
   }
 
+  deleteProject = (projectID) => {
+    return this.service.post(`/project/delete/${projectID}`)
+    .then(response => response.data)
+  }
+
+  markProjectComplete = (projectID) => {
+    return this.service.post(`/project/markcomplete/${projectID}`)
+    .then(response => response.data)
+  }
+
+  markProjectIncomplete = (projectID) => {
+    return this.service.post(`/project/markincomplete/${projectID}`)
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;

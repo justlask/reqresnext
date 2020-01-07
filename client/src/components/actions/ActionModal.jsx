@@ -83,7 +83,7 @@ export default class ActionModal extends Component {
         <div className="modalnames">
           <h3>Add an Action</h3>
         </div>
-        <label>Project Main Image</label>
+        <label>Action Image</label>
         <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
         <label>Action Name</label>
         <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>

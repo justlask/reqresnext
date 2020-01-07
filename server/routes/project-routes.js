@@ -114,6 +114,37 @@ router.post('/update', (req,res,next) => {
 
 
 
+router.post('/delete/:projectID', (req,res,next) => {
+  res.json('delete this project')
+
+  //gotta DELETE IT ALLLLL *pokemon voice*
+
+  //delete project
+  // pull project from user project array
+  // delete all actions with project.id
+  //delete all comments with project.id
+
+
+
+
+})
+
+router.post('/markcomplete/:projectID', (req,res,next) => {
+  Project.findByIdAndUpdate(req.params.projectID, {complete: true}, {new: true})
+  .then(response => {
+    res.json(response)
+  })
+})
+
+router.post('/markincomplete/:projectID', (req,res,next) => {
+  Project.findByIdAndUpdate(req.params.projectID, {complete: false}, {new: true})
+  .then(response => {
+    res.json(response)
+  })
+})
+
+
+
 
 
 

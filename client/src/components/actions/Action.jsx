@@ -178,7 +178,6 @@ export default class Action extends Component {
             <div className="icons">
               <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
               <div>
-                {/* <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button> */}
                 <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
                 <MoreActionOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} action={this.state.action} toggleModal={this.toggleModal} deleteAction={e => this.deleteAction(e)} show={this.state.moreOptions}/>
               </div>

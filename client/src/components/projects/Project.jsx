@@ -7,6 +7,7 @@ import Button from '../Button'
 import ActionModal from '../actions/ActionModal'
 import ProjectAction from './ProjectAction'
 import EditProjectModal from './EditProjectModal'
+import MoreProjectOptions from './MoreProjectOptions'
 
 
 export default class Project extends Component {
@@ -19,6 +20,7 @@ export default class Project extends Component {
       members: [],
       actions: [],
       isEdit: false,
+      moreOptions: false,
     }
   }
 
@@ -78,8 +80,6 @@ export default class Project extends Component {
     )
   }
 
-
-
   toggleModal = () => {
     this.setState({
       isOpen: !this.state.isOpen
@@ -92,9 +92,42 @@ export default class Project extends Component {
     })
   }
 
-  handleCompleteButton = () => {
-    console.log(this.state.project.complete)
+
+  showMoreOptions = () => {
+    this.setState({
+      moreOptions: !this.state.moreOptions
+    })
   }
+  
+  deleteProject = () => {
+    let projectID = this.state.project._id
+
+    this.service.deleteProject(projectID)
+    .then(response => {
+      console.log(response)
+      // this.props.history.push(`/dashboard`)
+    })
+
+  }
+
+  markComplete = () => {
+    this.service.markProjectComplete(this.state.project._id)
+    .then(response => {
+      console.log(response)
+      this.updateProject();
+      this.showMoreOptions();
+    })
+  }
+
+  markIncomplete = () => {
+    this.service.markProjectIncomplete(this.state.project._id)
+    .then(response => {
+      console.log(response)
+      this.updateProject();
+      this.showMoreOptions();
+    })
+  }
+
   
 
   render() {
@@ -103,9 +136,10 @@ export default class Project extends Component {
         <main className="">
           <div className="icons">
             <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-            {/* <Button className="addproj" title="Edit this project" onClick={this.toggleEdit}></Button> */}
-            <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />}></Button>
+
+            <div>
+              <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
+              <MoreProjectOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} project={this.state.project} toggleEdit={this.toggleEdit} deleteProject={e => this.deleteProject(e)} show={this.state.moreOptions}/>
             </div>
           </div>
     
