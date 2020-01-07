@@ -135,7 +135,6 @@ export default class Action extends Component {
   }
 
   showMoreOptions = () => {
-    console.log('these are more options')
     this.setState({
       moreOptions: !this.state.moreOptions
     })
@@ -148,14 +147,26 @@ export default class Action extends Component {
 
     this.service.deleteAction(actionID, projectID)
     .then(response => {
-      console.log("you've been deleted")
-      console.log(response)
-
       this.props.history.push(`/project/${projectID}`)
     })
 
+  }
 
 
+  markComplete = () => {
+    this.service.markActionComplete(this.state.action._id)
+    .then(response => {
+      this.loadAction();
+      this.showMoreOptions();
+    })
+  }
+
+  markIncomplete = () => {
+    this.service.markActionIncomplete(this.state.action._id)
+    .then(response => {
+      this.loadAction();
+      this.showMoreOptions();
+    })
   }
 
 
@@ -169,7 +180,7 @@ export default class Action extends Component {
               <div>
                 {/* <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button> */}
                 <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
-                <MoreActionOptions action={this.state.action} toggleModal={this.toggleModal} deleteAction={e => this.deleteAction(e)} show={this.state.moreOptions}/>
+                <MoreActionOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} action={this.state.action} toggleModal={this.toggleModal} deleteAction={e => this.deleteAction(e)} show={this.state.moreOptions}/>
               </div>
             </div>
             <div className="title">

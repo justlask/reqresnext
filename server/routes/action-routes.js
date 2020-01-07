@@ -56,13 +56,9 @@ router.post('/update', (req,res,next) => {
   .then(response => {
     res.json(response)
   })
-})
+});
 
 router.post('/delete/:projectID/:actionID', (req,res,next) => {
-  console.log('projectId ====>  ' + req.params.projectID)
-  console.log('actionID ===>   ' + req.params.actionID)
-
-
 
   Action.findByIdAndDelete(req.params.actionID)
   .then(response => {
@@ -72,9 +68,26 @@ router.post('/delete/:projectID/:actionID', (req,res,next) => {
       res.json(data)
     })
 
-
   })
-})
+});
+
+router.post('/markcomplete/:actionID', (req,res,next) => {
+
+  Action.findByIdAndUpdate(req.params.actionID, {complete: true})
+  .then(response => {
+    res.json(response)
+  })
+
+});
+
+router.post('/markincomplete/:actionID', (req,res,next) => {
+
+  Action.findByIdAndUpdate(req.params.actionID, {complete: false})
+  .then(response => {
+    res.json(response)
+  })
+
+});
 
 
 

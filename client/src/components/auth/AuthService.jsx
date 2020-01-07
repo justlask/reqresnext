@@ -139,6 +139,16 @@ class AuthService {
     .then(response => response.data)
   }
 
+  markActionComplete = (actionID) => {
+    return this.service.post(`/action/markcomplete/${actionID}`)
+    .then(response => response.data)
+  }
+
+  markActionIncomplete = (actionID) => {
+    return this.service.post(`/action/markincomplete/${actionID}`)
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;
