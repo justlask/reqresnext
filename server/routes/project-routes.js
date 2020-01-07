@@ -100,6 +100,21 @@ router.post('/create', (req,res,next) => {
 });
 
 
+router.post('/update', (req,res,next) => {
+  let updatedProject = req.body.projectInfo
+
+  if (req.body.image) updatedProject.image = req.body.image
+
+
+  Project.findByIdAndUpdate(req.body.projectID, updatedProject, {new: true})
+  .then(response => {
+    res.json(response)
+  })
+});
+
+
+
+
 
 
 

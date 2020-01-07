@@ -882,7 +882,8 @@ main {
   justify-items: space-around;
 }
 
-.atask .buttontitle button {
+.atask .buttontitle button,
+.notCompletedBtn {
   transition: all 0s;
   background-color: white;
   margin-top: 5px;
@@ -900,7 +901,8 @@ main {
   border: 3px solid #0C0C3E;
 }
 
-.atask .buttontitle button:focus {
+.atask .buttontitle button:focus,
+.notCompletedBtn:focus {
   transition: all 0s;
   border: 2px solid #0C0C3E;
   box-shadow: none;
@@ -921,7 +923,8 @@ main {
   justify-items: space-around;
 }
 
-.ataskdone .buttontitle button {
+.ataskdone .buttontitle button,
+.completedBtn {
   background-color: rgb(0, 211, 56);
   color: white;
   cursor: pointer;
@@ -938,7 +941,8 @@ main {
   margin-top: 8px;
 }
 
-.ataskdone .buttontitle button:focus {
+.ataskdone .buttontitle button:focus,
+.completedBtn:focus {
   box-shadow: none;
 }
 
@@ -1184,6 +1188,7 @@ main {
   margin-bottom: 10px;
   cursor: pointer;
   font-size: 14px;
+  color: #0C0C3E;
 }
 
 .projbox {

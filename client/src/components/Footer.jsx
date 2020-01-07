@@ -20,9 +20,9 @@ export default class Footer extends Component {
         </div>
         <div className="footerlinks">
           <h4>About Req, Res, Next</h4>
-          <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/about" target="_blank">About</Link>
+          <Link to="/blog" target="_blank">Blog</Link>
+          <Link to="/contact" target="_blank">Contact</Link>
         </div>
       </footer>
     )

@@ -6,6 +6,7 @@ import { faChevronLeft, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import ActionModal from '../actions/ActionModal'
 import ProjectAction from './ProjectAction'
+import EditProjectModal from './EditProjectModal'
 
 
 export default class Project extends Component {
@@ -16,7 +17,8 @@ export default class Project extends Component {
       isOpen: false,
       project: {},
       members: [],
-      actions: []
+      actions: [],
+      isEdit: false,
     }
   }
 
@@ -27,7 +29,7 @@ export default class Project extends Component {
       this.setState({
         project: data,
         members: data.members,
-        actions: data.actions
+        actions: data.actions,
       })
     })
   }
@@ -39,7 +41,8 @@ export default class Project extends Component {
       this.setState({
         project: data,
         members: data.members,
-        actions: data.actions
+        actions: data.actions,
+        isEdit: false
       })
     })
   }
@@ -83,17 +86,32 @@ export default class Project extends Component {
     });
   }
 
+  toggleEdit = () => {
+    this.setState({
+      isEdit: !this.state.isEdit
+    })
+  }
+
+  handleCompleteButton = () => {
+    console.log(this.state.project.complete)
+  }
+  
+
   render() {
     if (this.props.user) {
       return (
         <main className="">
           <div className="icons">
             <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
-            <Button className="editbtn" title={<FontAwesomeIcon style={{color: '#0C0C3E'}} icon={faPencilAlt} />}>edit project</Button>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+            <Button className="addproj" title="Edit this project" onClick={this.toggleEdit}></Button>
+            <Button className="addproj" title="Mark project as complete" onClick={e => this.handleCompleteButton(e)}></Button>
+            </div>
           </div>
     
             {this.loadProject()}
           <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
+          <EditProjectModal updateProject={this.updateProject} project={this.state.project} show={this.state.isEdit} onClose={this.toggleEdit}></EditProjectModal>
         </main>
       )
     }

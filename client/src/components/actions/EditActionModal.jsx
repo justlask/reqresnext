@@ -84,7 +84,7 @@ export default class EditActionModal extends Component {
     return (
       <form className="actionform">
         <div className="modalnames">
-          <h3>Edit Action</h3>
+          <h3>Edit This Action</h3>
         </div>
         <label>Action Image</label>
         <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />

@@ -16,8 +16,8 @@ export default class EditProjectModal extends Component {
 
   componentDidMount() {
     this.setState({
-      title: this.props.action.title,
-      description: this.props.action.description
+      title: this.props.project.title,
+      description: this.props.project.description
     })
   }
       
@@ -27,11 +27,11 @@ export default class EditProjectModal extends Component {
   }
     
 
-  updateAction = (e) => {
+  updateProject = (e) => {
 
-    let actionID = this.props.action._id
+    let projectID = this.props.project._id
 
-    let actionInfo = {
+    let projectInfo = {
       title: this.state.title,
       description: this.state.description,
     }
@@ -44,10 +44,9 @@ export default class EditProjectModal extends Component {
 
     e.preventDefault();
 
-    this.service.updateAction(actionID, actionInfo, image)
+    this.service.updateProject(projectID, projectInfo, image)
     .then(response => {
-
-      this.props.loadAction();
+      this.props.updateProject();
       this.props.onClose();
     })
   }
@@ -84,14 +83,14 @@ export default class EditProjectModal extends Component {
     return (
       <form className="actionform">
         <div className="modalnames">
-          <h3>Edit Action</h3>
+          <h3>Edit This Project</h3>
         </div>
-        <label>Action Image</label>
+        <label>Project Main Image</label>
         <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
-        <label>Action Title</label>
-        <input type="text" name="title" placeholder={this.props.action.title} value={this.state.title} defaultValue={this.props.action.title} onChange={e => this.handleChange(e)}/>
-        <label>Action Description</label>
-        <input type="text" name="description" placeholder={this.props.action.description} value={this.state.description} defaultValue={this.props.action.description} onChange={e => this.handleChange(e)}/>
+        <label>Project Title</label>
+        <input type="text" name="title" placeholder={this.props.project.title} value={this.state.title} defaultValue={this.props.project.title} onChange={e => this.handleChange(e)}/>
+        <label>Project Description</label>
+        <input type="text" name="description" placeholder={this.props.project.description} value={this.state.description} defaultValue={this.props.project.description} onChange={e => this.handleChange(e)}/>
       </form>
     )
   }
@@ -110,7 +109,7 @@ export default class EditProjectModal extends Component {
          {this.createForm()}
           <div className="addactionmodal">
             <Button className="noButtonBlue" title="cancel" onClick={e => this.props.onClose()}></Button>
-            <Button className="addactionmodalbtn" title="save" onClick={e => {this.updateAction(e)}}></Button>
+            <Button className="addactionmodalbtn" title="save" onClick={e => {this.updateProject(e)}}></Button>
           </div>
         </div>
       </div>

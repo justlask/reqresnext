@@ -133,13 +133,45 @@ export default class Action extends Component {
   }
 
 
+
+  // handleButton = () => {
+  //   if (this.props.elem.complete) {
+  //     return (
+  //       <Button className="completedBtn" onClick={e => this.markAsIncomplete()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
+  //     )
+  //   }
+  //   else {
+  //     return (
+  //       <Button className="notCompletedBtn" onClick={e => this.markAsComplete()} title=""></Button>
+  //     )
+  //   }
+  // }
+
+
+  // markAsComplete = () => {
+  //   console.log("it's completed")
+  //   this.props.elem.complete = true
+  // }
+
+  // markAsIncomplete = () => {
+  //   console.log("it's incomplete")
+  //   this.props.elem.complete = false
+  // }
+
+
+  handleCompleteButton = () => {
+    console.log(this.state.action.complete)
+  }
   render() {
     if (this.props.user) {
       return (
         <main className="actionpage">
             <div className="icons">
               <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
-              <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button>
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button>
+                <Button className="addproj" title="Mark action as complete" onClick={e => this.handleCompleteButton(e)}></Button>
+              </div>
             </div>
             <div className="title">
               <h3>{this.state.action.title}</h3>

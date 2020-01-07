@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
+import Button from '../Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default class ProjectAction extends Component {
   constructor(props) {
@@ -64,6 +67,7 @@ export default class ProjectAction extends Component {
             <img className="" src={this.props.members[0].image} alt=""/>
           </div>
         </div>
+
       </div>
     )
   }
