@@ -58,6 +58,24 @@ router.post('/update', (req,res,next) => {
   })
 })
 
+router.post('/delete/:projectID/:actionID', (req,res,next) => {
+  console.log('projectId ====>  ' + req.params.projectID)
+  console.log('actionID ===>   ' + req.params.actionID)
+
+
+
+  Action.findByIdAndDelete(req.params.actionID)
+  .then(response => {
+
+    Project.findByIdAndUpdate(req.params.projectID, { $pull: { actions: req.params.actionID }}, {new: true})
+    .then(data => {
+      res.json(data)
+    })
+
+
+  })
+})
+
 
 
 

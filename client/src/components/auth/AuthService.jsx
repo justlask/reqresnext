@@ -134,6 +134,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  deleteAction = (actionID, projectID) => {
+    return this.service.post(`/action/delete/${projectID}/${actionID}`)
+    .then(response => response.data)
+  }
+
 }
 
 export default AuthService;

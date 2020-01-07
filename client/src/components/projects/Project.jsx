@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import AuthService from '../auth/AuthService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import ActionModal from '../actions/ActionModal'
 import ProjectAction from './ProjectAction'
@@ -104,8 +104,8 @@ export default class Project extends Component {
           <div className="icons">
             <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
             <div style={{display: 'flex', flexDirection: 'column'}}>
-            <Button className="addproj" title="Edit this project" onClick={this.toggleEdit}></Button>
-            <Button className="addproj" title="Mark project as complete" onClick={e => this.handleCompleteButton(e)}></Button>
+            {/* <Button className="addproj" title="Edit this project" onClick={this.toggleEdit}></Button> */}
+            <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />}></Button>
             </div>
           </div>
     

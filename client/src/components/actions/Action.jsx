@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'
 import EditActionModal from './EditActionModal'
+import MoreActionOptions from './MoreActionOptions'
 
 export default class Action extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ export default class Action extends Component {
       type: 'front-end',
       activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
       project: '',
-      isOpen: false
+      isOpen: false,
+      moreOptions: false
     }
   }
 
@@ -132,45 +134,42 @@ export default class Action extends Component {
     });
   }
 
-
-
-  // handleButton = () => {
-  //   if (this.props.elem.complete) {
-  //     return (
-  //       <Button className="completedBtn" onClick={e => this.markAsIncomplete()} title={<FontAwesomeIcon style={{color: 'white', fontSize: '16px' }}icon={faCheck} />}></Button>
-  //     )
-  //   }
-  //   else {
-  //     return (
-  //       <Button className="notCompletedBtn" onClick={e => this.markAsComplete()} title=""></Button>
-  //     )
-  //   }
-  // }
-
-
-  // markAsComplete = () => {
-  //   console.log("it's completed")
-  //   this.props.elem.complete = true
-  // }
-
-  // markAsIncomplete = () => {
-  //   console.log("it's incomplete")
-  //   this.props.elem.complete = false
-  // }
-
-
-  handleCompleteButton = () => {
-    console.log(this.state.action.complete)
+  showMoreOptions = () => {
+    console.log('these are more options')
+    this.setState({
+      moreOptions: !this.state.moreOptions
+    })
   }
+  
+  deleteAction = () => {
+    let actionID = this.state.action._id
+    let projectID = this.props.match.params.projectID
+
+
+    this.service.deleteAction(actionID, projectID)
+    .then(response => {
+      console.log("you've been deleted")
+      console.log(response)
+
+      this.props.history.push(`/project/${projectID}`)
+    })
+
+
+
+  }
+
+
+
   render() {
     if (this.props.user) {
       return (
         <main className="actionpage">
             <div className="icons">
               <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
-              <div style={{display: 'flex', flexDirection: 'column'}}>
-                <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button>
-                <Button className="addproj" title="Mark action as complete" onClick={e => this.handleCompleteButton(e)}></Button>
+              <div>
+                {/* <Button className="addproj" title="Edit this action" onClick={e => this.toggleModal(e)}></Button> */}
+                <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
+                <MoreActionOptions action={this.state.action} toggleModal={this.toggleModal} deleteAction={e => this.deleteAction(e)} show={this.state.moreOptions}/>
               </div>
             </div>
             <div className="title">
