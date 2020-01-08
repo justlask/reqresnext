@@ -1295,3 +1295,76 @@ main {
   outline: none;
   box-shadow: none;
 }
+
+
+
+/*MOBILE   */
+
+
+@media only screen and (max-width: 880px) {
+  header {
+    flex-direction: column;
+  }
+ #hero {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+ #herotext {
+   order: 2;
+   width: 80vw;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+ }
+ #hero img {
+   order: 1;
+   width: 70vw;
+ }
+ .boxes {
+   flex-direction: column;
+   justify-content: space-between;
+   margin-top: 50px;
+ }
+ .boxes div {
+  width: 60vw;
+  margin-bottom: 20px;
+ }
+ #about {
+  padding-top: 50px;
+  align-items: center;
+ }
+ footer {
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+ }
+ footer #name {
+   padding-bottom: 20px;
+   width: 100vw;
+ }
+ .footerlinks {
+   width: 100vw;
+   padding-left: 50px;
+ }
+ #mockups div {
+  flex-direction: column;
+}
+#mockups div p {
+  width: 80vw;
+}
+.mainblue {
+  margin: 0;
+}
+
+}
+
+
+@media only screen and (max-width: 500px) {
+  #mockups div {
+    flex-direction: column;
+  }
+  #mockups div p {
+    width: 80vw;
+  }
+ }
