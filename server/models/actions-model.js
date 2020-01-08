@@ -7,7 +7,7 @@ const Project = require('./projects-model')
 
 const actionSchema = new Schema({
   title: String,
-  image: {type: String, default: 'https://res.cloudinary.com/justlaskcloud/image/upload/v1578278371/ReqResNext/image.png.png'},
+  image: {type: String, default: 'https://res.cloudinary.com/justlaskcloud/image/upload/v1578498797/placeholder_id7rkc.png'},
   description: String,
   tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
   members: [{type: Schema.Types.ObjectId, ref: 'User'}],
