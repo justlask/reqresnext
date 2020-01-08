@@ -24,9 +24,8 @@ export default class Blog extends Component {
           <br></br><br></br>
           This was what my prototype looked like
           once I was finished and ready to begin coding.
-          <video width='700px' height="auto" controls >
-              <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578309023/rrnv1_giwnpj.mov" type="video/mp4"/>
-            </video><br></br>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/7rl3PZjaHfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <br></br>
           </p>
           <h2 style={{fontWeight: 500}}>The Process: Development</h2>
           <p style={{paddingBottom: '25px'}}>
@@ -56,9 +55,8 @@ export default class Blog extends Component {
             I'll have to admit that sometimes actual "bold" is too bold, and a font weight of 500/600 can be better 😉.
             <br></br><br></br>
             There's still a lot of work to do, but here is current state of ReqResNext with help from <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a> 🙌.
-            <video width='800px' height="auto" controls >
-              <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578502430/LatestFlow_axhhkb.mov" type="video/mp4"/>
-            </video><br></br> 
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ju-Pi-j0Y2A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <br></br> 
           </p>
 
           
