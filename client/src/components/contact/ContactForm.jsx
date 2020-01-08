@@ -16,13 +16,18 @@ export default class ContactForm extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      sent: true
-    })
-    console.log(this.state)
-    this.service.contact(this.state.name, this.state.email, this.state.message)
-    .then(data => {
-    })
+    let email = this.state.email
+    if (email.includes('@') && email.includes('.')) {
+      this.setState({
+        sent: true
+      })
+      this.service.contact(this.state.name, this.state.email, this.state.message)
+      .then(data => {
+      })
+    }
+    else {
+      console.log('I need an email to email you back!')
+    }
   }
 
   handleChange = (event) => {  
