@@ -57,9 +57,9 @@ export default class ContactForm extends Component {
           <label>Name*</label>
           <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)} required/>
           <label>Email*</label>
-          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <input type="text" name="email" value={this.state.email} placeholder="an actual email please" onChange={ e => this.handleChange(e)} required/>
           <label>Message*</label>
-          <textarea name="message" value={this.state.message} onChange={ e => this.handleChange(e)} required/>
+          <textarea name="message" value={this.state.message} placeholder="Tell me....." onChange={ e => this.handleChange(e)} required/>
           <Button title="send" className="signupbtn" onClick={(e) => this.handleFormSubmit(e)}/>
         </form>
       </div>
