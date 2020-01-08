@@ -1395,6 +1395,10 @@ main {
 
 
 @media only screen and (max-width: 500px) {
+  #herotext h1,
+  .abouttext h1 {
+    font-size: 32px;
+  }
   #mockups div {
     flex-direction: column;
   }
