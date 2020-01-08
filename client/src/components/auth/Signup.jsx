@@ -16,21 +16,25 @@ class Signup extends Component {
     const email = this.state.email;
     const password = this.state.password
   
-    this.service.signup(name, email, password)
-    .then( response => {
-        this.setState({
-            name: "",
-            email: "",
-            password: "",
-        });
-        this.props.getUser(response)
-        this.props.history.push('/dashboard')
-    })
-    .catch( error => console.log(error) )
+    if (email.includes('@') && email.includes('.')) {
+      this.service.signup(name, email, password)
+      .then( response => {
+          this.setState({
+              name: "",
+              email: "",
+              password: "",
+          });
+          this.props.getUser(response)
+          this.props.history.push('/dashboard')
+      })
+      .catch( error => console.log(error) )
+    }
+    else {
+      console.log('use an email please')
+    }
   }
   
   handleChange = (event) => {  
-    console.log(this.state)
     const {name, value} = event.target;
     this.setState({[name]: value});
   }
@@ -48,7 +52,7 @@ class Signup extends Component {
           <label>Name*</label>
           <input type="text" name="name" value={this.state.name} onChange={ e => this.handleChange(e)} required/>
           <label>Email*</label>
-          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <input type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
           <label>Password*</label>
           <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} required />
           <Button title="join" className="signupbtn" onClick={this.handleFormSubmit}/>

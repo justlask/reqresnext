@@ -39,7 +39,7 @@ class Login extends Component {
         <form className="signupform">
           <h1>Login</h1>
           <label>Email*</label>
-          <input type="text" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
+          <input type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
           <label>Password*</label>
           <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} required/>
           
