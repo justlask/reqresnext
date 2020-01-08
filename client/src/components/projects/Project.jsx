@@ -105,7 +105,7 @@ export default class Project extends Component {
     this.service.deleteProject(projectID)
     .then(response => {
       console.log(response)
-      // this.props.history.push(`/dashboard`)
+      this.props.history.push(`/dashboard`)
     })
 
   }

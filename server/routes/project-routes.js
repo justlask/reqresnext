@@ -8,6 +8,7 @@ const User        = require('../models/user-model');
 const Project     = require('../models/projects-model');
 const Task        = require('../models/tasks-model');
 const Action      = require('../models/actions-model');
+const Comment     = require('../models/comment-model')
 
 
 
@@ -115,18 +116,36 @@ router.post('/update', (req,res,next) => {
 
 
 router.post('/delete/:projectID', (req,res,next) => {
-  res.json('delete this project')
-
   //gotta DELETE IT ALLLLL *pokemon voice*
 
   //delete project
-  // pull project from user project array
-  // delete all actions with project.id
-  //delete all comments with project.id
+  Project.findByIdAndDelete(req.params.projectID)
+  .then(response => {
+
+    //find and delete all actions of that project
+    Action.deleteMany({project: req.params.projectID})
+    .then(response => {
+      
+      //delets all tasks relating to that project
+      Task.deleteMany({project: req.params.projectID})
+      .then(response => {
+        
+        //deletes all comments relating to that project
+        Comment.deleteMany({project: req.params.projectID})
+        .then(response => {
 
 
+          //then delete project from user array
+          User.findByIdAndUpdate(req.user.id, { $pull: { projects: req.params.projectID }})
+          .then(response => {
+            console.log('removed from user')
+            res.json(response)
+          })
 
-
+        })
+      })
+    })
+  })
 })
 
 router.post('/markcomplete/:projectID', (req,res,next) => {
