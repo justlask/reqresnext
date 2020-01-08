@@ -104,7 +104,6 @@ export default class Project extends Component {
 
     this.service.deleteProject(projectID)
     .then(response => {
-      console.log(response)
       this.props.history.push(`/dashboard`)
     })
 
@@ -113,7 +112,6 @@ export default class Project extends Component {
   markComplete = () => {
     this.service.markProjectComplete(this.state.project._id)
     .then(response => {
-      console.log(response)
       this.updateProject();
       this.showMoreOptions();
     })
@@ -122,7 +120,6 @@ export default class Project extends Component {
   markIncomplete = () => {
     this.service.markProjectIncomplete(this.state.project._id)
     .then(response => {
-      console.log(response)
       this.updateProject();
       this.showMoreOptions();
     })

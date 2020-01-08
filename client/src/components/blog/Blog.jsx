@@ -50,11 +50,12 @@ export default class Blog extends Component {
             it should work. Sometimes the end user has a completely different idea of <b>how </b> to use what we've made. 
             <br></br><br></br>
             I am grateful for all UX/UI Designers for what they do, however, I am most grateful for <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a>,
-            who helped steer me in the right direction when trying to style and polish this project. This project would not look as good
+            who tried to steer me in the right direction when trying to style and polish this project. This project would not look as good
             without her keen attention to detail. She really helped me craft this project into something special. Thank you for answering
-            my endless questions, and for giving me your thoughts, input, and notes on what worked and what needed to be re-tooled.
+            my endless questions, and for giving me your thoughts, input, and notes on what worked and what needed to be re-tooled. 
+            I'll have to admit that sometimes actual "bold" is too bold, and a font weight of 500/600 can be better 😉.
             <br></br><br></br>
-            The current state of ReqResNext with help from our UX/UI Design Consultant <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a> 🙌.
+            There's still a lot of work to do, but here is current state of ReqResNext with help from <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a> 🙌.
             <video width='800px' height="auto" controls >
               <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578317113/new_cnokmx.mov" type="video/mp4"/>
             </video><br></br> 
