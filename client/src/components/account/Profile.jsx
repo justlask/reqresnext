@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import AuthService from '../auth/AuthService';
 import Button from '../Button';
 import ImageUpload from './ImageUpload';
 import UserCard from './UserCard';
 import UserEdit from './UserEdit';
+import UserDelete from './UserDelete'
+import MoreUserOptions from './MoreUserOptions'
+
 
 
 export default class Profile extends Component {
@@ -14,12 +19,13 @@ export default class Profile extends Component {
     this.state = {
       user: {},
       image: '',
-      update: false
+      update: false,
+      delete: false,
+      moreOptions: false,
     }
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.service.getUserInfo(this.props.user.id)
     .then(user => {
       this.setState({
@@ -51,8 +57,9 @@ export default class Profile extends Component {
 
   handleEdit = () => {
     this.setState({
-      update: true
+      update: !this.state.update,
     })
+    this.showMoreOptions();
   }
 
   updateUser = () => {
@@ -72,6 +79,11 @@ export default class Profile extends Component {
         <UserEdit user={this.state.user} updateUser={this.updateUser}/>
       )
     }
+    if (this.state.delete) {
+      return (
+        <UserDelete user={this.state.user} updateUser={this.updateUser} />
+      )
+    }
     else {
       return (
         <UserCard user={this.state.user}/>
@@ -79,12 +91,28 @@ export default class Profile extends Component {
     }
   }
 
+  showMoreOptions = () => {
+    this.setState({
+      moreOptions: !this.state.moreOptions
+    })
+  }
+
+  deleteAccount = () => {
+    this.setState({
+      delete: !this.state.delete
+    })
+    this.showMoreOptions();
+  }
+
   render() {
     if (this.props.user) {
       return (
         <main className="accountpage">
           <div className="accountInfo">
-            <Button className="noButtonBlueThin" title="edit profile" onClick={e => this.handleEdit()}></Button>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+              <Button className="editaccount" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
+              <MoreUserOptions toggleEdit={this.handleEdit} deleteAccount={this.deleteAccount} show={this.state.moreOptions}/>
+            </div>
             <div className="userInfo">
             <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
               {this.handleCard()}

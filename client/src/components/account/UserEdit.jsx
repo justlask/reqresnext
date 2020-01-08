@@ -15,7 +15,6 @@ export default class UserEdit extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.user)
     this.setState({
       name: this.props.user.name,
       position: this.props.user.position,
@@ -26,14 +25,12 @@ export default class UserEdit extends Component {
   handleChange = (e) => {
     const {name, value} = e.target;
     this.setState({[name]: value});
-    console.log(this.state)
   }
 
   submitChange = (e) => {
     e.preventDefault();
       this.service.updateAccount(this.state)
       .then(user => {
-        console.log(user)
         this.props.updateUser()
       })
   }

@@ -119,8 +119,8 @@ class AuthService {
     .then(response => response.data)
   }
 
-  deleteAccount = () => {
-    return this.service.post('/user/deleteaccount')
+  deleteAccount = (userPass) => {
+    return this.service.post('/user/deleteaccount', userPass)
     .then(response => response.data)
   }
 

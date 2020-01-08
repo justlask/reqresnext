@@ -1,8 +1,12 @@
 const express    = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const bcrypt     = require('bcryptjs')
+const passport   = require('passport')
+const nodemailer = require('nodemailer')
 
 const profileUploadCloud = require('../configs/profileCloudinary');
+
 
 const User       = require('../models/user-model');
 const Action     = require('../models/actions-model');
@@ -10,15 +14,12 @@ const Comment    = require('../models/comment-model');
 const Project    = require('../models/projects-model');
 const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model');
-const bcrypt     = require('bcryptjs')
-const passport   = require('passport')
-const nodemailer = require('nodemailer')
+
+
 
 
 router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
  
-  
-  
   if (!req.file) {
     next(new Error('No file uploaded!'));
     return;
@@ -126,6 +127,36 @@ router.post('/contact', (req,res,next) => {
       res.status(200).json({message: 'we have emailed you a link to reset your password.'})
   )
   .catch(error => console.log(error));
+});
+
+
+router.post('/deleteaccount', (req,res,next) => {
+
+  console.log(req.body)
+
+  User.findByIdAndDelete(req.user.id)
+  .then(response => {
+
+    Project.deleteMany({owner: req.user.id})
+    .then(response => {
+
+      Action.deleteMany({creator: req.user.id})
+      .then(response => {
+
+        Task.deleteMany({owner: req.user.id})
+        .then(response => {
+
+          Comment.deleteMany({owner: req.user.id})
+          .then(response => {
+            req.logout();
+            res.json("fine, you're deleted")
+          })
+        })
+
+      })
+
+    })
+  })
 })
 
 

@@ -1132,7 +1132,7 @@ main {
 .editbox input {
   border: none;
   padding: 5px 10px;
-  background-color: #f7f7f7;
+  background-color: white;
   margin-bottom: 15px;
   color: #0C0C3E;
   font-size: 16px;
@@ -1272,8 +1272,7 @@ main {
   right: 50px;
   top: 150px;
   background-color: white;
-  padding-top: 20px;
-  padding-right: 10px;
+  padding: 30px 20px 20px;
   border: 1px solid #0C0C3E;
   border-radius: 8px;
 }
@@ -1281,7 +1280,6 @@ main {
 .noButtonEdit {
   border: none;
   background-color: inherit;
-  padding: 10px 25px;
   font-size: 16px;
   cursor: pointer;
   color: #0C0C3E;
@@ -1291,9 +1289,33 @@ main {
   color: #2d3d8b;
 }
 
-.noButtonEdit:focus {
+.noButtonEdit:focus,
+.editaccount:focus {
   outline: none;
   box-shadow: none;
+}
+
+.editaccount {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: #0C0C3E;
+  font-size: 16px;
+  margin-right: 25px;
+  z-index: 2;
+}
+
+.editaccountbtns {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: -50px;
+  border: 1px solid #0C0C3E;
+  width: 40%;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 30px 35px 10px 10px;
 }
 
 
