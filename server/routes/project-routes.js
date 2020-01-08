@@ -138,7 +138,6 @@ router.post('/delete/:projectID', (req,res,next) => {
           //then delete project from user array
           User.findByIdAndUpdate(req.user.id, { $pull: { projects: req.params.projectID }})
           .then(response => {
-            console.log('removed from user')
             res.json(response)
           })
 

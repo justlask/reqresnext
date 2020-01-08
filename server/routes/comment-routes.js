@@ -15,12 +15,6 @@ const moment     = require('moment')
 
 router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
 
-  console.log('projectID ====== ' + req.params.projectID)
-  console.log('actionID ====== ' + req.params.actionID)
-  console.log('taskID ====== ' + req.params.taskID)
-  console.log(req.body)
-
-
   const newComment = {
     description: req.body.description,
     owner: req.user.id,
@@ -48,7 +42,6 @@ router.post(`/add/:projectID/:actionID/:taskID`, (req,res,next) => {
     })
   })
 });
-
 
 
 

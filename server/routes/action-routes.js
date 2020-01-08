@@ -7,6 +7,7 @@ const User        = require('../models/user-model');
 const Project     = require('../models/projects-model');
 const Task        = require('../models/tasks-model');
 const Action      = require('../models/actions-model');
+const Comment    = require('../models/comment-model');
 
 
 router.get('/:actionID', (req,res,next) => {
@@ -21,7 +22,6 @@ router.get('/:actionID', (req,res,next) => {
 
 
 router.post('/:projectID/addaction', (req,res,next) => {
-  console.log(req.body)
   let newAction = {
     title: req.body.actionInfo.title,
     description: req.body.actionInfo.description,
@@ -38,7 +38,6 @@ router.post('/:projectID/addaction', (req,res,next) => {
   Action.create(newAction)
   .then(action => {
     // add actionID to project
-
     Project.findByIdAndUpdate(req.params.projectID, { $push: { actions: action.id }}, {new: true})
     .then(data => {
       res.json(data)
@@ -59,15 +58,24 @@ router.post('/update', (req,res,next) => {
 });
 
 router.post('/delete/:projectID/:actionID', (req,res,next) => {
-
+  //find action and delete it
   Action.findByIdAndDelete(req.params.actionID)
   .then(response => {
-
+    //find action's project and remove the action id from it's list
     Project.findByIdAndUpdate(req.params.projectID, { $pull: { actions: req.params.actionID }}, {new: true})
     .then(data => {
-      res.json(data)
-    })
 
+      // find tasks of that action and delete those
+      Task.deleteMany({action: req.params.actionID})
+      .then(response => {
+
+        // find comments of that action and delete those too
+        Comment.deleteMany({action: req.params.actionID})
+        .then(response => {
+          res.json(data)
+        })
+      })
+    })
   })
 });
 

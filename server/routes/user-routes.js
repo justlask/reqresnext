@@ -132,8 +132,6 @@ router.post('/contact', (req,res,next) => {
 
 router.post('/deleteaccount', (req,res,next) => {
 
-  console.log(req.body)
-
   User.findByIdAndDelete(req.user.id)
   .then(response => {
 

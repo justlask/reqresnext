@@ -18,7 +18,6 @@ router.post('/complete/:taskID', (req,res,next) => {
 })
 
 router.get('/:actionID/:type', (req,res,next) => {
-  console.log(req.body)
   if (req.params.type === undefined) {
     req.params.type = 'front-end'
   }
@@ -49,6 +48,7 @@ router.post('/addtask/:actionID', (req,res,next) => {
 
   Task.create(newTask)
   .then(newTask => {
+
     Action.findByIdAndUpdate(req.params.actionID, { $push: { tasks: newTask.id }}, {new: true})
     .then(response => {
 
@@ -65,8 +65,7 @@ router.post('/addtask/:actionID', (req,res,next) => {
       .then(data => {
         res.json(data)
       })
-      // console.log(response)
-      // res.json(response)
+
     })
   })
 
