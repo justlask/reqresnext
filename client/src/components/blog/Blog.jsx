@@ -6,7 +6,7 @@ export default class Blog extends Component {
       <main style={{padding: '50px 0', width: '100vw', display: 'flex', flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'left', width: '70vw', minHeight: '60vh', textAlign: 'left'}}>
           <h1 style={{fontWeight: 500, paddingBottom: '10px'}}>Why ReqResNext?</h1>
-          <p style={{paddingBottom: '25px'}}>Well, when I was begining another solo project I realized that there was no project management tool
+          <p style={{paddingBottom: '25px'}}>Well, when I was beginning another solo project I realized that there was no project management tool
             that was highly geared to a team of one, or even to a team of a few. Most large teams use not only one tool, but many.
             And that's great, but for a small project, it can become too much to keep track of - I wanted something simple.
           </p>
@@ -17,7 +17,7 @@ export default class Blog extends Component {
           </p>
           <h2 style={{fontWeight: 500}}>The Process: Design</h2>
           <p style={{paddingBottom: '25px'}}>I'm a dev, not a designer, but I'd like to believe that I have a general idea
-          of what looks decent and what doesn't. I like to take the time to do some (very) Lo Fideilty mockups before I start any project.
+          of what looks decent and what doesn't. I like to take the time to do some (very) Lo Fidelity mockups before I start any project.
           I find that it helps me organize information, giving me a general idea of what I'm building and how all the parts 
           should work together. And while that has made my previous projects look a little bit better, this time I wanted to make
           a very polished project. So, I started with a two day design sprint using Adobe XD.
