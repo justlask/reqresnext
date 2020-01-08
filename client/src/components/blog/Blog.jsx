@@ -57,7 +57,7 @@ export default class Blog extends Component {
             <br></br><br></br>
             There's still a lot of work to do, but here is current state of ReqResNext with help from <a style={{textDecoration: 'none', color: '#2d3d8b', fontWeight: 500}}target="_blank" href="http://www.nicolematos.design"> Nicole Matos</a> 🙌.
             <video width='800px' height="auto" controls >
-              <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578448573/NewestFlow_nbqm7z.mov" type="video/mp4"/>
+              <source src="https://res.cloudinary.com/justlaskcloud/video/upload/v1578502430/LatestFlow_axhhkb.mov" type="video/mp4"/>
             </video><br></br> 
           </p>
 
