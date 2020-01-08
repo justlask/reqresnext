@@ -1357,7 +1357,40 @@ main {
 .mainblue {
   margin: 0;
 }
+.signup {
+  flex-direction: column;
+}
+.loginbtns {
+  flex-direction: column;
+}
+.loginbtns a {
+  order: 2
+}
+.loginbtns button {
+  order: 1;
+}
+.projectbox > div {
+  flex-direction: column;
+}
+.actions .projectbox {
+  flex-direction: column;
+}
 
+.actions .projectbox > div > a {
+  width: 100%;
+}
+.flexrow2 {
+  flex-direction: column;
+  align-items: center;
+}
+.flexrow2 div {
+  width: 80vw;
+}
+.accountpage {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 }
 
 
