@@ -3,6 +3,7 @@ import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
+import FlashMessage from '../FlashMessage'
 
 export default class addTask extends Component {
   constructor(props) {
@@ -10,12 +11,15 @@ export default class addTask extends Component {
     this.service = new AuthService();
     this.state = {
       title: '',
+      flash: false,
+      message: ''
     }
   }
 
   addTask = (e) => {
     e.preventDefault();
-    if (this.state.type !== null) {
+    console.log(this.state)
+    if (this.state.type) {
       this.service.addTask(this.props.action, this.state)
       .then(response => {
         this.setState({
@@ -25,7 +29,7 @@ export default class addTask extends Component {
       })
     }
     else {
-      console.log('must pick a type!!!')
+      this.handleFlash('must pick a type from the select options')
     }
   }
 
@@ -39,11 +43,26 @@ export default class addTask extends Component {
     this.setState({[name]: value});
   }
 
+  handleFlash = (message) => {
+    this.setState({
+      flash: !this.state.flash,
+      message: message
+    })
+    setTimeout(() => this.cancelFlash(), 2000)
+  }
+
+  cancelFlash = () => {
+    this.setState({
+      flash: !this.state.flash
+    })
+  }
+
 
   render() {
     return (
-      <form className="addtask">
-        <select name="type" id="type" onChange={e => this.handleSelect(e)}>
+      <div>
+        <form className="addtask">
+        <select name="type" id="type" onChange={e => this.handleSelect(e)} required>
           <option selected="true" disabled="true">select one</option>
           <option value="front-end">front-end</option>
           <option value="back-end">back-end</option>
@@ -52,6 +71,8 @@ export default class addTask extends Component {
         <input type="text" name="title" placeholder="add a task" value={this.state.title} onChange={(e) => this.handleChange(e)}/>
         <Button onClick={e => this.addTask(e)} title={<FontAwesomeIcon style={{color: '#f7f7f7', fontSize: '20px' }} icon={faPlus} />}></Button>
       </form>
+      <FlashMessage show={this.state.flash} message={this.state.message} handleFlash={this.handleFlash} />
+      </div>
     )
   }
 }
