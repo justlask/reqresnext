@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import Button from '../Button'
+import FlashMessage from '../FlashMessage'
 
 class Signup extends Component {
   constructor(props){
     super(props);
-    this.state = { name: '', email: '', password: '' };
+    this.state = { name: '',
+    email: '',
+    password: '',
+    flash: false,
+    message: ''
+    };
     this.service = new AuthService();
   }
 
@@ -30,13 +36,28 @@ class Signup extends Component {
       .catch( error => console.log(error) )
     }
     else {
-      console.log('use an email please')
+      console.log('email must be in email format.')
+      this.handleFlash('email must be a valid email');
     }
   }
   
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
+  }
+
+  handleFlash = (message) => {
+    this.setState({
+      flash: !this.state.flash,
+      message: message
+    })
+    setTimeout(() => this.cancelFlash(), 4000)
+  }
+
+  cancelFlash = () => {
+    this.setState({
+      flash: !this.state.flash
+    })
   }
 
   render(){
@@ -55,8 +76,8 @@ class Signup extends Component {
           <input type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)} required/>
           <label>Password*</label>
           <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} required />
+          <FlashMessage thestyle='flashemail' show={this.state.flash} message={this.state.message} />
           <Button title="join" className="signupbtn" onClick={this.handleFormSubmit}/>
-          {/* <input type="submit" className="signupbtn" value="Signup" /> */}
         </form>
     </div>
     )

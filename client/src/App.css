@@ -260,7 +260,7 @@ footer #name {
   justify-content: space-around;
 }
 
-.signup div {
+.signup > div {
   text-align: left;
   width: 50vw;
 }
@@ -1313,6 +1313,27 @@ main {
 }
 
 
+.flashmessage {
+  background-color: rgba(255, 0, 0, 0.411);
+  color: black;
+  height: 10%;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.flashemail {
+  width: 32vw;
+  align-self: flex-end;
+  background-color: rgba(255, 0, 0, 0.411);
+  color: black;
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+
+
 
 /*MOBILE   */
 
@@ -1421,10 +1442,4 @@ main {
   #mockups div p {
     width: 80vw;
   }
- }
-
- .flashmessage {
-   background-color: rgba(255, 0, 0, 0.411);
-   color: black;
-   padding: 5px;
  }

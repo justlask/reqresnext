@@ -8,7 +8,7 @@ export default class FlashMessage extends Component {
   loadMessage = () => {
     if (this.props.show) {
       return (
-        <div className="flashmessage">
+        <div className={this.props.thestyle}>
           <p>{this.props.message}</p>
         </div>
       )
