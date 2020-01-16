@@ -27,8 +27,8 @@ export default class Dashboard extends Component {
         user: data,
         teams: data.teams,
       })
-    }) 
       this.handleCurrent();
+    }) 
   }
 
 
@@ -41,7 +41,7 @@ export default class Dashboard extends Component {
   }
 
   handleCurrent = (e) => {
-    let userID = this.props.user._id
+    let userID = this.state.user._id
     let select = false
 
     this.service.getProjects(select, userID)
@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
   }
 
   handlePast = (e) => {
-    let userID = this.props.user._id
+    let userID = this.state.user._id
     let select = true
 
     this.service.getProjects(select, userID)
@@ -73,7 +73,7 @@ export default class Dashboard extends Component {
   }
 
   handleTeam = (id) => {
-    let userID = this.props.user._id
+    let userID = this.state._id
     let select = id
 
     this.service.getProjectsByTeam(select, userID)
@@ -121,7 +121,6 @@ export default class Dashboard extends Component {
 
 
   render() {
-    if (this.props.user) {
       return (
         <main className="padding">
           <div className="flexrow">
@@ -145,11 +144,5 @@ export default class Dashboard extends Component {
           <NewProjectModal updateProject={this.updateProject} show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
         </main>
       )
-    }
-    else {
-      return (
-        <Redirect to="/" />
-      )
-    }
   }
 }

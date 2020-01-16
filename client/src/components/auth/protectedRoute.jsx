@@ -4,10 +4,11 @@ import { Route, Redirect } from 'react-router-dom';
 const protectedRoute  = ({component: Component, user, ...rest}) => {
   // console.log({component: Component, user, ...rest})
     return (
-      <Route {...rest}
+      <Route
+        {...rest}
         render={ props  => {
             if(user){
-              return <Component {...props} user={user}/>
+              return <Component {...props} loggedInUser={user}/>
             } else {
               return <Redirect to={{pathname: '/', state: {from: props.location}}} />
             }

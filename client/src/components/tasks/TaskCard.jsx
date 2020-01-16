@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import AddTaskComment from './AddTaskComment';
 import TaskComment from './TaskComment'

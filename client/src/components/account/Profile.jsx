@@ -10,8 +10,6 @@ import UserEdit from './UserEdit';
 import UserDelete from './UserDelete'
 import MoreUserOptions from './MoreUserOptions'
 
-
-
 export default class Profile extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +24,8 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    this.service.getUserInfo(this.props.user.id)
+    console.log(this.props)
+    this.service.getUserInfo(this.props.loggedInUser.id)
     .then(user => {
       this.setState({
         user: user,
@@ -46,7 +45,7 @@ export default class Profile extends Component {
   }
 
   updateAccount = (response) => {
-    this.service.getUserInfo(this.props.user.id)
+    this.service.getUserInfo(this.state.user.id)
     .then(user => {
       this.setState({
         user: user,
@@ -63,7 +62,7 @@ export default class Profile extends Component {
   }
 
   updateUser = () => {
-    this.service.getUserInfo(this.props.user.id)
+    this.service.getUserInfo(this.state.user.id)
     .then(user => {
       this.setState({
         user: user,
@@ -105,7 +104,6 @@ export default class Profile extends Component {
   }
 
   render() {
-    if (this.props.user) {
       return (
         <main className="accountpage">
           <div className="accountInfo">
@@ -126,11 +124,5 @@ export default class Profile extends Component {
           </div>
         </main>
       )
-    }
-  else {
-    return (
-      <Redirect to="/" />
-    )
-  }
   }
 }

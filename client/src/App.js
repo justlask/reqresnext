@@ -15,6 +15,7 @@ import AboutUs from './components/about/AboutUs';
 import Blog from './components/blog/Blog';
 import ContactForm from './components/contact/ContactForm';
 import PasswordReset from './components/auth/PasswordReset';
+import ProtectedRoute from './components/auth/protectedRoute'
 
 
 class App extends Component {
@@ -55,14 +56,18 @@ class App extends Component {
             <Route exact path="/" render={() => <Home />} />
             <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
-            <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/>
-            <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } />
-            <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route>
-            <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route>
             <Route exact path="/about" render={(props) => <AboutUs {...props} />}></Route>
             <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
             <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
             <Route exact path="/forgot" render={(props) => <PasswordReset {...props} />}></Route>
+            {/* <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/> */}
+              <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
+            {/* <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route> */}
+              <ProtectedRoute user={this.state.loggedInUser} path='/project/:projectID/:actionID' component={Action} />
+            {/* <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } /> */}
+            <ProtectedRoute user={this.state.loggedInUser} path='/project/:id' component={Project} />
+            {/* <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route> */}
+              <ProtectedRoute user={this.state.loggedInUser} path='/account' component={Profile} />
           </Switch>
         <Footer />
       </div>

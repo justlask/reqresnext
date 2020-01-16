@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button'
 import FlashMessage from '../FlashMessage'
 
@@ -18,7 +18,6 @@ export default class addTask extends Component {
 
   addTask = (e) => {
     e.preventDefault();
-    console.log(this.state)
     if (this.state.type) {
       this.service.addTask(this.props.action, this.state)
       .then(response => {

@@ -172,7 +172,6 @@ export default class Action extends Component {
 
 
   render() {
-    if (this.props.user) {
       return (
         <main className="actionpage">
             <div className="icons">
@@ -205,11 +204,5 @@ export default class Action extends Component {
           <EditActionModal loadAction={this.loadAction} action={this.state.action} show={this.state.isOpen} onClose={this.toggleModal}> /></EditActionModal>
         </main>
       )
-    }
-    else {
-      return (
-        <Redirect to="/" />
-      )
-    }
   }
 }

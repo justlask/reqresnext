@@ -14,8 +14,7 @@ class Signup extends Component {
     };
     this.service = new AuthService();
   }
-
-  // handleChange() and handleSubmit() will be added here
+  
   handleFormSubmit = (event) => {
     event.preventDefault();
     const name = this.state.name;
@@ -36,7 +35,6 @@ class Signup extends Component {
       .catch( error => console.log(error) )
     }
     else {
-      console.log('email must be in email format.')
       this.handleFlash('email must be a valid email');
     }
   }

@@ -128,28 +128,21 @@ export default class Project extends Component {
   
 
   render() {
-    if (this.props.user) {
-      return (
-        <main className="">
-          <div className="icons">
-            <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
+    return (
+      <main className="">
+      <div className="icons">
+        <Link to="/dashboard"><FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>Dashboard</sub></Link>
 
-            <div>
-              <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
-              <MoreProjectOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} project={this.state.project} toggleEdit={this.toggleEdit} deleteProject={e => this.deleteProject(e)} show={this.state.moreOptions}/>
-            </div>
-          </div>
-    
-            {this.loadProject()}
-          <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
-          <EditProjectModal updateProject={this.updateProject} project={this.state.project} show={this.state.isEdit} onClose={this.toggleEdit}></EditProjectModal>
-        </main>
-      )
-    }
-    else {
-      return (
-        <Redirect to="/" />
-      )
-    }
+        <div>
+          <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
+          <MoreProjectOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} project={this.state.project} toggleEdit={this.toggleEdit} deleteProject={e => this.deleteProject(e)} show={this.state.moreOptions}/>
+        </div>
+      </div>
+
+        {this.loadProject()}
+      <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
+      <EditProjectModal updateProject={this.updateProject} project={this.state.project} show={this.state.isEdit} onClose={this.toggleEdit}></EditProjectModal>
+    </main>
+    )
   }
 }
