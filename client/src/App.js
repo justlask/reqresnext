@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './AppNew.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import AuthService from './components/auth/AuthService';
 import Signup from './components/auth/Signup';

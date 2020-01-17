@@ -97,7 +97,7 @@ export default class Dashboard extends Component {
   }
 
   updateProject = () => {
-    let userID = this.props.user._id
+    let userID = this.state.user._id
     let select = false
     
     this.service.getProjects(select, userID)

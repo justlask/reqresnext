@@ -138,8 +138,10 @@ export default class Project extends Component {
           <MoreProjectOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} project={this.state.project} toggleEdit={this.toggleEdit} deleteProject={e => this.deleteProject(e)} show={this.state.moreOptions}/>
         </div>
       </div>
+      <div className="projects">
 
-        {this.loadProject()}
+      {this.loadProject()}
+      </div>
       <ActionModal updateProject={this.updateProject} project={this.state.project} show={this.state.isOpen} onClose={this.toggleModal}> /></ActionModal>
       <EditProjectModal updateProject={this.updateProject} project={this.state.project} show={this.state.isEdit} onClose={this.toggleEdit}></EditProjectModal>
     </main>

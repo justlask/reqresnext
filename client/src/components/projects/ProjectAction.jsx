@@ -57,17 +57,16 @@ export default class ProjectAction extends Component {
       <div className="projectbox" style={{backgroundColor: this.state.color}}>
         <div style={{backgroundColor: this.state.color}}>
         <Link to={`/project/${this.props.projectID}/${this.props.elem._id}`}><img src={this.props.elem.image} alt=""/></Link>
-        </div>
         <div className="secondaryproject">
-          <Link to={`/project/${this.props.projectID}/${this.props.elem._id}`}><h3>{this.props.elem.title}</h3></Link>
-          <div className="meter2">
+          <h3><Link to={`/project/${this.props.projectID}/${this.props.elem._id}`}>{this.props.elem.title}</Link></h3>
+          <div className="meter">
             {this.handleStatusBar(this.props.elem)}
           </div>
           <div className="smallimg">
             <img className="" src={this.props.members[0].image} alt=""/>
           </div>
         </div>
-
+        </div>
       </div>
     )
   }
