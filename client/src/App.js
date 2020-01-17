@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import AuthService from './components/auth/AuthService';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
@@ -49,10 +49,34 @@ class App extends Component {
 
   render() {
     {this.fetchUser()}
-    return (
+    if (this.state.loggedInUser) {
+      return (
       <div className="App">
-        <Navbar  user={this.state.loggedInUser} updateUser={this.getTheUser} />
+        <Navbar user={this.state.loggedInUser} updateUser={this.getTheUser} />
           <Switch> 
+            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/about" render={(props) => <AboutUs {...props} />}></Route>
+            <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
+            <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
+            <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/project/:projectID/:actionID' component={Action} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/project/:id' component={Project} />
+            <ProtectedRoute user={this.state.loggedInUser} path='/account' component={Profile} />
+            {/* <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/> */}
+            {/* <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route> */}
+            {/* <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } /> */}
+            {/* <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route> */}
+            <Redirect to="/" />
+          </Switch>
+        <Footer />
+      </div>
+    )
+    }
+    else {
+      return (
+        <div className="App">
+          <Navbar user={this.state.loggedInUser} updateUser={this.getTheUser} />
+          <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
@@ -60,18 +84,12 @@ class App extends Component {
             <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
             <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
             <Route exact path="/forgot" render={(props) => <PasswordReset {...props} />}></Route>
-            {/* <Route exact path='/dashboard' render={(props) => <Dashboard {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser}/>}/> */}
-              <ProtectedRoute user={this.state.loggedInUser} path='/dashboard' component={Dashboard} />
-            {/* <Route exact path="/project/:projectID/:actionID" render={(props) => <Action {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> }></Route> */}
-              <ProtectedRoute user={this.state.loggedInUser} path='/project/:projectID/:actionID' component={Action} />
-            {/* <Route exact path="/project/:id" render={(props) => <Project {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} /> } /> */}
-            <ProtectedRoute user={this.state.loggedInUser} path='/project/:id' component={Project} />
-            {/* <Route exact path="/account" render={(props) => <Profile {...props} user={this.state.loggedInUser} getUser={this.state.getTheUser} />} ></Route> */}
-              <ProtectedRoute user={this.state.loggedInUser} path='/account' component={Profile} />
+            <Redirect to="/" />
           </Switch>
-        <Footer />
-      </div>
-    )
+          <Footer />
+        </div>
+      )
+    }
   }}
 
 

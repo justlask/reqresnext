@@ -20,7 +20,6 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    
     this.service.getUserInfo()
     .then(data => {
       this.setState({

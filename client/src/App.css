@@ -9,6 +9,7 @@
 
 input[type=text], 
 input[type=password],
+input[type="email"],
 textarea {
   transition: all 0.30s ease-in-out;
   outline: none;
@@ -17,6 +18,7 @@ textarea {
  
 input[type=text]:focus,
 input[type=password]:focus,
+input[type="email"]:focus,
 textarea:focus {
   box-shadow: 0 0 5px #2d3d8b;
   /* #7fbbca or #2d3d8b  rgba(81, 203, 238, 1)*/
