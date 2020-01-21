@@ -9,6 +9,7 @@ import UserCard from './UserCard';
 import UserEdit from './UserEdit';
 import UserDelete from './UserDelete'
 import MoreUserOptions from './MoreUserOptions'
+import Teams from '../teams/Teams'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -34,15 +35,15 @@ export default class Profile extends Component {
     })
   }
 
-  handleTeams = () => {
-    if (this.state.user.teams) {
-      return this.state.user.teams.map(team => {
-        return (
-          <Link to={`/team/${team._id}`}><li>{team.name}</li></Link>
-        )
-      })
-    }
-  }
+  // handleTeams = () => {
+  //   if (this.state.user.teams) {
+  //     return this.state.user.teams.map(team => {
+  //       return (
+  //         <Link to={`/team/${team._id}`}><li>{team.name}</li></Link>
+  //       )
+  //     })
+  //   }
+  // }
 
   updateAccount = (response) => {
     this.service.getUserInfo(this.state.user.id)
@@ -116,12 +117,7 @@ export default class Profile extends Component {
               {this.handleCard()}
             </div>
           </div>
-          <div className="teams">
-          <h2>Teams</h2>
-            <ul>
-              {this.handleTeams()}
-            </ul>
-          </div>
+          <Teams />
         </main>
       )
   }

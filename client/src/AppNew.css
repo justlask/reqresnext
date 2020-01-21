@@ -36,6 +36,7 @@ button:focus {
 }
 header {
   display: flex;
+  position: relative;
   color: white;
   justify-content: space-between;
   align-items: center;
@@ -919,13 +920,33 @@ section {
   padding: 50px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   text-align: left;
-  background-color: #f7f7f7;
-  z-index: -1;
+  background-color: #e9e8e8;
 }
 .teams h2 {
   font-weight: 500;
+}
+.teambox {
+  height: 100%;
+  width: 90%;
+  padding: 25px;
+}
+.teambtn {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #0C0C3E;
+  color: #0C0C3E;
+  background: white;
+  border-radius: 8px;
+}
+.createform {
+  background-color: white;
+  padding: 25px;
+  margin: 25px;
+  border-radius: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.53);
 }
 
 
@@ -1021,6 +1042,7 @@ section {
   padding: 5px 10px;
   border-radius: 8px;
 }
+
 
 
 /* Email */
