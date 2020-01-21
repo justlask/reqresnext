@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
+import AuthService from '../auth/AuthService'
 
 export default class CreateTeam extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.service = new AuthService();
+  }
+
+  componentDidMount() {
+    console.log(this.props)
   }
 
   submitNewTeam = (e) =>{
     e.preventDefault();
     console.log(this.state)
+    this.service.createTeam(this.state)
+    .then(response => {
+      console.log(response)
+      this.props.updateUser();
+      this.props.hide();
+    })
   }
 
   handleChange = (e) => {
@@ -16,21 +27,33 @@ export default class CreateTeam extends Component {
     this.setState({[name]: value})
   }
 
+  showTeams = (e) => {
+    console.log(this.props)
+    return this.props.teams.map(team => {
+      return (
+          <h3>{team.name}</h3>
+      )
+    })
+  }
+
   render() {
     if (this.props.show) {
       return (
         <div className="createform">
-          <form style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <form className="teamform">
             <label>Team Name</label>
-            <input type="text" name="name" placeholder="team name" onChange={e => this.handleChange(e)}/>
-            <input type="submit" onClick={e => this.submitNewTeam(e)}/>
+            <input type="text" name="name" placeholder="what are you going to call your team?" onChange={e => this.handleChange(e)}/>
+            <input type="submit" value="create my team!" onClick={e => this.submitNewTeam(e)}/>
           </form>
         </div>
       )
     }
     else {
       return (
-        <div><p>nothing here</p></div>
+        <div>
+          <h1>Your Teams:</h1>
+          {this.showTeams()}
+        </div>
       )
     }
   }

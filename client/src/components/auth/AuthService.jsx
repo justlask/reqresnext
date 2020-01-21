@@ -169,6 +169,15 @@ class AuthService {
     .then(response => response.data)
   }
 
+  getTeams = () => {
+    return this.service.get('/getmyteams')
+    .then(response => response.data)
+  }
+
+  createTeam = (team) => {
+    return this.service.post('/team/create', team)
+    .then(response => response.data)
+  }
 }
 
 export default AuthService;

@@ -18,6 +18,7 @@ export default class Profile extends Component {
     this.state = {
       user: {},
       image: '',
+      teams: [],
       update: false,
       delete: false,
       moreOptions: false,
@@ -30,7 +31,8 @@ export default class Profile extends Component {
     .then(user => {
       this.setState({
         user: user,
-        image: user.image
+        image: user.image,
+        teams: user.teams
       })
     })
   }
@@ -50,7 +52,8 @@ export default class Profile extends Component {
     .then(user => {
       this.setState({
         user: user,
-        image: user.image
+        image: user.image,
+        teams: user.teams
       })
     })
   }
@@ -68,6 +71,7 @@ export default class Profile extends Component {
       this.setState({
         user: user,
         image: user.image,
+        teams: user.teams,
         update: false
       })
     })
@@ -117,7 +121,7 @@ export default class Profile extends Component {
               {this.handleCard()}
             </div>
           </div>
-          <Teams />
+          {(this.state.user.teams) ? <Teams teams={this.state.user.teams} updateUser={this.updateUser}/> : null}
         </main>
       )
   }

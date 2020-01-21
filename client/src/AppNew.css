@@ -948,6 +948,41 @@ section {
   border-radius: 8px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.53);
 }
+.teamform {
+  display: flex;
+  flex-direction: column;
+}
+.teamform label {
+  margin-bottom: 10px;
+}
+.teamform input[type=text]{
+  transition: all 0.30s ease-in-out;
+  padding: 5px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid #0C0C3E;
+  color: #0C0C3E;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.teamform input[type=text]:focus {
+  box-shadow: 0 0 5px #2d3d8b;
+  /* #7fbbca or #2d3d8b  rgba(81, 203, 238, 1)*/
+  border: 1px solid #2d3d8b;
+}
+.teamform input[type=submit] {
+  background-color: #0C0C3E;
+  text-align: center;
+  font-weight: 400;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  width: 50%;
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
 
 
 

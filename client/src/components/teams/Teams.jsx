@@ -10,14 +10,8 @@ export default class Teams extends Component {
     this.state = {
       startTeam: false,
       editTeam: false,
-      teams: this.props.teams
     }
   }
-
-  componentDidMount() {
-    console.log('sup from team')
-  }
-
 
   handleShowCreate = () => {
     console.log('sup from show create')
@@ -29,9 +23,8 @@ export default class Teams extends Component {
     return (
       <div className="teams">
         <div className="teambox">
-          <h3>Teams</h3>
             <Button className="teambtn" title="create a team" onClick={e => this.handleShowCreate(e)}></Button>
-            <CreateTeam show={this.state.startTeam} hide={this.handleShowCreate} />
+            <CreateTeam teams={this.props.teams} show={this.state.startTeam} hide={this.handleShowCreate} updateUser={this.props.updateUser} />
         </div>
       </div>
     )
