@@ -183,6 +183,11 @@ class AuthService {
     return this.service.post('/team/sendinvite', {team, email})
     .then(response => response.data)
   }
+
+  addProjectToTeam = (team, project) => {
+    return this.service.post('/team/addproject', {team, project})
+    .then(response => response.data)
+  }
 }
 
 export default AuthService;

@@ -40,6 +40,14 @@ router.post('/create', (req,res,next) => {
 });
 
 
+
+router.post('/addproject', (req,res,next) => {
+  //
+  console.log(req.body)
+  res.json('sup from the backend')
+})
+
+
 router.post('/sendinvite', (req,res,next) => {
   let name = req.user.name
   let email = req.body.email

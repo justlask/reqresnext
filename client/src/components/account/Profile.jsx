@@ -121,7 +121,7 @@ export default class Profile extends Component {
               {this.handleCard()}
             </div>
           </div>
-          {(this.state.user.teams) ? <Teams teams={this.state.user.teams} updateUser={this.updateUser}/> : null}
+          {(this.state.user.teams) ? <Teams user={this.state.user} teams={this.state.user.teams} updateUser={this.updateUser}/> : null}
         </main>
       )
   }

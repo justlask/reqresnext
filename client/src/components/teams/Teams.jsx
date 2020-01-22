@@ -19,12 +19,13 @@ export default class Teams extends Component {
       startTeam: !this.state.startTeam
     })
   }
+
   render() {
     return (
       <div className="teams">
         <div className="teambox">
             <Button className="teambtn" title="create a team" onClick={e => this.handleShowCreate(e)}></Button>
-            <CreateTeam teams={this.props.teams} show={this.state.startTeam} hide={this.handleShowCreate} updateUser={this.props.updateUser} />
+            <CreateTeam user={this.props.user} teams={this.props.teams} show={this.state.startTeam} hide={this.handleShowCreate} updateUser={this.props.updateUser} />
         </div>
       </div>
     )

@@ -32,7 +32,7 @@ export default class CreateTeam extends Component {
     return this.props.teams.map((team, i) => {
       console.log(team)
       return (
-          <TeamCard team={team} key={i} />
+          <TeamCard user={this.props.user} team={team} key={i} />
       )
     })
   }

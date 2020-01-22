@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import Button from '../Button'
 import TeamMemberInvite from './TeamMemberInvite'
+import AddTeamProject from './AddTeamProject'
 
 
 export default class TeamEdit extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showMore: false
+      showMore: false,
+      projectShowMore: false
     }
   }
 
@@ -46,7 +48,6 @@ export default class TeamEdit extends Component {
   }
 
   handleProjects = () => {
-    console.log(this.props.team.projects)
     if (this.props.team.projects.length > 0) {
       return (
         this.props.team.projects.map((project, i) => {
@@ -80,6 +81,20 @@ export default class TeamEdit extends Component {
     }
   }
 
+
+  handleAddExistingProject = () => {
+    if (this.state.projectShowMore) {
+      return null
+    }
+    else {
+      return <Button className="teambtn" title="add existing project" onClick={this.handleShowProject}></Button>
+    }
+  }
+
+  handleShowProject = () => {
+    this.setState({projectShowMore: !this.state.projectShowMore})
+  }
+
   render() {
     if (this.props.show) {
       return (
@@ -99,8 +114,8 @@ export default class TeamEdit extends Component {
             <br></br>
             <b>Projects:</b>
             {this.handleProjects()}
-            <TeamMemberInvite team={this.props.team} show={this.state.showMore} hide={this.handleShow} />
-            {this.handleInviteButton()}
+            <AddTeamProject user={this.props.user} team={this.props.team} show={this.state.projectShowMore} hide={this.handleShowProject}/>
+            {this.handleAddExistingProject()}
           </div>
           <div>
             <br></br>
