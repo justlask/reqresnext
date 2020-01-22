@@ -273,8 +273,8 @@ section {
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 40vw;
-  padding: 25px 50px;
+  width: 35vw;
+
 }
 .signupform label {
   margin-bottom: 2px;
@@ -295,6 +295,7 @@ section {
 }
 .signupbtn {
   background-color: #0C0C3E;
+  cursor: pointer;
   justify-self: left;
   align-self: flex-end;
   color: white;
@@ -923,7 +924,7 @@ section {
   align-items: center;
   justify-content: center;
   text-align: left;
-  background-color: #e9e8e8;
+  background-color: #f7f7f7;
 }
 .teams h2 {
   font-weight: 500;
@@ -931,7 +932,9 @@ section {
 .teambox {
   height: 100%;
   width: 90%;
-  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
 }
 .teambtn {
   cursor: pointer;
@@ -940,6 +943,9 @@ section {
   color: #0C0C3E;
   background: white;
   border-radius: 8px;
+  align-self: flex-end;
+  justify-self: right;
+  margin: 5px 20px;
 }
 .createform {
   background-color: white;
@@ -982,6 +988,39 @@ section {
   width: 50%;
   align-self: flex-end;
   margin-bottom: 20px;
+}
+.teamcard {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.33);
+}
+.teamlist:hover {
+  cursor: pointer;
+  color: #2d3d8b;
+}
+.teamuser {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.teamuser img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 0px 2px 2px rgba(8, 8, 8, 0.33);
+}
+.teamuser p {
+  padding-left: 10px;
+}
+.teamedit {
+  display: flex;
+  flex-direction: column;
+}
+.teamedit button {
+  align-self: flex-end;
+  justify-self: right;
 }
 
 
@@ -1067,15 +1106,19 @@ section {
   padding: 5px 10px;
   border-radius: 8px;
   margin-bottom: 10px;
+  width: 30vw;
 }
 .flashemail {
-  width: 32vw;
+  width: 100%;
   align-self: flex-end;
   background-color: rgba(255, 0, 0, 0.411);
   color: black;
   height: 30px;
-  padding: 5px 10px;
+  padding: 5px 0px;
   border-radius: 8px;
+}
+.flashemail p {
+  font-size: 12px;
 }
 
 

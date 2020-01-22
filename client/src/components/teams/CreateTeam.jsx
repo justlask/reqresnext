@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../auth/AuthService'
+import TeamCard from './TeamCard'
 
 export default class CreateTeam extends Component {
   constructor(props) {
@@ -28,10 +29,10 @@ export default class CreateTeam extends Component {
   }
 
   showTeams = (e) => {
-    console.log(this.props)
-    return this.props.teams.map(team => {
+    return this.props.teams.map((team, i) => {
+      console.log(team)
       return (
-          <h3>{team.name}</h3>
+          <TeamCard team={team} key={i} />
       )
     })
   }

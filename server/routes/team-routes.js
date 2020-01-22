@@ -40,6 +40,12 @@ router.post('/create', (req,res,next) => {
 });
 
 
+router.post('/sendinvite', (req,res,next) => {
+  console.log(req.body)
+  res.json('leeee do it')
+});
+
+
 
 
 

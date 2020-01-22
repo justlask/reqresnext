@@ -178,6 +178,11 @@ class AuthService {
     return this.service.post('/team/create', team)
     .then(response => response.data)
   }
+
+  sendInvite = (team, email) => {
+    return this.service.post('/team/sendinvite', {team, email})
+    .then(response => response.data)
+  }
 }
 
 export default AuthService;
