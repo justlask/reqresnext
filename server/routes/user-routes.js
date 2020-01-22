@@ -56,6 +56,14 @@ router.get('/getuserinfo', (req, res, next) => {
     }
   })
   .populate({
+    path : 'teams',
+    model: Team,
+    populate : {
+      path : 'projects',
+      model: Project
+    }
+  })
+  .populate({
     path : 'projects',
     model: Project,
     populate : {

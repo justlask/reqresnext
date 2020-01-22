@@ -1022,6 +1022,42 @@ section {
   align-self: flex-end;
   justify-self: right;
 }
+.inviteform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.33);
+  padding: 10px;
+  margin: 20px 10px;
+}
+/* .inviteform form {
+
+} */
+.inviteform form input[type="email"] {
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid #0C0C3E;
+  transition: all 0.30s ease-in-out;
+  outline: none;
+}
+.inviteform form input[type="email"]:focus {
+  box-shadow: 0 0 5px #2d3d8b;
+  border: 1px solid #2d3d8b;
+}
+.inviteform form input[type="submit"] {
+  padding: 5px 10px;
+  background-color: #0C0C3E;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
 
 

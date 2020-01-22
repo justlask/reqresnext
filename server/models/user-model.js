@@ -10,7 +10,12 @@ const userSchema = new Schema({
   image: {type: String, default: 'https://www.livesafemobile.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'},
   position: {type: String, enum: ["web developer", "developer", "front-end developer", "back-end developer", "designer", "ux designer", "ui designer", "qa engineer", "project manager"]},
   teams: [ { type : Schema.Types.ObjectId, ref: 'Team' } ],
-  projects: [{type: Schema.Types.ObjectId, ref: 'Project'}]
+  projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
+  invites: [{
+    team: {type : Schema.Types.ObjectId, ref: 'Team'},
+    confirmationCode: String,
+    invitedBy: {type: Schema.Types.ObjectId, ref: 'User'}
+  }]
 }, 
 {
   timestamps: true

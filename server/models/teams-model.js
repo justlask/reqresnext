@@ -11,7 +11,8 @@ const teamSchema = new Schema({
   projects: [{ type : Schema.Types.ObjectId, ref: 'Projects' }],
   invites: [{ 
     email: String,
-    confirmationCode: String
+    confirmationCode: String,
+    invitedBy: {type: Schema.Types.ObjectId, ref: 'User'}
   }]
 },
 {
