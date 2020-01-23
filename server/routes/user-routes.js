@@ -161,24 +161,24 @@ router.post('/deleteaccount', (req,res,next) => {
     Project.deleteMany({owner: req.user.id})
     .then(projects => {
 
-      projects.forEach(project => {
-        
-        Team.find({ projects: { $in: project }})
-        .then(teams => {
+      // projects.forEach(project => {
 
-          teams.forEach(team => {
-            Team.findById(team, {$pull: {project: project}})
-          })
-        })
-      })
+      //   Team.find({ projects: { $in: project }})
+      //   .then(teams => {
 
-      Team.find({member: req.user.id})
-      .then(response => {
-          console.log(response)
-        response.forEach(team => {
-          Team.findByIdAndUpdate(team, {$pull: {member: req.user.id}})
-        })
-      })
+      //     teams.forEach(team => {
+      //       Team.findById(team, {$pull: {project: project}})
+      //     })
+      //   })
+      // })
+
+      // Team.find({member: req.user.id})
+      // .then(response => {
+      //     console.log(response)
+      //   response.forEach(team => {
+      //     Team.findByIdAndUpdate(team, {$pull: {member: req.user.id}})
+      //   })
+      // })
 
       Action.deleteMany({creator: req.user.id})
       .then(response => {
