@@ -17,6 +17,7 @@ export default class TeamMemberInvite extends Component {
       this.service.sendInvite(this.props.team, this.state.email)
       .then(response => {
         console.log(response)
+        this.props.updateUser()
         this.props.hide();
       })
     }

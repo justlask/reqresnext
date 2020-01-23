@@ -26,7 +26,8 @@ export default class AddTeamProject extends Component {
     this.service.addProjectToTeam(team, projectID)
     .then(response => {
       console.log(response)
-
+      this.props.updateUser();
+      this.props.hide();
     })
 
   }

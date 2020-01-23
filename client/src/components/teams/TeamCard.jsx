@@ -22,7 +22,7 @@ export default class TeamCard extends Component {
           <h3>{this.props.team.name}</h3>
         </div>
         <div>
-          <TeamEdit user={this.props.user} team={this.props.team} show={this.state.showMore} showMore={this.showMore}/>
+          <TeamEdit updateUser={this.props.updateUser} user={this.props.user} team={this.props.team} show={this.state.showMore} showMore={this.showMore}/>
         </div>
       </div>
     )

@@ -16,6 +16,7 @@ import Blog from './components/blog/Blog';
 import ContactForm from './components/contact/ContactForm';
 import PasswordReset from './components/auth/PasswordReset';
 import ProtectedRoute from './components/auth/protectedRoute'
+import SignupReferral from './components/auth/SignupReferral'
 
 
 class App extends Component {
@@ -84,6 +85,7 @@ class App extends Component {
             <Route exact path="/blog" render={(props) => <Blog {...props} />}></Route>
             <Route exact path="/contact" render={(props) => <ContactForm {...props} />} ></Route>
             <Route exact path="/forgot" render={(props) => <PasswordReset {...props} />}></Route>
+            <Route exact path="/join/:teamID/:confirmationCode" render={(props) => <SignupReferral {...props} />}></Route>
             <Redirect to="/" />
           </Switch>
           <Footer />

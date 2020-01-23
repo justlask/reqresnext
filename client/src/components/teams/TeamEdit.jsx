@@ -53,7 +53,7 @@ export default class TeamEdit extends Component {
         this.props.team.projects.map((project, i) => {
           return (
           <div className="teamuser" key={i}>
-            <p>{project.name}</p>
+            <p>{project.title}</p>
           </div>
           )
         })
@@ -114,14 +114,14 @@ export default class TeamEdit extends Component {
             <br></br>
             <b>Projects:</b>
             {this.handleProjects()}
-            <AddTeamProject user={this.props.user} team={this.props.team} show={this.state.projectShowMore} hide={this.handleShowProject}/>
+            <AddTeamProject updateUser={this.props.updateUser} user={this.props.user} team={this.props.team} show={this.state.projectShowMore} hide={this.handleShowProject}/>
             {this.handleAddExistingProject()}
           </div>
           <div>
             <br></br>
             <b>Pending Invites:</b>
             {this.handleInvites()}
-            <TeamMemberInvite team={this.props.team} show={this.state.showMore} hide={this.handleShow} />
+            <TeamMemberInvite updateUser={this.props.updateUser} team={this.props.team} show={this.state.showMore} hide={this.handleShow} />
             {this.handleInviteButton()}
           </div>
         </div>

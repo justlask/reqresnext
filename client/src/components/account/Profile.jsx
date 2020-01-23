@@ -37,16 +37,6 @@ export default class Profile extends Component {
     })
   }
 
-  // handleTeams = () => {
-  //   if (this.state.user.teams) {
-  //     return this.state.user.teams.map(team => {
-  //       return (
-  //         <Link to={`/team/${team._id}`}><li>{team.name}</li></Link>
-  //       )
-  //     })
-  //   }
-  // }
-
   updateAccount = (response) => {
     this.service.getUserInfo(this.state.user.id)
     .then(user => {

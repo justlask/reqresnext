@@ -8,16 +8,10 @@ export default class CreateTeam extends Component {
     this.service = new AuthService();
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   submitNewTeam = (e) =>{
     e.preventDefault();
-    console.log(this.state)
     this.service.createTeam(this.state)
     .then(response => {
-      console.log(response)
       this.props.updateUser();
       this.props.hide();
     })
@@ -30,9 +24,8 @@ export default class CreateTeam extends Component {
 
   showTeams = (e) => {
     return this.props.teams.map((team, i) => {
-      console.log(team)
       return (
-          <TeamCard user={this.props.user} team={team} key={i} />
+          <TeamCard updateUser={this.props.updateUser} user={this.props.user} team={team} key={i} />
       )
     })
   }
