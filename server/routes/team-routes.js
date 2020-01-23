@@ -46,27 +46,26 @@ router.post('/addproject', (req,res,next) => {
   let teamID = req.body.team
   let projectID = req.body.project
 
+  // add team to project
   Project.findByIdAndUpdate(projectID, {team: teamID})
   .then(response => {
-
+      //add project to team
       Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
       .then(response => {
-        console.log(response.members)
 
-        // response.members.forEach(member => {
-
-        //   User.findByIdAndUpdate(member._id, {$push: {projects: projectID}})
-        //   .then(response => {
-        //   })
-
-        // })
-        console.log(req.body)
-        res.json('Project has a team, team has a project, members have projects')
-
+        response.members.forEach(member => {
+          //put projectID in each team members data
+          User.findByIdAndUpdate(member, {$push: {projects: projectID}})
+          .then(response => {
+          })
+        })
+        // add all members to the project's members
+        Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
+        .then(response => {
+          res.json('Project has a team, team has a project, members have projects')
+        })
       })
   })
-  // Project gets team set under team
-  // Team also gets the project added
 })
 
 
