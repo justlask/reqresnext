@@ -51,8 +51,18 @@ router.post('/addproject', (req,res,next) => {
 
       Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
       .then(response => {
+        console.log(response.members)
+
+        // response.members.forEach(member => {
+
+        //   User.findByIdAndUpdate(member._id, {$push: {projects: projectID}})
+        //   .then(response => {
+        //   })
+
+        // })
         console.log(req.body)
-        res.json('Project has a team, team has a project')
+        res.json('Project has a team, team has a project, members have projects')
+
       })
   })
   // Project gets team set under team
@@ -179,8 +189,143 @@ router.post('/sendinvite', (req,res,next) => {
 
 
 router.post('/join/:teamID/:email/:confirmationCode', (req,res,next) => {
-  console.log(req.body)
-  console.log(req.params)
+  // console.log(req.body)
+  // console.log(req.params)
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  const teamID = req.params.teamID
+  const confirmationCode = req.params.confirmationCode
+  
+    if (!email || !password || !name) {
+      res.status(400).json({ message: 'Provide a name, email and password' });
+      return;
+    }
+
+    User.findOne({ email }, (err, foundUser) => {
+
+        if(err){
+            res.status(500).json({message: "email check went bad."});
+            return;
+        }
+
+        if (foundUser) {
+            res.status(400).json({ message: 'email taken. Choose another one.' });
+            return;
+        }
+  
+        const salt     = bcrypt.genSaltSync(10);
+        const hashPass = bcrypt.hashSync(password, salt);
+
+
+        Invite.find({email})
+        .then(theInvite => {
+          if (theInvite[0].email === email && theInvite[0].confirmationCode === confirmationCode) {
+
+            Project.find({team: teamID})
+            .then(projects => {
+
+
+              let projs = projects.map(project => {
+                return project.id
+              })
+
+              const aNewUser = new User({
+                name: name,
+                email: email,
+                password: hashPass,
+                teams: [ teamID ],
+                projects: projs
+                });
+
+                aNewUser.save(err => {
+
+                  console.log('a new user id ===   ' + aNewUser.id)
+                  if (err) {
+                      res.status(400).json({ message: 'Saving user to database went wrong.' });
+                      return;
+                  }
+
+                  Project.find({team: teamID})
+                  .then(projects => {
+
+                    projects.forEach(project => {
+
+                      Project.findByIdAndUpdate(project.id, {$push: {members: aNewUser.id}})
+                      .then(response => {
+                          // Automatically log in user after sign up
+                          // .login() here is actually predefined passport method
+                          req.login(aNewUser, (err) => {
+              
+                            if (err) {
+                                res.status(500).json({ message: 'Login after signup went bad.' });
+                                return;
+                            }
+          
+                            else {
+                              // add the member to the team
+          
+                              Team.findByIdAndUpdate(teamID, {$push: {members: req.user.id}, $pull: {invites: {email: req.user.email}}})
+                              .then(response => {
+
+                                
+                                // Send the user's information to the frontend
+                                // We can use also: res.status(200).json(req.user);
+                                res.status(200).json(aNewUser);
+                              })
+                            }
+                        });
+
+                        
+                      })
+
+
+                    })
+
+                  })
+    
+                
+              });
+            })
+
+            //delete the invite here! so user can only join once.
+          }
+          else {          
+
+            const aNewUser = new User({
+            name: name,
+            email: email,
+            password: hashPass,
+            });
+
+            aNewUser.save(err => {
+              if (err) {
+                  res.status(400).json({ message: 'Saving user to database went wrong.' });
+                  return;
+              }
+
+              
+              // Automatically log in user after sign up
+              // .login() here is actually predefined passport method
+              req.login(aNewUser, (err) => {
+  
+                  if (err) {
+                      res.status(500).json({ message: 'Login after signup went bad.' });
+                      return;
+                  }
+
+                  else {
+                      // Send the user's information to the frontend
+                      // We can use also: res.status(200).json(req.user);
+                      res.status(200).json(aNewUser);
+                  }
+              });
+          });
+  
+          }
+        })
+
+    });
 });
 
 

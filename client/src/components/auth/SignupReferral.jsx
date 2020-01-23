@@ -20,7 +20,10 @@ class SignupReferral extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params)
+    this.setState({props: 
+      {teamID: this.props.match.params.teamID,
+        confirmationCode: this.props.match.params.confirmationCode
+      }})
   }
   
   handleFormSubmit = (event) => {
