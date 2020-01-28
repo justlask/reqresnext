@@ -33,6 +33,10 @@ export default class NewProjectModal extends Component {
       projectInfo.image = this.state.image
     }
 
+    if (this.state.team) {
+      projectInfo.team = this.state.team
+    }
+
 
     this.service.createProject(projectInfo)
     .then(response => {
@@ -110,9 +114,6 @@ export default class NewProjectModal extends Component {
     this.props.onClose();
   }
 
-
-
-
   render() {
     if(!this.props.show) {
       return null;
@@ -121,10 +122,7 @@ export default class NewProjectModal extends Component {
     return (
       <div className="backdrop">
         <div className="modal">
-
-
          {this.createForm()}
-
           <div className="addactionmodal">
             <Button className="noButtonBlue" title="cancel" onClick={e => this.cancelCreate()}></Button>
             <Button className="addactionmodalbtn" title="create" onClick={e => {this.createProject(e)}}></Button>

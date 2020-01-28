@@ -8,7 +8,8 @@ const User        = require('../models/user-model');
 const Project     = require('../models/projects-model');
 const Task        = require('../models/tasks-model');
 const Action      = require('../models/actions-model');
-const Comment     = require('../models/comment-model')
+const Comment     = require('../models/comment-model');
+const Team        = require('../models/teams-model');
 
 
 
@@ -79,6 +80,8 @@ router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) =
 
 router.post('/create', (req,res,next) => {
 
+  console.log(req.body)
+
   let newProject = {
     title: req.body.title,
     description: req.body.description,
@@ -97,11 +100,11 @@ router.post('/create', (req,res,next) => {
   .then(project => {
 
     if (req.body.team) {
-      Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
+      Team.findByIdAndUpdate(req.body.team, {$push: {projects: project.id}})
       .then(response => {
         // add all members to the project's members
         // think there's a bug here need to do $nin req.user.id to ensure that creator isn't added twice
-        Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
+        Project.findByIdAndUpdate(project.id, {$push: {members: response.members}})
         .then(response => {
 
           User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
