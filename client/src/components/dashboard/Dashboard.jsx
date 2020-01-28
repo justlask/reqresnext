@@ -72,11 +72,13 @@ export default class Dashboard extends Component {
   }
 
   handleTeam = (id) => {
+    console.log(id)
     let userID = this.state._id
     let select = id
 
     this.service.getProjectsByTeam(select, userID)
     .then(data => {
+      console.log(data)
       this.setState({
         projects: data
       })

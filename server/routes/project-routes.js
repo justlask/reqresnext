@@ -80,8 +80,6 @@ router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) =
 
 router.post('/create', (req,res,next) => {
 
-  console.log(req.body)
-
   let newProject = {
     title: req.body.title,
     description: req.body.description,
@@ -103,18 +101,17 @@ router.post('/create', (req,res,next) => {
   .then(project => {
 
     if (req.body.team) {
+      // adds project to team
       Team.findByIdAndUpdate(req.body.team, {$push: {projects: project.id}})
       .then(response => {
-        // add all members to the project's members
-        // think there's a bug here need to do $nin req.user.id to ensure that creator isn't added twice
+        // adds the project to each member of the team
+        response.members.forEach(member => {
+          User.findByIdAndUpdate(member, {$push: {projects: project.id}})
+        })
+        // adds all members to the project members array
         Project.findByIdAndUpdate(project.id, {$push: {members: response.members}})
         .then(response => {
-
-          User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
-          .then(data => {
-            res.json(project)
-          })
-
+          res.json(response)
         })
       })
     }
@@ -144,10 +141,57 @@ router.post('/update', (req,res,next) => {
 
 router.post('/delete/:projectID', (req,res,next) => {
   //gotta DELETE IT ALLLLL *pokemon voice*
+  // doesn't work for teams
+  // will need to find the project
+    // then remove the project from all members
+    // then remove all tasks, actions and comments for that project
+    // remove the project from the team
 
-  //delete project
-  Project.findByIdAndDelete(req.params.projectID)
-  .then(response => {
+
+  Project.findById(req.params.projectID)
+  .then(project => {
+
+
+    //if project has a team and the user trying to delete is the owner
+    if (project.team && req.user.id === project.owner) {
+      // remove project from team
+      Team.findByIdAndUpdate(project.team, {$pull: {projects: req.params.projectID}})
+      .then(response => {
+
+        response.members.forEach(memeber => {
+          // remove project from all team members
+          User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
+          .then(response => {
+          })
+        })
+
+        Project.findByIdAndDelete(req.params.projectID)
+        .then(response => {
+      
+          //find and delete all actions of that project
+          Action.deleteMany({project: req.params.projectID})
+          .then(response => {
+            
+            //delets all tasks relating to that project
+            Task.deleteMany({project: req.params.projectID})
+            .then(response => {
+              
+              //deletes all comments relating to that project
+              Comment.deleteMany({project: req.params.projectID})
+              .then(response => {
+      
+                res.json(response)
+      
+              })
+            })
+          })
+        })
+      })
+    }
+    // else if the project doesn't have a team and the owner is the user
+    else if (!project.team && req.user.id === project.owner) {
+    Project.findByIdAndDelete(req.params.projectID)
+    .then(response => {
 
     //find and delete all actions of that project
     Action.deleteMany({project: req.params.projectID})
@@ -163,16 +207,20 @@ router.post('/delete/:projectID', (req,res,next) => {
 
 
           //then delete project from user array
-          User.findByIdAndUpdate(req.user.id, { $pull: { projects: req.params.projectID }})
-          .then(response => {
-            res.json(response)
+              User.findByIdAndUpdate(req.user.id, { $pull: { projects: req.params.projectID }})
+              .then(response => {
+                res.json(response)
+              })
+            })
           })
-
         })
       })
-    })
+    }
+    else {
+      res.json('you are not authorized to delete this project')
+    }
   })
-})
+});
 
 router.post('/markcomplete/:projectID', (req,res,next) => {
   Project.findByIdAndUpdate(req.params.projectID, {complete: true}, {new: true})
