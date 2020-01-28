@@ -86,7 +86,10 @@ router.post('/create', (req,res,next) => {
     title: req.body.title,
     description: req.body.description,
     owner: req.user.id,
-    members: [ req.user.id ],
+  }
+
+  if (!req.body.team) {
+    newProject.members = [ req.user.id ]
   }
 
   if (req.body.image) {
