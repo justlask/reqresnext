@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from '../auth/AuthService'
 import Button from '../Button'
 
-// the modal that opens to allow people to add an action
+// the modal that opens to allow people to add a project
 
 export default class NewProjectModal extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ export default class NewProjectModal extends Component {
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
+    console.log(this.state)
   }
     
 
@@ -40,12 +41,9 @@ export default class NewProjectModal extends Component {
         description: '',
         image: '',
       })
-      console.log(response)
       this.props.updateProject();
       this.props.onClose();
     })
-
-    // this.handleFileUpload()
   }
 
 
@@ -57,8 +55,6 @@ export default class NewProjectModal extends Component {
     
     this.service.handleProjectUploadMainImage(uploadData)
     .then(response => {
-      console.log(response)
-      console.log(response.secure_url)
         this.setState({
           image: response.secure_url
         })
@@ -73,11 +69,17 @@ export default class NewProjectModal extends Component {
     this.setState({
       image: e.target.files[0]
     })
-    console.log(this.state.image)
+  }
+
+  handleOptions = () => {
+    return this.props.user.teams.map((team, i) => {
+      return (
+        <option key={i} value={team._id}>{team.name}</option>
+      )
+    })
   }
 
   createForm = () => {
-
     return (
       <form className="actionform">
         <div className="modalnames">
@@ -89,8 +91,23 @@ export default class NewProjectModal extends Component {
         <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>
         <label>Project Description</label>
         <input type="text" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
+        <label>Add Project To A Team?</label>
+        <select defaultValue="no-value" name="team" onChange={e => this.handleChange(e)}>
+          <option value='no-value' disabled>Select one</option>
+          {this.handleOptions()}
+        </select>
       </form>
     )
+  }
+
+  cancelCreate = () => {
+    this.setState({
+      title: '',
+      description: '',
+      team: '',
+      image: ''
+    })
+    this.props.onClose();
   }
 
 
@@ -109,7 +126,7 @@ export default class NewProjectModal extends Component {
          {this.createForm()}
 
           <div className="addactionmodal">
-            <Button className="noButtonBlue" title="cancel" onClick={e => this.props.onClose()}></Button>
+            <Button className="noButtonBlue" title="cancel" onClick={e => this.cancelCreate()}></Button>
             <Button className="addactionmodalbtn" title="create" onClick={e => {this.createProject(e)}}></Button>
           </div>
         </div>

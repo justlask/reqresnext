@@ -467,6 +467,7 @@ section {
 
 
 
+
 /* Status bars*/
 .meter {
   height: 15px;
@@ -645,16 +646,15 @@ section {
   margin-bottom: 20px;
 }
 .addtask select {
-  width: 20%;
+  display: block;
+  box-sizing: border-box;
+  width: 22%;
   background-color: #f7f7f7;
   text-align: center;
   font-weight: normal;
   color: #0C0C3E;
   border: 1px solid #0C0C3E;
   font-size: 16px;
-  border-radius: 62px;
-  padding: 20px 15px;
-  width: 20%;
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -1077,9 +1077,9 @@ section {
   border-radius: 5px;
   min-width: 400px;
   max-width: 800px;
-  height: 50%;
+  height: 60%;
   overflow: hidden;
-  margin: 100px auto;
+  margin: 50px auto;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -1131,6 +1131,16 @@ section {
   border-radius: 8px;
   padding: 6px;
   margin-bottom: 25px;
+  font-size: 16px;
+  color: #0C0C3E;
+}
+.actionform select {
+  display: block;
+	font-size: 16px;
+  color: #0C0C3E;
+  box-sizing: border-box;
+  padding: 6px;
+	border: 1px solid #0C0C3E;
 }
 
 

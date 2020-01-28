@@ -100,6 +100,7 @@ router.post('/projectsbyteam', (req,res,next) => {
     $and: [ { members: { $in: req.body.userID } }, 
       { team: req.body.select}]
     })
+    .populate('projects')
     .populate('members')
     .then(data => {
       res.json(data)

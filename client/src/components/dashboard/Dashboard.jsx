@@ -140,7 +140,7 @@ export default class Dashboard extends Component {
               {this.showProjects()}
             </div>
           </div>
-          <NewProjectModal updateProject={this.updateProject} show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
+          <NewProjectModal user={this.state.user} updateProject={this.updateProject} show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
         </main>
       )
   }

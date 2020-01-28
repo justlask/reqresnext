@@ -52,17 +52,29 @@ router.post('/addproject', (req,res,next) => {
       //add project to team
       Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
       .then(response => {
-
-        response.members.forEach(member => {
-          //put projectID in each team members data
-          User.findByIdAndUpdate(member, {$push: {projects: projectID}})
-          .then(response => {
-          })
-        })
         // add all members to the project's members
         Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
         .then(response => {
-          res.json('Project has a team, team has a project, members have projects')
+          res.json('Project has a team, team has a project, project has members')
+        })
+      })
+  })
+})
+
+router.post('/removeproject', (req,res,next) => {
+  let teamID = req.body.team
+  let projectID = req.body.project
+
+  // add team to project
+  Project.findByIdAndUpdate(projectID, {team: null})
+  .then(response => {
+      //add project to team
+      Team.findByIdAndUpdate(teamID, {$pull: {projects: projectID}})
+      .then(response => {
+        // add all members to the project's members
+        Project.findByIdAndUpdate(projectID, {$pull: {members: response.members}})
+        .then(response => {
+          res.json('Project has no team, team has no project, project has no members')
         })
       })
   })
@@ -114,8 +126,7 @@ router.post('/sendinvite', (req,res,next) => {
       
             let messageWithContactInfo = `Hi there!<br><br> ${name} has invited you to join their team '${teamName}' on ReqResNext.<br><br> But we
             noticed that you don't have an account!<br><br> Joining their team will allow you to have access to their projects, which will allow you to
-            collaborate together. Please visit <a href="https://www.reqresnext.com/join/${teamID}/${confirmationCode}">this link</a> to join!<br><br>
-            If that link does not work please copy this url https://www.reqresnext.com/join/${teamID}/${confirmationCode} into your browser.
+            collaborate together. Please visit https://www.reqresnext.com/join/${teamID}/${confirmationCode} to join their team.
             <br><br>
             Welcome to ReqResNext and happy coding!`
       
@@ -217,7 +228,7 @@ router.post('/join/:teamID/:email/:confirmationCode', (req,res,next) => {
         const hashPass = bcrypt.hashSync(password, salt);
 
 
-        Invite.find({email})
+        Invite.find({email: email, team: teamID})
         .then(theInvite => {
           if (theInvite[0].email === email && theInvite[0].confirmationCode === confirmationCode) {
 
