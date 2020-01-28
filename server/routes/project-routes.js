@@ -89,14 +89,35 @@ router.post('/create', (req,res,next) => {
   if (req.body.image) {
     newProject.image = req.body.image
   }
+  if (req.body.team) {
+    newProject.team = req.body.team
+  }
 
   Project.create(newProject)
   .then(project => {
 
-    User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
-    .then(data => {
-      res.json(project)
-    })
+    if (req.body.team) {
+      Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
+      .then(response => {
+        // add all members to the project's members
+        // think there's a bug here need to do $nin req.user.id to ensure that creator isn't added twice
+        Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
+        .then(response => {
+
+          User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
+          .then(data => {
+            res.json(project)
+          })
+
+        })
+      })
+    }
+    else {
+      User.findByIdAndUpdate(req.user.id, { $push: { projects: project.id }}, {new: true})
+      .then(data => {
+        res.json(project)
+      })
+    }
   })
 });
 

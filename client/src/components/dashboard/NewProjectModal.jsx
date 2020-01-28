@@ -91,7 +91,7 @@ export default class NewProjectModal extends Component {
         <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>
         <label>Project Description</label>
         <input type="text" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
-        <label>Add Project To A Team?</label>
+        <label>Add This Project To A Team?</label>
         <select defaultValue="no-value" name="team" onChange={e => this.handleChange(e)}>
           <option value='no-value' disabled>Select one</option>
           {this.handleOptions()}
