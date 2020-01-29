@@ -120,7 +120,7 @@ authRoutes.post('/resetpassword', (req,res,next) => {
     const email = req.body.email
 
     
-    User.findOne({email: email},)
+    User.findOne({email: email})
     .then(foundUser => {
         console.log('user     ' + foundUser)
         if (foundUser === null) {

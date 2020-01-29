@@ -96,10 +96,8 @@ router.post('/projects', (req,res,next) => {
 
 
 router.post('/projectsbyteam', (req,res,next) => {
-  Project.find({ 
-    $and: [ { members: { $in: req.body.userID } }, 
-      { team: req.body.select}]
-    })
+  console.log('hi')
+  Project.find({ team: req.body.select })
     .populate('projects')
     .populate('members')
     .then(data => {
@@ -156,30 +154,54 @@ router.post('/contact', (req,res,next) => {
 
 router.post('/deleteaccount', (req,res,next) => {
 
-  User.findByIdAndDelete(req.user.id)
-  .then(response => {
+  User.findById(req.user.id)
+  .then(theUser => {
 
-    Project.deleteMany({owner: req.user.id})
-    .then(projects => {
-
-      Action.deleteMany({creator: req.user.id})
-      .then(response => {
-
-        Task.deleteMany({owner: req.user.id})
-        .then(response => {
-
-          Comment.deleteMany({owner: req.user.id})
-          .then(response => {
-            req.logout();
-            res.json("fine, you're deleted")
-          })
-        })
-
+    // handle logic for user having teams
+    if (theUser.teams) {
+      // find each team
+      // remove user from each team
+      let userProjects = {}
+      theUser.projects.forEach(project => {
+        userProjects[project] = project
       })
 
-    })
-  })
+      res.json('oops')
 
+
+      // see if the teams have any projects
+      // User.projects forEach(project)
+      // if team projects includes project
+      // pull that project from the array
+      // pull that project from all members array
+
+    }
+    else {
+      User.findByIdAndDelete(req.user.id)
+      .then(response => {
+    
+        Project.deleteMany({owner: req.user.id})
+        .then(projects => {
+    
+          Action.deleteMany({creator: req.user.id})
+          .then(response => {
+    
+            Task.deleteMany({owner: req.user.id})
+            .then(response => {
+    
+              Comment.deleteMany({owner: req.user.id})
+              .then(response => {
+                req.logout();
+                res.json("fine, you're deleted")
+              })
+            })
+    
+          })
+    
+        })
+      })
+    }
+  })
 
   // Team.find({members: {$in: req.user.id}})
   // .then(teams => {

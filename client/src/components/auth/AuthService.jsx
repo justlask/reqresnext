@@ -39,8 +39,8 @@ class AuthService {
     .then(response => response.data)
   }
 
-  getProjectsByTeam = (select, userID) => {
-    return this.service.post('/user/projectsbyteam', {select, userID})
+  getProjectsByTeam = (select) => {
+    return this.service.post('/user/projectsbyteam', {select})
     .then(response => response.data)
   }
 

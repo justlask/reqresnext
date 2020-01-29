@@ -141,16 +141,9 @@ router.post('/update', (req,res,next) => {
 
 router.post('/delete/:projectID', (req,res,next) => {
   //gotta DELETE IT ALLLLL *pokemon voice*
-  // doesn't work for teams
-  // will need to find the project
-    // then remove the project from all members
-    // then remove all tasks, actions and comments for that project
-    // remove the project from the team
-
 
   Project.findById(req.params.projectID)
   .then(project => {
-
 
     //if project has a team and the user trying to delete is the owner
     if (project.team && req.user.id === project.owner) {
@@ -216,6 +209,7 @@ router.post('/delete/:projectID', (req,res,next) => {
         })
       })
     }
+    // if the user has the project in their projects, but they aren't the owner.
     else {
       res.json('you are not authorized to delete this project')
     }

@@ -35,7 +35,7 @@ export default class ProjectCard extends Component {
     return proj.members.map((elem, i) => {
       if (i < 2) {
         return (
-          <img src={elem.image} />
+          <img key={i} src={elem.image} />
         )}
       return (
       <p>+{proj.members.length-2}</p>

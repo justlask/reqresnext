@@ -31,6 +31,13 @@ export default class Dashboard extends Component {
   }
 
 
+  clearProjects = () => {
+    this.setState({
+      projects: []
+    })
+  }
+
+
   showProjects = () => {
     return this.state.projects.map((project, i) => {
       return (
@@ -40,6 +47,7 @@ export default class Dashboard extends Component {
   }
 
   handleCurrent = (e) => {
+    this.clearProjects();
     let userID = this.state.user._id
     let select = false
 
@@ -56,6 +64,7 @@ export default class Dashboard extends Component {
   }
 
   handlePast = (e) => {
+    this.clearProjects();
     let userID = this.state.user._id
     let select = true
 
@@ -72,16 +81,15 @@ export default class Dashboard extends Component {
   }
 
   handleTeam = (id) => {
+    this.clearProjects();
     console.log(id)
-    let userID = this.state._id
-    let select = id
-
-    this.service.getProjectsByTeam(select, userID)
+    this.service.getProjectsByTeam(id)
     .then(data => {
       console.log(data)
       this.setState({
         projects: data
       })
+      this.showProjects()
     });
   }
 
@@ -90,8 +98,8 @@ export default class Dashboard extends Component {
       return (
         <ul>
           Teams
-          {this.state.teams.map(team => {
-            return <li onClick={(e) => {this.handleTeam(team._id) }}>{team.name}</li>
+          {this.state.teams.map((team, i) => {
+            return <li key={i} onClick={(e) => {this.handleTeam(team._id)}}>{team.name}</li>
           })}
         </ul>
       )
