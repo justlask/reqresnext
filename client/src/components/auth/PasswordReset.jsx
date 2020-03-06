@@ -38,7 +38,7 @@ class ResetPassword extends Component {
     }
     else {
       return (
-        <div className="signup">
+        <div className="signup" style={{minHeight: '40vh'}}>
         <div>
           <h1 style={{fontSize: '32px'}}>So... you forgot your password,<br></br>huh?</h1>
           <p>It happens.<br></br> We got you covered.</p>
