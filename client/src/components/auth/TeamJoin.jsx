@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-export default class TeamJoin extends Component {
-  render() {
+// needs to go to functional/hooks
+
+const TeamJoin = () => {
     return (
       <div>
-        
+        <h1>Team join goes here</h1>
       </div>
     )
-  }
 }

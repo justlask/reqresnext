@@ -1,48 +1,36 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import AuthService from '../auth/AuthService'
 
-export default class ImageUpload extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      user: '',
-      image: ''
-    }
-  }
+const ImageUpload = (props) => {
+  const service = new AuthService();
+  const [user, setUser] = useState();
+  const [image, setImage] = useState(props.image);
 
-  componentDidMount(){
-    this.setState({
-      image: this.props.image,
+  const handleFileUpload = (e) => {
+    console.log('The file to be uploaded is: ', e.target.files[0]);
+
+    const uploadData = new FormData();
+    uploadData.append('image', e.target.files[0]);
+
+    service.handleUpload(uploadData)
+    .then(response => {
+      console.log(response)
+      props.updateAccount(response);
+      setUser(response);
+      setImage(response.image);
+    })
+    .catch(err => {
+      console.log('Error while uploading the file: ', err)
     })
   }
 
-  handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
-
-    const uploadData = new FormData();
-    uploadData.append("image", e.target.files[0]);
-    
-    this.service.handleUpload(uploadData)
-    .then(response => {
-      console.log(response)
-        this.props.updateAccount(response);
-        this.setState({ user: response,
-        image: response.image });
-      })
-      .catch(err => {
-        console.log("Error while uploading the file: ", err);
-      });
-  }
-
-
-  render() {
-    return (
-      <label HTMLfor="image" className="userimgbox">
-        <input type="file" name="image" id="image" style={{display: 'none'}} onChange={e => this.handleFileUpload(e)}/>
-        <span>update</span>
-        <img src={this.props.image}/>
-      </label>
-    )
-  }
+  return (
+    <label HTMLfor="image" className="userimgbox">
+      <input type="file" name="image" id="image" style={{display: 'none'}} onChange={e => handleFileUpload(e)}/>
+      <span>update</span>
+      <img src={image}/>
+    </label>
+  )
 }
+
+export default ImageUpload;
