@@ -1,38 +1,33 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Button from '../Button'
 import AuthService from '../auth/AuthService'
 
-export default class UserDelete extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      password: '',
-    }
+const UserDelete = (props) => {
+  const service = new AuthService();
+  const [password, setPassword] = useState(null);
+
+  const handleChange = (e) => {
+    setPassword(e.target.value)
   }
 
-  handleChange = (e) => {
-    const {name, value} = e.target;
-    this.setState({[name]: value});
-  }
-
-  submitChange = (e) => {
+  const submitChange = (e) => {
     e.preventDefault();
-      this.service.deleteAccount(this.state)
-      .then(response => {
-      })
+    service.deleteAccount(password)
+    .then(response => {
+      window.location.reload()
+    })
   }
 
-  render() {
-    return (
-      <div>
-        <h3 style={{fontWeight: 400, textAlign: 'left'}}>Well this is sad, 😔</h3>
-        <form className="editbox">
-          <label style={{textAlign: 'left'}}>Enter Your Password</label>
-          <input type="password" name="password" placeholder=":/" onChange={e => this.handleChange(e)}/>
-          <Button onClick={e => this.submitChange(e)}title="delete"/>
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h3 style={{fontWeight: 400, textAlign: 'left'}}>Well this is sad, 😔</h3>
+      <form className="editbox">
+        <label style={{textAlign: 'left'}}>Enter Your Password</label>
+        <input type="password" name="password" placeholder=":/" onChange={e => handleChange(e)}/>
+        <Button onClick={e => submitChange(e)}title="delete"/>
+      </form>
+    </div>
+  )
 }
+
+export default UserDelete;

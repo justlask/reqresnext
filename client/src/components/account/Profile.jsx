@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import AuthService from '../auth/AuthService';
@@ -11,108 +10,79 @@ import UserDelete from './UserDelete'
 import MoreUserOptions from './MoreUserOptions'
 import Teams from '../teams/Teams'
 
-export default class Profile extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      user: {},
-      image: '',
-      teams: [],
-      update: false,
-      delete: false,
-      moreOptions: false,
-    }
-  }
+const Profile = (props) => {
+  const service = new AuthService();
+  const [user, setUser] = useState(props.loggedInUser);
+  const [image, setImage] = useState(props.loggedInUser.image);
+  const [teams, setTeams] = useState(props.loggedInUser.teams);
+  const [update, setUpdate] = useState(false);
+  const [isDeleteAccount, setIsDeleteAccount] = useState(false);
+  const [moreOptions, setMoreOptions] = useState(false);
 
-  componentDidMount() {
-    console.log(this.props)
-    this.service.getUserInfo(this.props.loggedInUser.id)
+  useEffect(()=> {
+    service.getUserInfo(props.loggedInUser.id)
     .then(user => {
-      this.setState({
-        user: user,
-        image: user.image,
-        teams: user.teams
-      })
+      setUser(user)
+      setImage(user.image)
+      setTeams(user.teams)
     })
-  }
+  }, [])
 
-  updateAccount = (response) => {
-    this.service.getUserInfo(this.state.user.id)
+  const updateAccount = (response) => {
+    service.getUserInfo(user.id)
     .then(user => {
-      this.setState({
-        user: user,
-        image: user.image,
-        teams: user.teams
-      })
+      setUser(user)
+      setImage(user.image)
+      setTeams(user.teams)
     })
   }
 
-  handleEdit = () => {
-    this.setState({
-      update: !this.state.update,
-    })
-    this.showMoreOptions();
+  const handleEdit = () => {
+    setUpdate(!update);
+    showMoreOptions();
   }
 
-  updateUser = () => {
-    this.service.getUserInfo(this.state.user.id)
+  const updateUser = () => {
+    service.getUserInfo(user.id)
     .then(user => {
-      this.setState({
-        user: user,
-        image: user.image,
-        teams: user.teams,
-        update: false
-      })
+      setUser(user)
+      setImage(user.image)
+      setTeams(user.teams)
+      setUpdate(false)
     })
   }
 
-  handleCard = () => {
-    if (this.state.update) {
-      return (
-        <UserEdit user={this.state.user} updateUser={this.updateUser}/>
-      )
-    }
-    if (this.state.delete) {
-      return (
-        <UserDelete user={this.state.user} updateUser={this.updateUser} />
-      )
-    }
-    else {
-      return (
-        <UserCard user={this.state.user}/>
-      )
-    }
+  const handleCard = () => {
+    if (update) return <UserEdit user={user} updateUser={updateUser}/>
+    if (isDeleteAccount) return <UserDelete user={user} updateUser={updateUser} logoutUser={props.logoutUser} />
+    else return <UserCard user={user}/>
   }
 
-  showMoreOptions = () => {
-    this.setState({
-      moreOptions: !this.state.moreOptions
-    })
+  const showMoreOptions = () => {
+    setMoreOptions(!moreOptions)
   }
 
-  deleteAccount = () => {
-    this.setState({
-      delete: !this.state.delete
-    })
-    this.showMoreOptions();
+  const deleteAccount = () => {
+    setIsDeleteAccount(!isDeleteAccount)
+    showMoreOptions();
   }
 
-  render() {
-      return (
-        <main className="accountpage">
-          <div className="accountInfo">
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-              <Button className="editaccount" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
-              <MoreUserOptions toggleEdit={this.handleEdit} deleteAccount={this.deleteAccount} show={this.state.moreOptions}/>
-            </div>
-            <div className="userInfo">
-            <ImageUpload image={this.state.image} updateAccount={this.updateAccount}/>
-              {this.handleCard()}
-            </div>
-          </div>
-          {(this.state.user.teams) ? <Teams user={this.state.user} teams={this.state.user.teams} updateUser={this.updateUser}/> : null}
-        </main>
-      )
-  }
+  return (
+    <main className="accountpage">
+      <div className="accountInfo">
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+          <Button className="editaccount" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => showMoreOptions(e)}></Button>
+          <MoreUserOptions toggleEdit={handleEdit} deleteAccount={deleteAccount} show={moreOptions}/>
+        </div>
+        <div className="userInfo">
+        <ImageUpload image={image} updateAccount={updateAccount}/>
+          {handleCard()}
+        </div>
+      </div>
+      {(teams) ? <Teams user={user} teams={teams} updateUser={updateUser}/> : null}
+    </main>
+  )
+
 }
+
+export default Profile

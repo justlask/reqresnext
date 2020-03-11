@@ -15,9 +15,6 @@ const Project    = require('../models/projects-model');
 const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model');
 
-
-
-
 router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
  
   if (!req.file) {
@@ -25,9 +22,8 @@ router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
     return;
   }
 
-  User.findByIdAndUpdate(req.user.id, {image: req.file.secure_url})
+  User.findByIdAndUpdate(req.user.id, {image: req.file.secure_url}, {new:true})
   .populate('teams')
-  .select("-password")
   .then(userInfo => {
     res.json(userInfo)
   })
@@ -158,25 +154,25 @@ router.post('/deleteaccount', (req,res,next) => {
   .then(theUser => {
 
     // handle logic for user having teams
-    if (theUser.teams) {
-      // find each team
-      // remove user from each team
-      let userProjects = {}
-      theUser.projects.forEach(project => {
-        userProjects[project] = project
-      })
+    // if (theUser.teams) {
+    //   // find each team
+    //   // remove user from each team
+    //   let userProjects = {}
+    //   theUser.projects.forEach(project => {
+    //     userProjects[project] = project
+    //   })
 
-      res.json('oops')
+    //   res.json('oops')
 
 
-      // see if the teams have any projects
-      // User.projects forEach(project)
-      // if team projects includes project
-      // pull that project from the array
-      // pull that project from all members array
+    //   // see if the teams have any projects
+    //   // User.projects forEach(project)
+    //   // if team projects includes project
+    //   // pull that project from the array
+    //   // pull that project from all members array
 
-    }
-    else {
+    // }
+    // else {
       User.findByIdAndDelete(req.user.id)
       .then(response => {
     
@@ -200,7 +196,7 @@ router.post('/deleteaccount', (req,res,next) => {
     
         })
       })
-    }
+    // }
   })
 
   // Team.find({members: {$in: req.user.id}})

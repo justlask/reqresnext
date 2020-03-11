@@ -3,6 +3,8 @@ import AuthService from './AuthService';
 import Button from '../Button'
 import FlashMessage from '../FlashMessage'
 
+// needs to go to functional/hooks
+
 class SignupReferral extends Component {
   constructor(props){
     super(props);

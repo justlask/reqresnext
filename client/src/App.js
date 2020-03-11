@@ -60,7 +60,7 @@ const App = () => {
           <ProtectedRoute user={user} path='/dashboard' component={Dashboard} />
           <ProtectedRoute user={user} path='/project/:projectID/:actionID' component={Action} />
           <ProtectedRoute user={user} path='/project/:id' component={Project} />
-          <ProtectedRoute user={user} path='/account' component={Profile} />
+          <ProtectedRoute user={user} logoutUser={updateUser} path='/account' component={Profile} />
           <Route path="/join/:teamID/:confirmationCode" render={(props) => <SignupReferral {...props} getUser={updateUser} />}></Route>
           <Redirect to="/" />
         </Switch>

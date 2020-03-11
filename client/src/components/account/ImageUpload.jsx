@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import AuthService from '../auth/AuthService'
 
 const ImageUpload = (props) => {
   const service = new AuthService();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [image, setImage] = useState(props.image);
 
   const handleFileUpload = (e) => {
