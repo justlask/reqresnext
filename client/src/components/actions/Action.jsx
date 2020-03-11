@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,201 +8,175 @@ import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'
 import EditActionModal from './EditActionModal'
 import MoreActionOptions from './MoreActionOptions'
+import ActionTypeButtons from './ActionTypeButtons'
 
-export default class Action extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      action: {},
-      tasks: [],
-      popOut: 'popouthidden',
-      type: 'front-end',
-      activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      project: '',
-      isOpen: false,
-      moreOptions: false
-    }
-  }
+const Action = (props) => {
+  const service = new AuthService();
+  const [action, setAction] = useState({});
+  const [tasks, setTasks] = useState([]);
+  const [popOut, setPopOut] = useState('popouthidden');
+  const [type, setType] = useState('front-end');
+  const [activeButtons, setActiveButtons] = useState({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'});
+  const [project, setProject] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [moreOptions, setMoreOptions] = useState(false);
 
-  componentDidMount() {
-    let projectID = this.props.match.params.projectID
-    let actionID = this.props.match.params.actionID
-    
-    this.service.getAction(actionID)
-    .then(response => {
-      this.setState({
-        action: response,
-        project: response.project.title
-      })
-    })
-
-    this.service.getTasks(actionID, 'front-end')
-    .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      })
-    })
-  }
-
-  loadAction = () => {
-    let projectID = this.props.match.params.projectID
+  useEffect(() => {
     let actionID = this.props.match.params.actionID
 
-    this.service.getAction(actionID)
+    service.getAction(actionID)
     .then(response => {
-      this.setState({
-        action: response,
-        project: response.project.title
-      })
+      setAction(response);
+      setProject(response.project.title)
     })
 
-    this.service.getTasks(actionID, 'front-end')
+    service.getTasks(actionID, 'front-end')
     .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      })
+      setTasks(response)
+      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
-  }
 
-  getFrontEnd = () => {
-    this.service.getTasks(this.props.match.params.actionID, 'front-end')
+  }, [])
+
+  const loadAction = () => {
+    let actionID = props.match.params.actionID
+
+    service.getAction(actionID)
     .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      })
+      setAction(response)
+      setProject(response.project.title)
     })
-  }
 
-  getBackEnd = () => {
-    this.service.getTasks(this.props.match.params.actionID, 'back-end')
+    service.getTasks(actionID, 'front-end')
     .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'notActiveActionButton', backEnd: 'activeActionButton', bugs: 'notActiveActionButton'},
-      })
-    })
-  }
-
-  getBugs = () => {
-    this.service.getTasks(this.props.match.params.actionID, 'bug')
-    .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'notActiveActionButton', backEnd: 'notActiveActionButton', bugs: 'activeActionButton'},
-      })
+      setTasks(response)
+      activeButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
   }
 
 
-  taskDone = () => {
-    let actionID = this.props.match.params.actionID
-
-    this.service.getTasks(actionID, 'front-end')
+  const getFrontEnd = () => {
+    service.getTasks(props.match.params.actionID, 'front-end')
     .then(response => {
-      this.setState({
-        tasks: response,
-        activeButtons: {frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'},
-      })
+      setTasks(response)
+      activeButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
+    })
+  }
+
+  const getBackEnd = () => {
+    service.getTasks(props.match.params.actionID, 'back-end')
+    .then(response => {
+      setTasks(response)
+      setActiveButtons({frontEnd: 'notActiveActionButton', backEnd: 'activeActionButton', bugs: 'notActiveActionButton'})
+    })
+  }
+
+  const getBugs = () => {
+    service.getTasks(props.match.params.actionID, 'bug')
+    .then(response => {
+      setTasks(response)
+      setActiveButtons({frontEnd: 'notActiveActionButton', backEnd: 'notActiveActionButton', bugs: 'activeActionButton'})
     })
   }
 
 
-  loadTasks = () => {
-    if (this.state.tasks) {
-      return this.state.tasks.map((task, i) => {
+  const taskDone = () => {
+    let actionID = props.match.params.actionID
+
+    service.getTasks(actionID, 'front-end')
+    .then(response => {
+      setTasks(response)
+      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
+    })
+  }
+
+
+  const loadTasks = () => {
+    if (tasks) {
+      return tasks.map((task, i) => {
         return (
-          <TaskCard project={this.props.match.params.projectID} action={this.props.match.params.actionID} taskDone={this.taskDone} task={task} key={task._id} index={i} />
+          <TaskCard project={props.match.params.projectID} action={props.match.params.actionID} taskDone={taskDone} task={task} key={task._id} index={i} />
         )
       })
     }
   }
 
-  updateTasks = (response) => {
-    this.setState({
-      tasks: response
-    })
+  const updateTasks = (response) => {
+    setTasks(response)
   }
 
 
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  const toggleModal = () => {
+    setIsOpen(!isOpen)
   }
 
-  showMoreOptions = () => {
-    this.setState({
-      moreOptions: !this.state.moreOptions
-    })
+  const showMoreOptions = () => {
+    setMoreOptions(!moreOptions)
   }
   
-  deleteAction = () => {
-    let actionID = this.state.action._id
-    let projectID = this.props.match.params.projectID
+  const deleteAction = () => {
+    let actionID = action._id
+    let projectID = props.match.params.projectID
 
 
-    this.service.deleteAction(actionID, projectID)
+    service.deleteAction(actionID, projectID)
     .then(response => {
-      this.props.history.push(`/project/${projectID}`)
+      props.history.push(`/project/${projectID}`)
     })
 
   }
 
 
-  markComplete = () => {
-    this.service.markActionComplete(this.state.action._id)
+  const markComplete = () => {
+    service.markActionComplete(action._id)
     .then(response => {
-      this.loadAction();
-      this.showMoreOptions();
+      loadAction();
+      showMoreOptions();
     })
   }
 
-  markIncomplete = () => {
-    this.service.markActionIncomplete(this.state.action._id)
+  const markIncomplete = () => {
+    service.markActionIncomplete(action._id)
     .then(response => {
-      this.loadAction();
-      this.showMoreOptions();
+      loadAction();
+      showMoreOptions();
     })
   }
 
 
 
-  render() {
-      return (
-        <main className="actionpage">
-            <div className="icons">
-              <Link to={`/project/${this.props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{this.state.project}</sub></Link>
-              <div>
-                <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => this.showMoreOptions(e)}></Button>
-                <MoreActionOptions markComplete={this.markComplete} markIncomplete={this.markIncomplete} action={this.state.action} toggleModal={this.toggleModal} deleteAction={e => this.deleteAction(e)} show={this.state.moreOptions}/>
-              </div>
-            </div>
-            <div className="title">
-              <h3>{this.state.action.title}</h3>
-              <p>{this.state.action.description}</p>
-            </div>
-          <div className="flexrow2">
-            <img src={this.state.action.image} alt=""/>
-            <div className="tasksform">
-              <AddTask action={this.state.action._id} updateTasks={this.updateTasks} />
-              <div className="tasksbuttons">
-                <Button className={this.state.activeButtons.frontEnd} onClick={e => this.getFrontEnd()} title="Front-End"></Button>
-                <Button className={this.state.activeButtons.backEnd + " center"} onClick={e => this.getBackEnd()} title="Back-End"></Button>
-                <Button className={this.state.activeButtons.bugs} onClick={e => this.getBugs()} title="Bugs"></Button>
-              </div>
-              <div className="tasks">
-                <div className="thetasks">
-                  {this.loadTasks()}
-                </div>
-              </div>
+
+
+  return (
+    <main className="actionpage">
+      <div className="icons">
+        <Link to={`/project/${props.match.params.projectID}`}><FontAwesomeIcon className="chevron" style={{color: '#0C0C3E' }}icon={faChevronLeft} /><sub>{project}</sub></Link>
+        <div>
+          <Button className="viewMore" title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faEllipsisH} />} onClick={e => showMoreOptions(e)}></Button>
+          <MoreActionOptions markComplete={markComplete} markIncomplete={markIncomplete} action={action} toggleModal={toggleModal} deleteAction={e => deleteAction(e)} show={moreOptions}/>
+        </div>
+      </div>
+      <div className="title">
+        <h3>{action.title}</h3>
+        <p>{action.description}</p>
+      </div>
+      <div className="flexrow2">
+        <img src={action.image} alt=""/>
+        <div className="tasksform">
+          <AddTask action={action._id} updateTasks={updateTasks} />
+          <ActionTypeButtons />
+
+          <div className="tasks">
+            <div className="thetasks">
+              {loadTasks()}
             </div>
           </div>
-          <EditActionModal loadAction={this.loadAction} action={this.state.action} show={this.state.isOpen} onClose={this.toggleModal}> /></EditActionModal>
-        </main>
-      )
-  }
+        </div>
+      </div>
+      <EditActionModal loadAction={loadAction} action={action} show={isOpen} onClose={toggleModal}> /></EditActionModal>
+    </main>
+  )
+
 }
+
+export default Action

@@ -1,116 +1,78 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AuthService from '../auth/AuthService'
 import Button from '../Button'
 
 // the modal that opens to allow people to add an action
 
-export default class ActionModal extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      title: '',
-      description: '',
-    }
-  }
-      
-  handleChange = (event) => {  
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
-    
+const ActionModal = () => {
+  const service = new AuthService();
+  const [action, setAction] = useState({title: null, description: null});
+  const [image, setImage] = useState(null)
 
-  createAction = (e) => {
-    let projectID = this.props.project._id
-    let actionInfo = {
-      title: this.state.title,
-      description: this.state.description
-    }
-    let image
-
-
-    if (this.state.image) {
-      image = this.state.image
-    }
-
-    e.preventDefault();
-
-    this.service.createAction(projectID, actionInfo, image)
-    .then(response => {
-        console.log(response)
-        this.setState({
-          title: '',
-          description: '',
-          image: ''
-        })
-
-      this.props.updateProject();
-      this.props.onClose();
+  const handleChange = (event) => {
+    setAction({
+      ...action,
+      [event.target.name]: event.target.value
     })
   }
 
-  handleFileUpload = e => {
+  const createAction = (e) => {
+    let projectID = props.project._id
+    e.preventDefault();
+
+    service.createAction(projectID, action, image)
+    .then(response => {
+      setAction({title: null, description: null})
+      setImage(null)
+      props.updateProject();
+      props.onClose();
+    })
+  }
+
+  const handleFileUpload = e => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     
-    this.service.handleProjectUploadMainImage(uploadData)
+    service.handleProjectUploadMainImage(uploadData)
     .then(response => {
       console.log(response)
       console.log(response.secure_url)
-        this.setState({
-          image: response.secure_url
-        })
+      setImage(response.secure_url)
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
       });
   }
 
-
-  handleImage = e => {
-    this.setState({
-      image: e.target.files[0]
-    })
-    console.log(this.state.image)
-  }
-
-  createForm = () => {
-
+  const createForm = () => {
     return (
       <form className="actionform">
         <div className="modalnames">
           <h3>Add an Action</h3>
         </div>
         <label>Action Image</label>
-        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
+        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => handleFileUpload(e)} />
         <label>Action Name</label>
-        <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)}/>
+        <input type="text" name="title" value={action.title} onChange={e => handleChange(e)}/>
         <label>Action Description</label>
-        <input type="text" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
+        <input type="text" name="description" value={action.description} onChange={e => handleChange(e)}/>
       </form>
     )
   }
 
-
-
-
-  render() {
-    if(!this.props.show) {
-      return null;
-    }
-
-    return (
-      <div className="backdrop">
-        <div className="modal">
-         {this.createForm()}
-          <div className="addactionmodal">
-            <Button className="noButtonBlue" title="cancel" onClick={e => this.props.onClose()}></Button>
-            <Button className="addactionmodalbtn" title="create" onClick={e => {this.createAction(e)}}></Button>
-          </div>
+  return (!props.show) ? null : (
+    <div className="backdrop">
+      <div className="modal">
+      {createForm()}
+        <div className="addactionmodal">
+          <Button className="noButtonBlue" title="cancel" onClick={e => props.onClose()}></Button>
+          <Button className="addactionmodalbtn" title="create" onClick={e => {createAction(e)}}></Button>
         </div>
       </div>
-    );
-  }
+    </div>
+  )
 }
+
+export default ActionModal
