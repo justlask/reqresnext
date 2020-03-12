@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Blog extends Component {
-  render() {
+const Blog = () => {
     return (
       <main style={{padding: '50px 0', width: '100vw', display: 'flex', flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'left', width: '70vw', minHeight: '60vh', textAlign: 'left'}}>
@@ -74,5 +73,6 @@ export default class Blog extends Component {
         </div>
       </main>
     )
-  }
 }
+
+export default Blog;
