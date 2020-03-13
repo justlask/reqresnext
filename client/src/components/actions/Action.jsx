@@ -8,7 +8,7 @@ import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'
 import EditActionModal from './EditActionModal'
 import MoreActionOptions from './MoreActionOptions'
-import ActionTypeButtons from './ActionTypeButtons'
+// import ActionTypeButtons from './ActionTypeButtons'
 
 const Action = (props) => {
   const service = new AuthService();
@@ -144,9 +144,6 @@ const Action = (props) => {
   }
 
 
-
-
-
   return (
     <main className="actionpage">
       <div className="icons">
@@ -164,8 +161,12 @@ const Action = (props) => {
         <img src={action.image} alt=""/>
         <div className="tasksform">
           <AddTask action={action._id} updateTasks={updateTasks} />
-          <ActionTypeButtons />
-
+          {/* <ActionTypeButtons /> */}
+          <div className="tasksbuttons">
+            <Button className={activeButtons.frontEnd} onClick={e => getFrontEnd()} title="Front-End"></Button>
+            <Button className={activeButtons.backEnd + " center"} onClick={e => getBackEnd()} title="Back-End"></Button>
+            <Button className={activeButtons.bugs} onClick={e => getBugs()} title="Bugs"></Button>
+          </div>
           <div className="tasks">
             <div className="thetasks">
               {loadTasks()}

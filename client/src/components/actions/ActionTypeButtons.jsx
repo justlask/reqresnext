@@ -1,5 +1,8 @@
 import React from 'react'
 
+// move buttons into here to have better logic regarding class names
+// use onFocus onBlur
+
 const ActionTypeButtons = () => {
   return (
     <div className="tasksbuttons">

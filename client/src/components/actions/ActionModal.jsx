@@ -4,7 +4,7 @@ import Button from '../Button'
 
 // the modal that opens to allow people to add an action
 
-const ActionModal = () => {
+const ActionModal = (props) => {
   const service = new AuthService();
   const [action, setAction] = useState({title: null, description: null});
   const [image, setImage] = useState(null)
