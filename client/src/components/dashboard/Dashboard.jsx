@@ -1,104 +1,92 @@
-import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom' 
+import React, { useState, useEffect } from 'react'
 import Button from '../Button'
 import AuthService from '../auth/AuthService'
 import ProjectCard from '../dashboard/ProjectCard'
 import NewProjectModal from '../dashboard/NewProjectModal'
 
-export default class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.service = new AuthService();
-    this.state = {
-      user: {},
-      teams: [],
-      projects: [],
-      actions: [],
-      activeButtons: {current: 'activeActionButton', past: 'notActiveActionButton'},
-      isOpen: false
-    }
-  }
+const Dashboard = (props) => {
+  const service = new AuthService();
+  const [user, setUser] = useState({})
+  const [teams, setTeams] = useState([])
+  const [projects, setProjects] = useState([])
+  const [activeButtons, setActiveButtons] = useState({current: 'activeActionButton', past: 'notActiveActionButton'})
+  const [isOpen, setIsOpen] = useState(false)
 
-  componentDidMount() {
-    this.service.getUserInfo()
-    .then(data => {
-      this.setState({
-        user: data,
-        teams: data.teams,
-      })
-      this.handleCurrent();
-    }) 
-  }
+  useEffect(() => {
+    service.getUserInfo()
+    .then(userData => {
+      let userID = userData._id
+      let select = false
 
-
-  clearProjects = () => {
-    this.setState({
-      projects: []
-    })
-  }
-
-
-  showProjects = () => {
-    return this.state.projects.map((project, i) => {
-      return (
-        <ProjectCard project={project} key={i+1} i={i}/>
-      )
-    })
-  }
-
-  handleCurrent = (e) => {
-    this.clearProjects();
-    let userID = this.state.user._id
-    let select = false
-
-    this.service.getProjects(select, userID)
-    .then(data => {
-      this.setState({
-        activeButtons: {
+      service.getProjects(select, userID)
+      .then(projectData => {
+        setActiveButtons({
           current: 'activeActionButton',
           past: 'notActiveActionButton',
-        },
-        projects: data
+        })
+        setUser(userData)
+        setTeams(userData.teams)
+        setProjects(projectData)
+    })
+    });
+  }, [])
+
+  const clearProjects = () => {
+    setProjects([])
+  }
+
+  const showProjects = () => {
+    return (projects.length > 0) ? (
+    projects.map((project, i) => {
+      return <ProjectCard project={project} key={i+1} i={i} />
+    })
+    ) : <p>No Projects to Show.</p>
+  }
+
+  const handleCurrent = (e) => {
+    clearProjects();
+    let userID = user._id
+    let select = false
+    service.getProjects(select, userID)
+    .then(data => {
+      setActiveButtons({
+        current: 'activeActionButton',
+        past: 'notActiveActionButton',
       })
+      setProjects(data)
     });
   }
 
-  handlePast = (e) => {
-    this.clearProjects();
-    let userID = this.state.user._id
+  const handlePast = (e) => {
+    clearProjects();
+    let userID = user._id
     let select = true
 
-    this.service.getProjects(select, userID)
+    service.getProjects(select, userID)
     .then(data => {
-      this.setState({
-        activeButtons: {
-          current: 'notActiveActionButton',
-          past: 'activeActionButton',
-        },
-        projects: data
-      })
+      setActiveButtons({
+        current: 'notActiveActionButton',
+        past: 'activeActionButton',
+      });
+      setProjects(data)
     });
   }
 
-  handleTeam = (id) => {
-    this.clearProjects();
-    console.log(id)
-    this.service.getProjectsByTeam(id)
+  const handleTeam = (id) => {
+    clearProjects();
+    service.getProjectsByTeam(id)
     .then(data => {
-      console.log(data)
-      this.setState({
-        projects: data
-      })
-      this.showProjects()
+      setProjects(data)
+      showProjects()
     });
   }
 
-  handleTeams = () => {
-    if (this.state.teams.length > 0) {
+  const handleTeams = () => {
+    if (teams.length > 0) {
       return (
         <ul>
           Teams
-          {this.state.teams.map((team, i) => {
+          {teams.map((team, i) => {
             return <li key={i} onClick={(e) => {this.handleTeam(team._id)}}>{team.name}</li>
           })}
         </ul>
@@ -106,52 +94,47 @@ export default class Dashboard extends Component {
     }
   }
 
-  updateProject = () => {
-    let userID = this.state.user._id
+  const updateProject = () => {
+    let userID = user._id
     let select = false
     
-    this.service.getProjects(select, userID)
+    service.getProjects(select, userID)
     .then(data => {
-      this.setState({
-        activeButtons: {
-          current: 'activeActionButton',
-          past: 'notActiveActionButton',
-        },
-        projects: data
+      setActiveButtons({
+        current: 'activeActionButton',
+        past: 'notActiveActionButton',
       })
+      setProjects(data)
     });
   }
 
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  const toggleModal = () => {
+    setIsOpen(!isOpen)
   }
 
-
-  render() {
-      return (
-        <main className="padding">
-          <div className="flexrow">
-            <div className="usercard">
-              <img src={this.state.user.image} alt="profile"/>
-              <h2>{this.state.user.name}</h2>
-              <h3>{this.state.user.position}</h3>
-              {this.handleTeams()}
-            </div>
-            <div className="projects">
-              <div className="projectNav">
-                <Button onClick={() => this.toggleModal()} className="addproj" title="Add Project"></Button>
-                <div className="projectbuttons">
-                  <Button className={this.state.activeButtons.current} title="Current Projects" onClick={(e) => this.handleCurrent(e)}/>
-                  <Button className={this.state.activeButtons.past} title="Past Projects" onClick={(e) => this.handlePast(e)} />
-                </div>
-              </div>
-              {this.showProjects()}
+  return (
+    <main className="padding">
+      <div className="flexrow">
+        <div className="usercard">
+          <img src={user.image} alt="profile"/>
+          <h2>{user.name}</h2>
+          <h3>{user.position}</h3>
+          {handleTeams()}
+        </div>
+        <div className="projects">
+          <div className="projectNav">
+            <Button onClick={() => toggleModal()} className="addproj" title="Add Project"></Button>
+            <div className="projectbuttons">
+              <Button className={activeButtons.current} title="Current Projects" onClick={(e) => handleCurrent(e)}/>
+              <Button className={activeButtons.past} title="Past Projects" onClick={(e) => handlePast(e)} />
             </div>
           </div>
-          <NewProjectModal user={this.state.user} updateProject={this.updateProject} show={this.state.isOpen} onClose={this.toggleModal}> /></NewProjectModal>
-        </main>
-      )
-  }
+          {showProjects()}
+        </div>
+      </div>
+      <NewProjectModal user={user} updateProject={updateProject} show={isOpen} onClose={toggleModal}> /></NewProjectModal>
+    </main>
+  )
 }
+
+export default Dashboard

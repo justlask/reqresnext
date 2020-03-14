@@ -1,73 +1,48 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import AuthService from '../auth/AuthService'
 
-export default class ProjectCard extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      percent: 0,
-      color: ''
-    }
-  }
+const ProjectCard = (props) => {
+  const service = new AuthService();
+  const [percent, setPercent] = useState(0)
+  const [color, setColor] = useState(null)
 
-  componentDidMount() {
-    this.service.calculatePercent(this.props.project._id)
+  useEffect(() => {
+    service.calculatePercent(props.project._id)
     .then(response => {
-      let bgColor
-      if (this.props.i % 2 === 1) {
-        bgColor = '#eeeeee'
-      }
-      else {
-        bgColor = '#f7f7f7'
-      }
-
-      this.setState({
-        percent: response,
-        color: bgColor
-      })
+      (props.i % 2 === 1) ? setColor('#eeeeee') : setColor('#f7f7f7')
+      setPercent(response)
     })
-  }
+  }, [])
 
-
-  showMembers = (proj) => {
+  const showMembers = (proj) => {
     return proj.members.map((elem, i) => {
-      if (i < 2) {
-        return (
-          <img key={i} src={elem.image} />
-        )}
-      return (
-      <p>+{proj.members.length-2}</p>
-      )
+      return (i < 2) ? <img key={i} src={elem.image} /> : <p>+{proj.members.length-2}</p>
     })
   }
 
-  handleStatusBar = (proj) => {
+  const handleStatusBar = (proj) => {
     return (
       <div className="meter">
-        <span style={{width: this.state.percent + '%'}}></span>
-      </div>
-      )
-  }
-
-
-
-
-  render() {
-    return (
-      <div className="projectbox" style={{backgroundColor: this.state.color}}>
-        <div style={{backgroundColor: this.state.color}}>
-          <Link to={`/project/${this.props.project._id}`}><img src={this.props.project.image} alt=""/></Link>
-          <div className="secondaryproject">
-            <h3><Link to={`/project/${this.props.project._id}`}>{this.props.project.title}</Link></h3>
-            {this.handleStatusBar(this.props.project._id)}
-            <div className="smallimg">
-              {this.showMembers(this.props.project)}
-            </div>
-          </div>
-        </div>
+        <span style={{width: percent + '%'}}></span>
       </div>
     )
   }
+
+  return (
+    <div className="projectbox" style={{backgroundColor: color}}>
+      <div style={{backgroundColor: color}}>
+        <Link to={`/project/${props.project._id}`}><img src={props.project.image} alt=""/></Link>
+        <div className="secondaryproject">
+          <h3><Link to={`/project/${props.project._id}`}>{props.project.title}</Link></h3>
+          {handleStatusBar(props.project._id)}
+          <div className="smallimg">
+            {showMembers(props.project)}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+export default ProjectCard
