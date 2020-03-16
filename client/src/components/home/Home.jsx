@@ -1,15 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Hero from '../home/Hero'
 import About from '../home/About'
 import Mockups from '../home/Mockups'
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
-
-  }
-
-  render() {
+const Home = () => {
     return (
       <main>
         <Hero />
@@ -17,5 +11,6 @@ export default class Home extends Component {
         <Mockups />
       </main>
     )
-  }
 }
+
+export default Home
