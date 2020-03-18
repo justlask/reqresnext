@@ -71,6 +71,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  incompleteTask = (taskID) => {
+    return this.service.post(`/task/incomplete/${taskID}`, taskID)
+    .then(response => response.data)
+  }
+
   addTask = (actionID, taskInfo) => {
     return this.service.post(`/task/addtask/${actionID}`, taskInfo)
     .then(response => response.data)

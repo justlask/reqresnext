@@ -17,6 +17,13 @@ router.post('/complete/:taskID', (req,res,next) => {
   })
 })
 
+router.post('/incomplete/:taskID', (req,res,next) => {
+  Task.findByIdAndUpdate(req.params.taskID, {complete: false}, {new:true})
+  .then(response =>{
+    res.json(response)
+  })
+})
+
 router.get('/:actionID/:type', (req,res,next) => {
   if (req.params.type === undefined) {
     req.params.type = 'front-end'

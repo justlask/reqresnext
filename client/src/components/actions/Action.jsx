@@ -80,13 +80,12 @@ const Action = (props) => {
   }
 
 
-  const taskDone = () => {
+  const taskDone = (taskType) => {
     let actionID = props.match.params.actionID
 
-    service.getTasks(actionID, 'front-end')
+    service.getTasks(actionID, taskType)
     .then(response => {
       setTasks(response)
-      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
   }
 

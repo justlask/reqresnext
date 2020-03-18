@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class EditTask extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+const EditTask = () => {
+  return (
+    <div>
+      
+    </div>
+  )
 }
+
+export default EditTask
