@@ -1,61 +1,70 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AuthService from '../auth/AuthService';
 import FlashMessage from '../FlashMessage';
 
-export default class TeamMemberInvite extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      sent: false
-    }
-  }
+const TeamMemberInvite = (props) => {
+  const service = new AuthService();
+  const [sent, setSent] = useState(false)
+  const [invite, setInvite] = useState(null)
+  const [flash, setFlash] = useState(false)
+  const [message, setMessage] = useState(null)
 
-  sendInvite = e => {
+  const sendInvite = (e) => {
     e.preventDefault();
-    if (this.state.email.includes('@') && this.state.email.includes(".")) {
-      this.service.sendInvite(this.props.team, this.state.email)
+    (invite.email.includes("@" && ".")) ? (
+      service.sendInvite(props.team, invite.email)
       .then(response => {
         console.log(response)
-        this.props.updateUser()
-        this.props.hide();
+        props.updateUser()
+        props.hide();
+        setSent(true)
       })
-    }
-    else {
-      console.log('its gotta be an email')
-    }
+    ): handleFlash("it's gotta be an email")
   }
 
-  handleChange = e => {
-    this.setState({email: e.target.value})
-    console.log(this.state)
+  const handleFlash = (message) => {
+    setMessage(message);
+    setFlash(!flash)
+    setTimeout(()=>{
+      setFlash(false);
+      setMessage(null)
+    }, 2000)
   }
 
-  handleCancel = e => {
+  const handleChange = (e) => {
+    setInvite({
+      ...invite,
+      [email]: e.target.value
+    })
+  }
+
+  const handleCancel = (e) => {
     e.preventDefault();
-    this.props.hide();
+    props.hide();
   }
 
-  render() {
-    if (this.props.show && !this.state.sent) {
-      return (
-        <div className="inviteform">
-          <form>
-          <label>Send An Invite</label><br></br>
-            <input type="email" placeholder="enter their email" onChange={e => this.handleChange(e)}/>
-            <input type="submit" value="send it!" onClick={e => this.sendInvite(e)}/>
-            <input style={{backgroundColor: 'inherit', color: '#0C0C3E', border: 'none'}}type="submit" value="cancel" onClick={(e) => this.handleCancel(e)} />
-          </form>
-        </div>
-      )
-    }
-    if (!this.props.show && this.state.sent) {
-      return (
-        <div>SENT!</div>
-      )
-    }
-    else {
-      return null
-    }
+  if (props.show && !sent) {
+    return (
+      <div className="inviteform">
+        <form>
+        <label>Send An Invite</label><br></br>
+          <input type="email" placeholder="enter their email" onChange={e => handleChange(e)}/>
+          <input type="submit" value="send it!" onClick={e => sendInvite(e)}/>
+          <FlashMessage show={flash} message={message}/>
+          <input style={{backgroundColor: 'inherit', color: '#0C0C3E', border: 'none'}}type="submit" value="cancel" onClick={(e) => handleCancel(e)} />
+        </form>
+      </div>
+    )
   }
+  if (!props.show && sent) {
+    return (
+      <div>SENT!</div>
+    )
+  }
+  else {
+    return null
+  }
+
 }
+
+export default TeamMemberInvite

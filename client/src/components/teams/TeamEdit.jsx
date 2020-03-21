@@ -1,134 +1,103 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Button from '../Button'
 import TeamMemberInvite from './TeamMemberInvite'
 import AddTeamProject from './AddTeamProject'
 
+const TeamEdit = (props) => {
+  const [showMore, setShowMore] = useState(false)
+  const [projectShowMore, setProjectShowMore] = useState(false)
 
-export default class TeamEdit extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showMore: false,
-      projectShowMore: false
-    }
-  }
-
-  getTeamMembers = () => {
+  const getTeamMembers = () => {
     return (
-      this.props.team.members.map((member, i) => {
+      props.team.members.map((member, i) => {
         return (
-        <div className="teamuser" key={i}>
-          <img src={member.image} />
-          <p>{member.name}</p>
-        </div>
-        )
+          <div className="teamuser" key={i}>
+            <img src={member.image} />
+            <p>{member.name}</p>
+          </div>
+          )
       })
     )
   }
 
-  handleInvites = () => {
-    if (this.props.team.invites.length > 0) {
-      return (
-        this.props.team.invites.map((invited, i) => {
-          return (
-          <div className="teamuser" key={i}>
-            <p>{invited.email}</p>
-          </div>
-          )
-        })
-      )
-    }
-    else {
-      return (
-        <div className="teamuser">
+  const handleInvites = () => {
+    return (props.team.invites && props.team.invites.length > 0) ? (
+      props.team.invites.map((invited, i) => {
+        return (
+        <div className="teamuser" key={i}>
+          <p>{invited.email}</p>
+        </div>
+        )
+      })
+    ) : (
+      <div className="teamuser">
         <p>no pending invites</p>
       </div>
-      )
-    }
+    )
   }
 
-  handleProjects = () => {
-    if (this.props.team.projects.length > 0) {
-      return (
-        this.props.team.projects.map((project, i) => {
-          return (
-          <div className="teamuser" key={i}>
-            <p>{project.title}</p>
-          </div>
-          )
-        })
-      )
-    }
-    else {
-      return (
-        <div className="teamuser">
-          <p>no projects yet</p>
+  const handleProjects = () => {
+    return (props.team.projects && props.team.projects.length > 0) ? (
+      props.team.projects.map((project, i) => {
+        return (
+        <div className="teamuser" key={i}>
+          <p>{project.title}</p>
         </div>
-      )
-    }
+        )
+      })
+    ) : (
+      <div className="teamuser">
+        <p>no projects yet</p>
+      </div>
+    )
   }
 
-  handleShow = () => {
-    this.setState({showMore: !this.state.showMore})
+  const handleShow = () => {
+    setShowMore(!showMore)
   }
 
-  handleInviteButton = () => {
-    if (this.state.showMore) {
-      return null
-    }
-    else {
-      return <Button className="teambtn" title="invite member" onClick={this.handleShow}></Button>
-    }
+  const handleInviteButton = () => {
+    return (showMore) ? null : <Button className="teambtn" title="invite member" onClick={handleShow}></Button>
   }
 
-
-  handleAddExistingProject = () => {
-    if (this.state.projectShowMore) {
-      return null
-    }
-    else {
-      return <Button className="teambtn" title="add existing project" onClick={this.handleShowProject}></Button>
-    }
+  const handleAddExistingProject = () => {
+    return (projectShowMore) ? null : <Button className="teambtn" title="add existing project" onClick={handleShowProject}></Button>
+  }
+  
+  const handleShowProject = () => {
+    setProjectShowMore(!projectShowMore)
   }
 
-  handleShowProject = () => {
-    this.setState({projectShowMore: !this.state.projectShowMore})
-  }
+  return (!props.show) ? null : (
+    <div className="teamedit">
+      <br></br>
+      <b>Admin:</b>
+      <div className="teamuser">
+        <img src={props.team.admin.image} />
+        <p>{props.team.admin.name}</p>
+      </div>
+      <br></br>
+      <div>
+        <b>Members:</b>
+        {getTeamMembers()}
+      </div>
+      <div>
+        <br></br>
+        <b>Projects:</b>
+        {handleProjects()}
+        <AddTeamProject updateUser={props.updateUser} user={props.user} team={props.team} show={state.projectShowMore} hide={handleShowProject}/>
+        {handleAddExistingProject()}
+      </div>
+      <div>
+        <br></br>
+        <b>Pending Invites:</b>
+        {handleInvites()}
+        <TeamMemberInvite updateUser={props.updateUser} team={props.team} show={state.showMore} hide={handleShow} />
+        {handleInviteButton()}
+      </div>
+    </div>
+  )
 
-  render() {
-    if (this.props.show) {
-      return (
-        <div className="teamedit">
-          <br></br>
-          <b>Admin:</b>
-          <div className="teamuser">
-            <img src={this.props.team.admin.image} />
-            <p>{this.props.team.admin.name}</p>
-          </div>
-          <br></br>
-          <div>
-            <b>Members:</b>
-            {this.getTeamMembers()}
-          </div>
-          <div>
-            <br></br>
-            <b>Projects:</b>
-            {this.handleProjects()}
-            <AddTeamProject updateUser={this.props.updateUser} user={this.props.user} team={this.props.team} show={this.state.projectShowMore} hide={this.handleShowProject}/>
-            {this.handleAddExistingProject()}
-          </div>
-          <div>
-            <br></br>
-            <b>Pending Invites:</b>
-            {this.handleInvites()}
-            <TeamMemberInvite updateUser={this.props.updateUser} team={this.props.team} show={this.state.showMore} hide={this.handleShow} />
-            {this.handleInviteButton()}
-          </div>
-        </div>
-      )
-    }
-    else {
-      return null
-    }
-  }
 }
+
+export default TeamEdit

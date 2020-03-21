@@ -1,33 +1,23 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Button from '../Button'
 import CreateTeam from './CreateTeam'
-import AuthService from '../auth/AuthService';
 
-export default class Teams extends Component {
-  constructor(props) {
-    super(props);
-    this.service = new AuthService();
-    this.state = {
-      startTeam: false,
-      editTeam: false,
-    }
+const Teams = (props) => {
+  const [startTeam, setStartTeam] = useState(false)
+  const [editTeam, setEditTeam]  = useState(false)
+
+  const handleShowCreate = () => {
+    setStartTeam(!startTeam)
   }
 
-  handleShowCreate = () => {
-    console.log('sup from show create')
-    this.setState({
-      startTeam: !this.state.startTeam
-    })
-  }
-
-  render() {
-    return (
-      <div className="teams">
-        <div className="teambox">
-            <Button className="teambtn" title="create a team" onClick={e => this.handleShowCreate(e)}></Button>
-            <CreateTeam user={this.props.user} teams={this.props.teams} show={this.state.startTeam} hide={this.handleShowCreate} updateUser={this.props.updateUser} />
-        </div>
+  return (
+    <div className="teams">
+      <div className="teambox">
+          <Button className="teambtn" title="create a team" onClick={e => handleShowCreate(e)}></Button>
+          <CreateTeam user={props.user} teams={props.teams} show={startTeam} hide={handleShowCreate} updateUser={props.updateUser} />
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Teams

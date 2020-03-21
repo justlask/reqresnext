@@ -1,54 +1,49 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AuthService from '../auth/AuthService'
 import TeamCard from './TeamCard'
 
-export default class CreateTeam extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-  }
+const CreateTeam = (props) => {
+  const service = new AuthService();
+  const [team, setTeam] = useState(null)
 
-  submitNewTeam = (e) =>{
+  const submitNewTeam = (e) => {
     e.preventDefault();
-    this.service.createTeam(this.state)
+    service.createTeam(team)
     .then(response => {
-      this.props.updateUser();
-      this.props.hide();
+      props.updateUser();
+      props.hide();
     })
   }
 
-  handleChange = (e) => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
-
-  showTeams = (e) => {
-    return this.props.teams.map((team, i) => {
-      return (
-          <TeamCard updateUser={this.props.updateUser} user={this.props.user} team={team} key={i} />
-      )
+  const handleChange = (e) => {
+    setTeam({
+      ...team,
+      [e.target.name]: e.target.value
     })
   }
 
-  render() {
-    if (this.props.show) {
-      return (
-        <div className="createform">
-          <form className="teamform">
-            <label>Team Name</label>
-            <input type="text" name="name" placeholder="what are you going to call your team?" onChange={e => this.handleChange(e)}/>
-            <input type="submit" value="create my team!" onClick={e => this.submitNewTeam(e)}/>
-          </form>
-        </div>
-      )
-    }
-    else {
-      return (
-        <div>
-          <h1>Your Teams:</h1>
-          {this.showTeams()}
-        </div>
-      )
-    }
+  const showTeams = (e) => {
+    return (
+      props.teams.map((team, i) => {
+        return <TeamCard updateUser={props.updateUser} user={props.user} team={team} key={i} />
+      })
+    )
   }
+
+  return (props.show) ? (
+      <div className="createform">
+        <form className="teamform">
+          <label>Team Name</label>
+          <input type="text" name="name" placeholder="what are you going to call your team?" onChange={e => handleChange(e)}/>
+          <input type="submit" value="create my team!" onClick={e => submitNewTeam(e)}/>
+        </form>
+      </div>
+  ) : (
+    <div>
+      <h1>Your Teams:</h1>
+      {showTeams()}
+    </div>
+  )
 }
+
+export default CreateTeam

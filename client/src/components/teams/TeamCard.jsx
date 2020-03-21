@@ -1,30 +1,24 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import TeamEdit from './TeamEdit'
 
-export default class TeamCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showMore: false
-    }
+const TeamCard = () => {
+  const [showMore, setShowMore] = useState(false)
+
+  const showMoreFunc = (props) => {
+    setShowMore(!showMore)
   }
 
-
-  showMore = () => {
-    this.setState({showMore: !this.state.showMore})
-  }
-
-
-  render() {
-    return (
-      <div className="teamcard">
-        <div className="teamlist" onClick={this.showMore}>
-          <h3>{this.props.team.name}</h3>
-        </div>
-        <div>
-          <TeamEdit updateUser={this.props.updateUser} user={this.props.user} team={this.props.team} show={this.state.showMore} showMore={this.showMore}/>
-        </div>
+  return (
+    <div className="teamcard">
+      <div className="teamlist" onClick={showMoreFunc}>
+        <h3>{props.team.name}</h3>
       </div>
-    )
-  }
+      <div>
+        <TeamEdit updateUser={props.updateUser} user={props.user} team={props.team} show={showMore} showMore={showMoreFunc}/>
+      </div>
+    </div>
+  )
+
 }
+
+export default TeamCard
