@@ -11,7 +11,7 @@ const TeamMemberInvite = (props) => {
 
   const sendInvite = (e) => {
     e.preventDefault();
-    (invite.email.includes("@" && ".")) ? (
+    (invite.email && invite.email.includes("@" && ".")) ? (
       service.sendInvite(props.team, invite.email)
       .then(response => {
         console.log(response)
@@ -34,7 +34,7 @@ const TeamMemberInvite = (props) => {
   const handleChange = (e) => {
     setInvite({
       ...invite,
-      [email]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 

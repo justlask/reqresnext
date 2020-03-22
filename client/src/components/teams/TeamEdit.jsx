@@ -85,14 +85,14 @@ const TeamEdit = (props) => {
         <br></br>
         <b>Projects:</b>
         {handleProjects()}
-        <AddTeamProject updateUser={props.updateUser} user={props.user} team={props.team} show={state.projectShowMore} hide={handleShowProject}/>
+        <AddTeamProject updateUser={props.updateUser} user={props.user} team={props.team} show={projectShowMore} hide={handleShowProject}/>
         {handleAddExistingProject()}
       </div>
       <div>
         <br></br>
         <b>Pending Invites:</b>
         {handleInvites()}
-        <TeamMemberInvite updateUser={props.updateUser} team={props.team} show={state.showMore} hide={handleShow} />
+        <TeamMemberInvite updateUser={props.updateUser} team={props.team} show={showMore} hide={handleShow} />
         {handleInviteButton()}
       </div>
     </div>

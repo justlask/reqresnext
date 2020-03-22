@@ -10,7 +10,7 @@ const AddTeamProject = (props) => {
     props.hide();
   }
 
-  handleSelect = (e) => {
+  const handleSelect = (e) => {
     setProject({
       ...project,
       [e.target.name]: e.target.value

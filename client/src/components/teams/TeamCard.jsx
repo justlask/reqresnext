@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TeamEdit from './TeamEdit'
 
-const TeamCard = () => {
+const TeamCard = (props) => {
   const [showMore, setShowMore] = useState(false)
 
   const showMoreFunc = (props) => {
