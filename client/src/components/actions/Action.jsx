@@ -8,7 +8,7 @@ import TaskCard from '../tasks/TaskCard'
 import AddTask from '../tasks/AddTask'
 import EditActionModal from './EditActionModal'
 import MoreActionOptions from './MoreActionOptions'
-// import ActionTypeButtons from './ActionTypeButtons'
+import ActionTypeButton from './ActionTypeButton'
 
 const Action = (props) => {
   const service = new AuthService();
@@ -32,8 +32,9 @@ const Action = (props) => {
 
     service.getTasks(actionID, 'front-end')
     .then(response => {
+      setType('front-end')
       setTasks(response)
-      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
+      // setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
 
   }, [])
@@ -47,35 +48,20 @@ const Action = (props) => {
       setProject(response.project.title)
     })
 
-    service.getTasks(actionID, 'front-end')
+    service.getTasks(actionID, type)
     .then(response => {
+      setType(type)
       setTasks(response)
-      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
   }
 
+  const getTasks = (taskType) => {
+    let actionID = props.match.params.actionID
 
-  const getFrontEnd = () => {
-    service.getTasks(props.match.params.actionID, 'front-end')
+    service.getTasks(actionID, taskType)
     .then(response => {
+      setType(taskType)
       setTasks(response)
-      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
-    })
-  }
-
-  const getBackEnd = () => {
-    service.getTasks(props.match.params.actionID, 'back-end')
-    .then(response => {
-      setTasks(response)
-      setActiveButtons({frontEnd: 'notActiveActionButton', backEnd: 'activeActionButton', bugs: 'notActiveActionButton'})
-    })
-  }
-
-  const getBugs = () => {
-    service.getTasks(props.match.params.actionID, 'bug')
-    .then(response => {
-      setTasks(response)
-      setActiveButtons({frontEnd: 'notActiveActionButton', backEnd: 'notActiveActionButton', bugs: 'activeActionButton'})
     })
   }
 
@@ -85,6 +71,7 @@ const Action = (props) => {
 
     service.getTasks(actionID, taskType)
     .then(response => {
+      setType(taskType)
       setTasks(response)
     })
   }
@@ -101,6 +88,7 @@ const Action = (props) => {
   }
 
   const updateTasks = (response) => {
+    setType(response[0].type)
     setTasks(response)
   }
 
@@ -160,11 +148,10 @@ const Action = (props) => {
         <img src={action.image} alt=""/>
         <div className="tasksform">
           <AddTask action={action._id} updateTasks={updateTasks} />
-          {/* <ActionTypeButtons /> */}
-          <div className="tasksbuttons">
-            <Button className={activeButtons.frontEnd} onClick={e => getFrontEnd()} title="Front-End"></Button>
-            <Button className={activeButtons.backEnd + " center"} onClick={e => getBackEnd()} title="Back-End"></Button>
-            <Button className={activeButtons.bugs} onClick={e => getBugs()} title="Bugs"></Button>
+          <div className="taskbuttons">
+            <ActionTypeButton type="front-end" getTasks={getTasks} setType={setType} isActive={type}/>
+            <ActionTypeButton type="back-end" getTasks={getTasks} setType={setType} isActive={type} />
+            <ActionTypeButton type="bug" getTasks={getTasks} setType={setType} isActive={type}/>
           </div>
           <div className="tasks">
             <div className="thetasks">

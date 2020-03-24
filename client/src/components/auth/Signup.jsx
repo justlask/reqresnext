@@ -29,7 +29,7 @@ const Signup = (props) => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    if (user.email.includes('@' && '.')) {
+    if (user.email && user.email.includes('@' && '.')) {
       service.signup(user.name, user.email, user.password)
       .then(response => {
           setUser({name: null, email: null, password: null});

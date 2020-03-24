@@ -27,10 +27,10 @@ const AddTask = (props) => {
 
   const addTask = (e) => {
     e.preventDefault();
-    (task.type) ? (
+    (task.type && task.title && task.title !== '') ? (
       service.addTask(props.action, task)
       .then(response => {
-        setTask({type: null, title: null});
+        setTask({type: undefined, title: ''});
         props.updateTasks(response)
       })
     ) : handleFlash('must pick a type from the select options')

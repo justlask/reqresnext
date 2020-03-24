@@ -613,12 +613,12 @@ section {
   box-shadow: none;
   border: none;
 }
-.tasksbuttons {
+.taskbuttons {
   display: flex;
   justify-content: space-evenly;
   background-color: #f7f7f7;
 }
-.tasksbuttons button {
+.taskbuttons button {
   border: 2px solid #0C0C3E;
   border-right: none;
   font-weight: 500;
