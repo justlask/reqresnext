@@ -3,7 +3,7 @@ import AuthService from '../auth/AuthService'
 
 const AddTeamProject = (props) => {
   const service = new AuthService();
-  const [project, setProject] = useState(null)
+  const [project, setProject] = useState(undefined)
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -11,15 +11,13 @@ const AddTeamProject = (props) => {
   }
 
   const handleSelect = (e) => {
-    setProject({
-      ...project,
-      [e.target.name]: e.target.value
-    })
+    setProject(e.target.value)
+    console.log(project)
   }
 
   const handleOptions = () => {
     return props.user.projects.map((project, i) => {
-      return (
+      return (project.team) ? null : (
         <option key={i} value={project._id}>{project.title}</option>
       )
     })
@@ -30,7 +28,7 @@ const AddTeamProject = (props) => {
     let projectID = project
     let team = props.team._id
 
-    console.log('project    ' + this.state.project)
+    console.log('project    ' + project)
     console.log('team    ' + team)
 
     service.addProjectToTeam(team, projectID)
