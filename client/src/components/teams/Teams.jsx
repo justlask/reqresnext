@@ -1,20 +1,13 @@
-import React, { useState } from 'react'
-import Button from '../Button'
-import CreateTeam from './CreateTeam'
+import React from 'react'
+import CreateTeam2 from '../components/CreateTeam2'
+import ShowTeams2 from '../components/ShowTeams2'
 
 const Teams = (props) => {
-  const [startTeam, setStartTeam] = useState(false)
-  const [editTeam, setEditTeam]  = useState(false)
-
-  const handleShowCreate = () => {
-    setStartTeam(!startTeam)
-  }
-
   return (
     <div className="teams">
       <div className="teambox">
-          <Button className="teambtn" title="create a team" onClick={e => handleShowCreate(e)}></Button>
-          <CreateTeam user={props.user} teams={props.teams} show={startTeam} hide={handleShowCreate} updateUser={props.updateUser} />
+        <CreateTeam2 user={props.user} teams={props.teams} updateUser={props.updateUser}/>
+        <ShowTeams2 user={props.user} teams={props.teams} updateUser={props.updateUser}/>
       </div>
     </div>
   )

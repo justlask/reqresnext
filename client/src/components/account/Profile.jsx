@@ -79,6 +79,7 @@ const Profile = (props) => {
           {handleCard()}
         </div>
       </div>
+      {/* {(teams) ? <Teams user={user} teams={teams} updateUser={updateUser}/> : null} */}
       {(teams) ? <Teams user={user} teams={teams} updateUser={updateUser}/> : null}
     </main>
   )

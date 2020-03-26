@@ -194,6 +194,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  removeProjectFromTeam = (team, project) => {
+    return this.service.post('/team/removeproject', {team, project})
+    .then(response => response.data)
+  }
+
   signupReferral = (name, email, password, props) => {
     return this.service.post(`/team/join/${props.teamID}/${email}/${props.confirmationCode}`, {name, email, password, props})
     .then(response => response.data)

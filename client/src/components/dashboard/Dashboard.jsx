@@ -87,7 +87,7 @@ const Dashboard = (props) => {
         <ul>
           Teams
           {teams.map((team, i) => {
-            return <li key={i} onClick={(e) => {this.handleTeam(team._id)}}>{team.name}</li>
+            return <li key={i} onClick={(e) => {handleTeam(team._id)}}>{team.name}</li>
           })}
         </ul>
       )
