@@ -22,7 +22,7 @@ const Action = (props) => {
   const [moreOptions, setMoreOptions] = useState(false);
 
   useEffect(() => {
-    let actionID = this.props.match.params.actionID
+    let actionID = props.match.params.actionID
 
     service.getAction(actionID)
     .then(response => {
@@ -50,7 +50,7 @@ const Action = (props) => {
     service.getTasks(actionID, 'front-end')
     .then(response => {
       setTasks(response)
-      activeButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
+      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
   }
 
@@ -59,7 +59,7 @@ const Action = (props) => {
     service.getTasks(props.match.params.actionID, 'front-end')
     .then(response => {
       setTasks(response)
-      activeButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
+      setActiveButtons({frontEnd: 'activeActionButton', backEnd: 'notActiveActionButton', bugs: 'notActiveActionButton'})
     })
   }
 

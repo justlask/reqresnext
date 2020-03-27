@@ -62,12 +62,18 @@ const ActionModal = (props) => {
     )
   }
 
+  const cancelAdd = () => {
+    setAction({title: null, description: null})
+    setImage(null)
+    props.onClose()
+  }
+
   return (!props.show) ? null : (
     <div className="backdrop">
       <div className="modal">
       {createForm()}
         <div className="addactionmodal">
-          <Button className="noButtonBlue" title="cancel" onClick={e => props.onClose()}></Button>
+          <Button className="noButtonBlue" title="cancel" onClick={e => cancelAdd(e)}></Button>
           <Button className="addactionmodalbtn" title="create" onClick={e => {createAction(e)}}></Button>
         </div>
       </div>

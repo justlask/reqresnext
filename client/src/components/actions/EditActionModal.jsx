@@ -7,7 +7,7 @@ import Button from '../Button'
 const EditActionModal = (props) => {
   const service = new AuthService();
   const [action, setAction] = useState({title: props.action.title, description: props.action.description});
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(props.action.image)
 
   const handleChange = (event) => {
     setAction({
@@ -44,6 +44,12 @@ const EditActionModal = (props) => {
       });
   }
 
+  const cancelEdit = () => {
+    setAction({title: props.action.title, description: props.action.description});
+    setImage(props.action.image)
+    props.onClose();
+  }
+
   const createForm = () => {
     return (
       <form className="actionform">
@@ -65,7 +71,7 @@ const EditActionModal = (props) => {
       <div className="modal">
       {createForm()}
         <div className="addactionmodal">
-          <Button className="noButtonBlue" title="cancel" onClick={e => props.onClose()}></Button>
+          <Button className="noButtonBlue" title="cancel" onClick={e => cancelEdit(e)}></Button>
           <Button className="addactionmodalbtn" title="save" onClick={e => {updateAction(e)}}></Button>
         </div>
       </div>

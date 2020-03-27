@@ -1,119 +1,84 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AuthService from '../auth/AuthService'
 import Button from '../Button'
 
 // the modal that opens to allow people to add an action
+const EditProjectModal = (props) => {
+  const service = new AuthService();
+  const [project, setProject] = useState({title: props.project.title, description: props.project.description})
+  const [image, setImage] = useState(props.project.image)
 
-export default class EditProjectModal extends Component {
-  constructor(props) {
-    super(props)
-    this.service = new AuthService();
-    this.state = {
-      title: '',
-      description: '',
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      title: this.props.project.title,
-      description: this.props.project.description
+  const handleChange = (event) => {
+    setProject({
+      ...project,
+      [event.target.name]: event.target.value
     })
   }
-      
-  handleChange = (event) => {  
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
-    
 
-  updateProject = (e) => {
+  const updateProject = (event) => {
+    let projectID = props.project._id
+    event.preventDefault();
 
-    let projectID = this.props.project._id
-
-    let projectInfo = {
-      title: this.state.title,
-      description: this.state.description,
-    }
-
-    let image
-
-    if (this.state.image) {
-      image = this.state.image
-    }
-
-    e.preventDefault();
-
-    this.service.updateProject(projectID, projectInfo, image)
+    service.updateProject(projectID, project, image)
     .then(response => {
-      this.props.updateProject();
-      this.props.onClose();
+      props.updateProject();
+      props.onClose();
     })
   }
 
-  handleFileUpload = e => {
+  const handleFileUpload = e => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     
-    this.service.handleProjectUploadMainImage(uploadData)
+    service.handleProjectUploadMainImage(uploadData)
     .then(response => {
       console.log(response)
       console.log(response.secure_url)
-        this.setState({
-          image: response.secure_url
-        })
+      setImage(response.secure_url)
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
       });
   }
-
-
-  handleImage = e => {
-    this.setState({
-      image: e.target.files[0]
-    })
-    console.log(this.state.image)
+  
+  const cancelEdit = () => {
+    setProject({title: props.project.title, description: props.project.description});
+    setImage(props.project.image)
+    props.onClose();
   }
 
-  createForm = () => {
-
+  const createForm = () => {
     return (
       <form className="actionform">
         <div className="modalnames">
           <h3>Edit This Project</h3>
         </div>
         <label>Project Main Image</label>
-        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => this.handleFileUpload(e)} />
+        <input style={{border: 'none'}} type="file" name="image" id="image" onChange={e => handleFileUpload(e)} />
         <label>Project Title</label>
-        <input type="text" name="title" placeholder={this.props.project.title} value={this.state.title} defaultValue={this.props.project.title} onChange={e => this.handleChange(e)}/>
+        <input type="text" name="title" placeholder={props.project.title} value={project.title} defaultValue={props.project.title} onChange={e => handleChange(e)}/>
         <label>Project Description</label>
-        <input type="text" name="description" placeholder={this.props.project.description} value={this.state.description} defaultValue={this.props.project.description} onChange={e => this.handleChange(e)}/>
+        <input type="text" name="description" placeholder={props.project.description} value={project.description} defaultValue={props.project.description} onChange={e => handleChange(e)}/>
       </form>
     )
   }
 
-
-
-
-  render() {
-    if(!this.props.show) {
-      return null;
-    }
-
-    return (
-      <div className="backdrop">
-        <div className="modal">
-         {this.createForm()}
-          <div className="addactionmodal">
-            <Button className="noButtonBlue" title="cancel" onClick={e => this.props.onClose()}></Button>
-            <Button className="addactionmodalbtn" title="save" onClick={e => {this.updateProject(e)}}></Button>
-          </div>
+  return (!props.show) ? null : (
+    <div className="backdrop">
+      <div className="modal">
+      {createForm()}
+        <div className="addactionmodal">
+          <Button className="noButtonBlue" title="cancel" onClick={e =>cancelEdit(e)}></Button>
+          <Button className="addactionmodalbtn" title="save" onClick={e => {updateProject(e)}}></Button>
         </div>
       </div>
-    );
-  }
+    </div>
+  )
+
+
 }
+
+export default EditProjectModal
 
