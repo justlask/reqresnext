@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import TeamEdit2 from './TeamEdit2'
+import TeamEdit from './TeamEdit'
 
-const TeamCard2 = (props) => {
+const TeamCard = (props) => {
   const [show, setShow] = useState(false)
 
   const showMore = () => {
@@ -14,10 +14,10 @@ const TeamCard2 = (props) => {
         <h3>{props.team.name}</h3>
       </div>
       <div>
-        <TeamEdit2 updateUser={props.updateUser} user={props.user} team={props.team} show={show} showMore={showMore}/>
+        <TeamEdit updateUser={props.updateUser} user={props.user} team={props.team} show={show} showMore={showMore}/>
       </div>
     </div>
   )
 }
 
-export default TeamCard2
+export default TeamCard

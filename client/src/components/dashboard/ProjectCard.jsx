@@ -15,11 +15,14 @@ const ProjectCard = (props) => {
     })
   }, [])
 
-  const showMembers = (proj) => {
-    return proj.members.map((elem, i) => {
-      return (i < 2) ? <img key={i} src={elem.image} /> : <p>+{proj.members.length-2}</p>
-    })
-  }
+  // const showMembers = (proj) => {
+  //   return (proj.members) ? (
+  //   <div style={{display: 'flex'}}>
+  //     <img src={proj.members[0].image} alt=""/> 
+  //     <p>+{proj.members.length-2}</p>
+  //   </div>
+  //   ) : null
+  // }
 
   const handleStatusBar = (proj) => {
     return (
@@ -37,7 +40,7 @@ const ProjectCard = (props) => {
           <h3><Link to={`/project/${props.project._id}`}>{props.project.title}</Link></h3>
           {handleStatusBar(props.project._id)}
           <div className="smallimg">
-            {showMembers(props.project)}
+            {/* {showMembers(props.project)} */}
           </div>
         </div>
       </div>

@@ -154,25 +154,18 @@ router.post('/deleteaccount', (req,res,next) => {
   .then(theUser => {
 
     // handle logic for user having teams
-    // if (theUser.teams) {
-    //   // find each team
-    //   // remove user from each team
-    //   let userProjects = {}
-    //   theUser.projects.forEach(project => {
-    //     userProjects[project] = project
-    //   })
-
-    //   res.json('oops')
+    if (theUser.teams) {
+      // loop through the teams
+      // check to see if the user is the admin of the team
+      // if the user is the admin of the team
+        // delete team
+        // remove team from all team members
+        // remove team from all team projects
 
 
-    //   // see if the teams have any projects
-    //   // User.projects forEach(project)
-    //   // if team projects includes project
-    //   // pull that project from the array
-    //   // pull that project from all members array
 
-    // }
-    // else {
+    }
+    else {
       User.findByIdAndDelete(req.user.id)
       .then(response => {
     
@@ -196,7 +189,7 @@ router.post('/deleteaccount', (req,res,next) => {
     
         })
       })
-    // }
+    }
   })
 
   // Team.find({members: {$in: req.user.id}})

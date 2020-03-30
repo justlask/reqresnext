@@ -65,10 +65,10 @@ router.post('/removeproject', (req,res,next) => {
   let teamID = req.body.team
   let projectID = req.body.project
 
-  // add team to project
-  Project.findByIdAndUpdate(projectID, {team: null})
+  // remove team from project
+  Project.findByIdAndUpdate(projectID, {team: {$pull: teamID}})
   .then(response => {
-      //add project to team
+      // remove project from team
       Team.findByIdAndUpdate(teamID, {$pull: {projects: projectID}})
       .then(response => {
         // add all members to the project's members
@@ -77,6 +77,28 @@ router.post('/removeproject', (req,res,next) => {
           res.json('Project has no team, team has no project, project has no members')
         })
       })
+  })
+})
+
+
+router.post('/removemember', (req,res,next) => {
+  let teamID = req.body.team
+  let memberID = req.body.member
+
+  Team.findById(teamID)
+  .then(response => {
+    if (response.admin.toString() == req.user._id.toString()) {
+      res.json('you cannot remove yourself')
+    }
+    else {
+      Team.findByIdAndUpdate(teamID, {$pull: {members: memberID}}, {new:true})
+      .then(response => {
+        User.findByIdAndUpdate(memberID, {$pull: { teams: teamID }})
+        .then(user => {
+          res.json(response)
+        })
+      })
+    }
   })
 })
 

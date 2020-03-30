@@ -8,23 +8,18 @@ const Project = (props) => {
   const service = new AuthService();
 
   const removeProject = (e) => {
-    console.log(props.project.title)
-    console.log(props.project._id)
-    console.log(props.team.name)
-    console.log(props.team._id)
-
     service.removeProjectFromTeam(props.team._id, props.project._id)
     .then(response => {
-      
+      props.updateUser()
     })
   }
 
-  return (
+  return (props.project) ? (
     <div className="teamuser">
       <p>{props.project.title}</p>
       <Button title={<FontAwesomeIcon style={{color: '#0C0C3E' }}icon={faTimes} />} onClick={e => removeProject(e)}></Button>
     </div>
-  )
+  ) : null
 }
 
 export default Project

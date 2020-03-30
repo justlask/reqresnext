@@ -3,7 +3,7 @@ import Members from './Members'
 import Projects from './Projects'
 import Invites from './Invites'
 
-const TeamEdit2 = (props) => {
+const TeamEdit = (props) => {
   
   return (!props.show) ? null : (
     <div className="teamedit">
@@ -14,11 +14,11 @@ const TeamEdit2 = (props) => {
         <p>{props.team.admin.name}</p>
       </div>
       <br></br>
-      <Members team={props.team}/>
-      <Projects team={props.team}/>
-      <Invites team={props.team} />
+      <Members team={props.team} updateUser={props.updateUser} user={props.user}/>
+      <Projects team={props.team} updateUser={props.updateUser} user={props.user}/>
+      <Invites team={props.team} updateUser={props.updateUser} user={props.user}/>
     </div>
   )
 }
 
-export default TeamEdit2
+export default TeamEdit

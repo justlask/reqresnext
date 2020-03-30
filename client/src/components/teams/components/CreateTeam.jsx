@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Button from '../../Button'
-import CreateTeamBox2 from './CreateTeamBox2'
+import CreateTeamBox from './CreateTeamBox'
 
-const CreateTeam2 = (props) => {
+const CreateTeam = (props) => {
   const [startTeam, setStartTeam] = useState(false)
 
   const handleShowCreate = () => {
@@ -12,9 +12,9 @@ const CreateTeam2 = (props) => {
   return (
     <div>
       <Button className="teambtn" title="create a team" onClick={e => handleShowCreate(e)}></Button>
-      <CreateTeamBox2 user={props.user} teams={props.teams} show={startTeam} hide={handleShowCreate} updateUser={props.updateUser}/>
+      <CreateTeamBox user={props.user} teams={props.teams} show={startTeam} hide={handleShowCreate} updateUser={props.updateUser}/>
     </div>
   )
 }
 
-export default CreateTeam2
+export default CreateTeam

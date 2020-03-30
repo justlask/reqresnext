@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AuthService from '../../auth/AuthService'
 import Button from '../../Button'
 
-const CreateTeamBox2 = (props) => {
+const CreateTeamBox = (props) => {
   const service = new AuthService();
   const [team, setTeam] = useState(null)
 
@@ -44,4 +44,4 @@ const CreateTeamBox2 = (props) => {
   ) : null
 }
 
-export default CreateTeamBox2
+export default CreateTeamBox

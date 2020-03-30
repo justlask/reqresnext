@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Member from './Member'
 
 const Members = (props) => {
+  const [show, setShow] = useState(false)
 
+  
   const getTeamMembers = () => {
     return (
       props.team.members.map((member, i) => {
         return (
-          <Member member={member} key={i} team={props.team}/>
+          <Member member={member} key={i} team={props.team} user={props.user}/>
         )
       })
     )
@@ -15,8 +17,10 @@ const Members = (props) => {
 
   return (
     <div>
-      <b>Members:</b>
-      {getTeamMembers()}
+      <div onClick={(e)=>setShow(!show)}>
+        <b style={{cursor: 'pointer'}}>Members:</b>
+      </div>
+      {(show) ? getTeamMembers() : null}
     </div>
   )
 }

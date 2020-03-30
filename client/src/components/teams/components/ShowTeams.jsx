@@ -1,11 +1,12 @@
 import React from 'react'
-import TeamCard2 from './TeamCard2'
+import TeamCard from './TeamCard'
 
-const ShowTeams2 = (props) => {
+const ShowTeams = (props) => {
+
 
   const showTeams = (e) => {
     return props.teams.map((team, i) => {
-      return <TeamCard2 updateUser={props.updateUser} user={props.user} team={team} key={i} />
+      return <TeamCard updateUser={props.updateUser} user={props.user} team={team} key={i} />
     })
   }
   return (
@@ -16,4 +17,4 @@ const ShowTeams2 = (props) => {
   )
 }
 
-export default ShowTeams2
+export default ShowTeams

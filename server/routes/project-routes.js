@@ -86,10 +86,6 @@ router.post('/create', (req,res,next) => {
     owner: req.user.id,
   }
 
-  if (!req.body.team) {
-    newProject.members = [ req.user.id ]
-  }
-
   if (req.body.image) {
     newProject.image = req.body.image
   }

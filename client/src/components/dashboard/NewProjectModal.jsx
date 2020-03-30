@@ -16,19 +16,7 @@ const NewProjectModal = (props) => {
 
   const createProject = (event) => {
     event.preventDefault();
-    // let projectInfo = {
-    //   title: this.state.title,
-    //   description: this.state.description,
-    // }
-
-    // if (this.state.image) {
-    //   projectInfo.image = this.state.image
-    // }
-
-    // if (this.state.team) {
-    //   projectInfo.team = this.state.team
-    // }
-
+    console.log(project)
 
     service.createProject(project)
     .then(response => {
