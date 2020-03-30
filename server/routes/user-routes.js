@@ -16,7 +16,6 @@ const Task       = require('../models/tasks-model');
 const Team       = require('../models/teams-model');
 
 router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
- 
   if (!req.file) {
     next(new Error('No file uploaded!'));
     return;
@@ -27,11 +26,7 @@ router.post('/upload', profileUploadCloud.single("image"), (req, res, next) => {
   .then(userInfo => {
     res.json(userInfo)
   })
-  // res.json({ secure_url: req.file.secure_url });
 });
-
-
-
 
 router.get('/getuserinfo', (req, res, next) => {
   User.findById(req.user.id)
@@ -71,7 +66,6 @@ router.get('/getuserinfo', (req, res, next) => {
       }
     }
   })
-  .select("-password")
   .then(data => {
     res.json(data)
   })
@@ -92,7 +86,6 @@ router.post('/projects', (req,res,next) => {
 
 
 router.post('/projectsbyteam', (req,res,next) => {
-  console.log('hi')
   Project.find({ team: req.body.select })
     .populate('projects')
     .populate('members')
@@ -150,21 +143,56 @@ router.post('/contact', (req,res,next) => {
 
 router.post('/deleteaccount', (req,res,next) => {
 
-  User.findById(req.user.id)
+  User.findById(req.user._id)
   .then(theUser => {
 
     // handle logic for user having teams
     if (theUser.teams) {
-      // loop through the teams
-      // check to see if the user is the admin of the team
-      // if the user is the admin of the team
-        // delete team
-        // remove team from all team members
-        // remove team from all team projects
 
+      theUser.teams.forEach((team, i) => {
+        if (team.admin === req.user._id) {
+          // remove team from all members
+          team.members.forEach((member, i) => {
+            User.findByIdAndUpdate(member.id, {$pull: {teams: team._id}})
+          })
+          // remove team from all projects
+          team.projects.forEach((project, i) => {
+            Project.findByIdAndUpdate(project.id, {$pull: {team: team._id}})
+          })
+          // delete team
+          Team.findByIdAndDelete(team._id)
+        }
+        else {
+          //remove user from team
+          Team.findByIdAndUpdate(team._id, {$pull: {members: req.user._id}})
+        }
+      })
 
-
+        User.findByIdAndDelete(req.user._id)
+        .then(response => {
+  
+          Project.deleteMany({owner: req.user._id})
+          .then(projects => {
+      
+            Action.deleteMany({creator: req.user._id})
+            .then(response => {
+      
+              Task.deleteMany({owner: req.user._id})
+              .then(response => {
+      
+                Comment.deleteMany({owner: req.user._id})
+                .then(response => {
+                  req.logout();
+                  res.json("fine, you're deleted")
+                })
+              })
+      
+            })
+      
+          })
+        })
     }
+
     else {
       User.findByIdAndDelete(req.user.id)
       .then(response => {
@@ -191,18 +219,6 @@ router.post('/deleteaccount', (req,res,next) => {
       })
     }
   })
-
-  // Team.find({members: {$in: req.user.id}})
-  // .then(teams => {
-  //   teams.forEach(team => {
-  //     Team.findByIdAndUpdate(team.id, {$pull: {members: req.user.id}})
-  //     .then(response => {
-
-  //       Team.fin
-
-  //     })
-  //   })
-  // })
 
 })
 

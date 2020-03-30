@@ -28,8 +28,7 @@ router.get('/getmyteams', (req,res,next) => {
 router.post('/create', (req,res,next) => {
   let newTeam = {
     name: req.body.name,
-    admin: req.user.id,
-    members: [req.user.id]
+    admin: req.user.id
   }
   Team.create(newTeam)
   .then(newTeam => {
@@ -53,10 +52,11 @@ router.post('/addproject', (req,res,next) => {
       Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
       .then(response => {
         // add all members to the project's members
-        Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
-        .then(response => {
-          res.json('Project has a team, team has a project, project has members')
-        })
+        // Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
+        // .then(response => {
+        //   res.json('Project has a team, team has a project, project has members')
+        // })
+        res.json('project has a team, team has a project')
       })
   })
 })
@@ -72,10 +72,11 @@ router.post('/removeproject', (req,res,next) => {
       Team.findByIdAndUpdate(teamID, {$pull: {projects: projectID}})
       .then(response => {
         // add all members to the project's members
-        Project.findByIdAndUpdate(projectID, {$pull: {members: response.members}})
-        .then(response => {
-          res.json('Project has no team, team has no project, project has no members')
-        })
+        // Project.findByIdAndUpdate(projectID, {$pull: {members: response.members}})
+        // .then(response => {
+        //   res.json('Project has no team, team has no project, project has no members')
+        // })
+        res.json('team has 1 less project, project has 1 less team')
       })
   })
 })
@@ -86,16 +87,16 @@ router.post('/removemember', (req,res,next) => {
   let memberID = req.body.member
 
   Team.findById(teamID)
-  .then(response => {
-    if (response.admin.toString() == req.user._id.toString()) {
+  .then(theTeam => {
+    if (theTeam.admin.toString() == req.user._id.toString()) {
       res.json('you cannot remove yourself')
     }
     else {
       Team.findByIdAndUpdate(teamID, {$pull: {members: memberID}}, {new:true})
-      .then(response => {
+      .then(teamResponse => {
         User.findByIdAndUpdate(memberID, {$pull: { teams: teamID }})
         .then(user => {
-          res.json(response)
+          res.json(teamResponse)
         })
       })
     }

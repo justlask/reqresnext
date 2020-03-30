@@ -11,8 +11,6 @@ const Action      = require('../models/actions-model');
 const Comment     = require('../models/comment-model');
 const Team        = require('../models/teams-model');
 
-
-
 router.get('/:projectID', (req,res,next) => {
   Project.findById(req.params.projectID)
   .populate({
@@ -33,7 +31,6 @@ router.get('/:projectID', (req,res,next) => {
 
 
 router.get('/calculatestatus/:projectID', (req,res,next) => {
-  
   Project.findById(req.params.projectID)
   .populate({
     path: 'members', model: User
@@ -66,7 +63,6 @@ router.get('/calculatestatus/:projectID', (req,res,next) => {
 });
 
 router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) => {
- 
   if (!req.file) {
     next(new Error('No file uploaded!'));
     return;
@@ -79,7 +75,6 @@ router.post('/upload/mainimage', uploadCloud.single("image"), (req, res, next) =
 
 
 router.post('/create', (req,res,next) => {
-
   let newProject = {
     title: req.body.title,
     description: req.body.description,
@@ -95,20 +90,20 @@ router.post('/create', (req,res,next) => {
 
   Project.create(newProject)
   .then(project => {
-
     if (req.body.team) {
       // adds project to team
       Team.findByIdAndUpdate(req.body.team, {$push: {projects: project.id}})
       .then(response => {
-        // adds the project to each member of the team
-        response.members.forEach(member => {
-          User.findByIdAndUpdate(member, {$push: {projects: project.id}})
-        })
+        // // adds the project to each member of the team
+        // response.members.forEach(member => {
+        //   User.findByIdAndUpdate(member, {$push: {projects: project.id}})
+        // })
         // adds all members to the project members array
-        Project.findByIdAndUpdate(project.id, {$push: {members: response.members}})
-        .then(response => {
-          res.json(response)
-        })
+        // Project.findByIdAndUpdate(project.id, {$push: {members: response.members}})
+        // .then(response => {
+        //   res.json(response)
+        // })
+        res.json(project)
       })
     }
     else {
@@ -140,7 +135,6 @@ router.post('/delete/:projectID', (req,res,next) => {
 
   Project.findById(req.params.projectID)
   .then(project => {
-
     //if project has a team and the user trying to delete is the owner
     if (project.team && req.user.id === project.owner) {
       // remove project from team
@@ -149,9 +143,9 @@ router.post('/delete/:projectID', (req,res,next) => {
 
         response.members.forEach(memeber => {
           // remove project from all team members
-          User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
-          .then(response => {
-          })
+          // User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
+          // .then(response => {
+          // })
         })
 
         Project.findByIdAndDelete(req.params.projectID)
