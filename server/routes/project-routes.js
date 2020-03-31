@@ -29,6 +29,61 @@ router.get('/:projectID', (req,res,next) => {
   })
 });
 
+router.post('/byteam', (req,res,next) => {
+  console.log(req.user._id)
+  console.log(req.body)
+
+  let select = (req.body.isCurrent === 'Current Projects') ? false : true
+
+  if (!req.body.team) {
+    console.log('----------------------')
+    console.log('theres no team!')
+    //get everything
+    //all projects where user is owner
+    //all projects where team is in user.teams
+    // Project.find({ 
+    //   $and: [ 
+    //     { team: { $in: req.user.teams } }, 
+    //     { complete: select}]
+    //   })
+    //   .then(data => {
+    //     console.log(data)
+    //     res.json(data)
+    //   })
+
+
+      Project.find({ 
+        $or: [
+          { $and: [ 
+                { team: { $in: req.user.teams } }, 
+                { complete: select}] },
+          { $and: [ 
+                { owner: req.user.id }, 
+                { complete: select}] }
+        ]
+        })
+        .then(data => {
+          res.json(data)
+        })
+
+  }
+  else {
+    //get only that teams projects
+    Team.findById(req.body.team._id)
+    .then(response => {
+      Project.find({ 
+        $and: [ { _id: { $in: response.projects } }, 
+          { complete: select}]
+        })
+        .then(data => {
+          res.json(data)
+        })
+    })
+
+  }
+
+})
+
 
 router.get('/calculatestatus/:projectID', (req,res,next) => {
   Project.findById(req.params.projectID)
@@ -141,12 +196,12 @@ router.post('/delete/:projectID', (req,res,next) => {
       Team.findByIdAndUpdate(project.team, {$pull: {projects: req.params.projectID}})
       .then(response => {
 
-        response.members.forEach(memeber => {
-          // remove project from all team members
-          // User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
-          // .then(response => {
-          // })
-        })
+        // response.members.forEach(memeber => {
+        //   // remove project from all team members
+        //   User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
+        //   .then(response => {
+        //   })
+        // })
 
         Project.findByIdAndDelete(req.params.projectID)
         .then(response => {

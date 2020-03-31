@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import AuthService from '../auth/AuthService'
-import Button from '../Button'
+import AuthService from '../../auth/AuthService'
+import Button from '../../Button'
 
 // the modal that opens to allow people to add a project
 const NewProjectModal = (props) => {
