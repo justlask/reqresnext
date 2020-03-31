@@ -5,14 +5,14 @@ import FlashMessage from '../../FlashMessage';
 const AddTeamMember = (props) => {
   const service = new AuthService();
   const [sent, setSent] = useState(false)
-  const [invite, setInvite] = useState(null)
+  const [email, setEmail] = useState(null)
   const [flash, setFlash] = useState(false)
   const [message, setMessage] = useState(null)
 
   const sendInvite = (e) => {
     e.preventDefault();
-    (invite && invite.includes("@" && ".")) ? (
-      service.sendInvite(props.team, invite.email)
+    (email && email.includes("@" && ".")) ? (
+      service.sendInvite(props.team, email)
       .then(response => {
         console.log(response)
         props.updateUser()
@@ -32,8 +32,8 @@ const AddTeamMember = (props) => {
   }
 
   const handleChange = (e) => {
-    setInvite(e.target.value)
-    console.log(invite)
+    setEmail(e.target.value)
+    console.log(email)
   }
 
   const handleCancel = (e) => {

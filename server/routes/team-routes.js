@@ -92,122 +92,118 @@ router.post('/removemember', (req,res,next) => {
 
 
 router.post('/sendinvite', (req,res,next) => {
-  let name = req.user.name
-  let email = req.body.email
-  let teamID = req.body.team._id
-  let teamName = req.body.team.name
-
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let confirmationCode = '';
   for (let i = 0; i < 25; i++) {
     confirmationCode += characters[Math.floor(Math.random() * characters.length )];
   }
-
-  //determine if email has an account
-  User.findOne({email: email})
+  // determine if email has an account
+  User.findOne({email: req.body.email})
   .then(foundUser => {
-
     if (!foundUser) {
-      Invite.create(
-        {
-        email: email,
-        team: teamID,
-        confirmationCode: confirmationCode,
-        invitedBy: req.user.id
-        })
+      console.log('user does not have account')
+      //create invite
+      Invite.create({
+        email: req.body.email,
+        team: req.body.team._id,
+        confimrationCode: confirmationCode,
+        invitedBy: req.user.id,
+        accepted: false
+      })
+      .then(response => {
+        //add invite to team
+        Team.findByIdAndUpdate(req.body.team._id, {$push: { invites: response._id }})
         .then(response => {
-
-          Team.findByIdAndUpdate(teamID, {$push : {
-            invites: { 
-              email: email,
-              confirmationCode: confirmationCode,
-              invitedBy: req.user.id
-            }
-          }})
-          .then(response => {
-
-            let transporter = nodemailer.createTransport({
-              service: 'Gmail',
-              auth: {
-                user: process.env.NODE_EMAIL,
-                pass: process.env.NODE_PASS
-              }
-            });
-      
-            let messageWithContactInfo = `Hi there!<br><br> ${name} has invited you to join their team '${teamName}' on ReqResNext.<br><br> But we
-            noticed that you don't have an account!<br><br> Joining their team will allow you to have access to their projects, which will allow you to
-            collaborate together. Please visit https://www.reqresnext.com/join/${teamID}/${confirmationCode} to join their team.
-            <br><br>
-            Welcome to ReqResNext and happy coding!`
-      
-            transporter.sendMail({
-              from: '"ReqResNext Team Invite" <reqresnext@gmail.com>',
-              to: email,
-              subject: `${name} invites you to join a team on ReqResNext!`, 
-              text: messageWithContactInfo,
-              html: messageWithContactInfo
-            })
-            .then(
-                res.status(200).json({message: "this user doesn't have an account, we have sent them an email invite."})
-            )
-            .catch(error => console.log(error));
-          })
-        })
-    }
-    // make sure a user cant invite someone who is already a member
-    else if (foundUser.teams.includes(teamID)) {
-      res.status(400).json({message: "This user is already a member of the team!"})
-    }
-    // the user already has an account
-    else if (!foundUser.teams.includes(teamID)) {
-      console.log(name, email, teamID, teamName)
-      // add the invite to the user account
-      User.findByIdAndUpdate(foundUser.id, 
-        {$push: {invites: {
-          team: teamID,
-          confirmationCode: confirmationCode,
-          invitedBy: req.user.id}}
-        })
-        .then(response => {
-          // send an email to them and let them know they've been invited
+          //send email
           let transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: process.env.NODE_EMAIL,
-              pass: process.env.NODE_PASS
+            user: process.env.NODE_EMAIL,
+            pass: process.env.NODE_PASS
             }
           });
-    
-          let messageWithContactInfo = `Hi there!<br><br> ${name} has invited you to join the team '${teamName}' on ReqResNext.<br>`
-    
+                
+          let messageWithContactInfo = `Hi there!<br><br> ${req.user.name} has invited you to join their team '${req.body.team.name}' on ReqResNext.<br><br> But we
+            noticed that you don't have an account!<br><br> Joining their team will allow you to have access to their projects, which will allow you to
+            collaborate together. Please visit https://www.reqresnext.com/join/${req.body.team._id}/${confirmationCode}/false to join their team.
+            <br><br>
+            Welcome to ReqResNext and happy coding!`
+                
           transporter.sendMail({
             from: '"ReqResNext Team Invite" <reqresnext@gmail.com>',
-            to: email,
-            subject: `${name} has invited you to join their team, ${teamName}!`, 
+            to: req.body.email,
+            subject: `${req.user.name} invites you to join a team on ReqResNext!`, 
             text: messageWithContactInfo,
             html: messageWithContactInfo
           })
           .then(
-            // add the invite info to the team for checks
-            Team.findByIdAndUpdate(teamID, {$push : {
-              invites: { 
-                email: email,
-                confirmationCode: confirmationCode,
-                invitedBy: req.user.id
+            res.status(200).json({message: "this user doesn't have an account, we have sent them an email invite."})
+          )
+          .catch(error => console.log(error));
+        })
+      })
+    }
+    else if (foundUser.teams.includes(req.body.team._id)) {
+      console.log('user already belongs to this team')
+      res.json('user already belongs to this team')
+    }
+    else {
+      console.log("user has an account and doesn't belong to the group")
+      // create invite
+      Invite.create({
+        email: req.body.email,
+        team: req.body.team._id,
+        confimrationCode: confirmationCode,
+        invitedBy: req.user.id,
+        accepted: false
+      })
+      .then(response => {
+        //add invite to team
+        Team.findByIdAndUpdate(req.body.team._id, {$push: { invites: response._id }})
+        .then(teamData => {
+          //add invite to user
+          User.findByIdAndUpdate(foundUser._id, {$push: {invites: response._id}})
+          .then(response => {
+            //send email
+            let transporter = nodemailer.createTransport({
+              service: 'Gmail',
+              auth: {
+              user: process.env.NODE_EMAIL,
+              pass: process.env.NODE_PASS
               }
-            }})
-            .then(response => {
-                  res.status(200).json({message: "We have sent an email to the user letting them know you've invited them!"})
+            });
+                  
+            let messageWithContactInfo = `Hi there!<br><br> ${req.user.name} has invited you to join their team '${req.body.team.name}' on ReqResNext.<br><br>
+              Joining their team will allow you to have access to their projects, which will allow you to collaborate together. 
+              Please visit https://www.reqresnext.com/join/${req.body.team._id}/${confirmationCode}/true to join their team.
+              <br><br>
+              Happy coding!`
+                  
+            transporter.sendMail({
+              from: '"ReqResNext Team Invite" <reqresnext@gmail.com>',
+              to: req.body.email,
+              subject: `${req.user.name} invites you to join a team on ReqResNext!`, 
+              text: messageWithContactInfo,
+              html: messageWithContactInfo
             })
-          ).catch(error => console.log(error));
+            .then(
+              res.status(200).json({message: "this user has an account, we have sent them an email invite to join."})
+            )
+            .catch(error => console.log(error));
+          })
+          })
       })
     }
   })
-
 });
 
 
-
+router.post('/join/:teamID/:confirmationCode/:hasAccount', (req,res,next) => {
+  console.log(req.params.teamID)
+  console.log(req.params.confirmationCode)
+  console.log(req.params.hasAccount)
+  console.log('JOINNNNN')
+})
 router.post('/join/:teamID/:email/:confirmationCode', (req,res,next) => {
   // console.log(req.body)
   // console.log(req.params)
