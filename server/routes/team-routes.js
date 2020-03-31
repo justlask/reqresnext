@@ -42,40 +42,24 @@ router.post('/create', (req,res,next) => {
 
 
 router.post('/addproject', (req,res,next) => {
-  let teamID = req.body.team
-  let projectID = req.body.project
-
   // add team to project
-  Project.findByIdAndUpdate(projectID, {team: teamID})
+  Project.findByIdAndUpdate(req.body.project._id, { team: req.body.team._id })
   .then(response => {
       //add project to team
-      Team.findByIdAndUpdate(teamID, {$push: {projects: projectID}})
+      Team.findByIdAndUpdate(req.body.team._id, {$push: {projects: req.body.project._id}})
       .then(response => {
-        // add all members to the project's members
-        // Project.findByIdAndUpdate(projectID, {$push: {members: response.members}})
-        // .then(response => {
-        //   res.json('Project has a team, team has a project, project has members')
-        // })
         res.json('project has a team, team has a project')
       })
   })
 })
 
 router.post('/removeproject', (req,res,next) => {
-  let teamID = req.body.team
-  let projectID = req.body.project
-
   // remove team from project
-  Project.findByIdAndUpdate(projectID, {team: {$pull: teamID}})
+  Project.findByIdAndUpdate(req.body.project._id, {team: undefined})
   .then(response => {
       // remove project from team
-      Team.findByIdAndUpdate(teamID, {$pull: {projects: projectID}})
+      Team.findByIdAndUpdate(req.body.team._id, {$pull: {projects: req.body.project._id}})
       .then(response => {
-        // add all members to the project's members
-        // Project.findByIdAndUpdate(projectID, {$pull: {members: response.members}})
-        // .then(response => {
-        //   res.json('Project has no team, team has no project, project has no members')
-        // })
         res.json('team has 1 less project, project has 1 less team')
       })
   })
@@ -88,10 +72,10 @@ router.post('/removemember', (req,res,next) => {
 
   Team.findById(teamID)
   .then(theTeam => {
-    if (theTeam.admin.toString() == req.user._id.toString()) {
+    if (theTeam.admin.toString() == req.user._id.toString() == memberID.toString()) {
       res.json('you cannot remove yourself')
     }
-    else {
+    else if (theTeam.admin.toString() == req.user._id.toString()) {
       Team.findByIdAndUpdate(teamID, {$pull: {members: memberID}}, {new:true})
       .then(teamResponse => {
         User.findByIdAndUpdate(memberID, {$pull: { teams: teamID }})
@@ -99,6 +83,9 @@ router.post('/removemember', (req,res,next) => {
           res.json(teamResponse)
         })
       })
+    }
+    else {
+      res.json("you are not authorized to remove members")
     }
   })
 })

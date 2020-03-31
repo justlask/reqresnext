@@ -27,7 +27,7 @@ const Projects = (props) => {
   return (
     <div>
       <div onClick={(e) => setShow(!show)}>
-        <b>Projects:</b>
+        <b style={{cursor: 'pointer'}}>Projects:</b>
       </div>
       {(show) ? showProjects() : null}
       <AddTeamProject updateUser={props.updateUser} user={props.user} team={props.team} show={showMore} hide={handleShowProject}/>

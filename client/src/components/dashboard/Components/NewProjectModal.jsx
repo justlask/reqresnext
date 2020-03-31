@@ -5,7 +5,7 @@ import Button from '../../Button'
 // the modal that opens to allow people to add a project
 const NewProjectModal = (props) => {
   const service = new AuthService();
-  const [project, setProject] = useState({title: null, description: null, image: null, team: null})
+  const [project, setProject] = useState({title: undefined, description: undefined, image: undefined, team: undefined})
 
   const handleChange = (event) => {
     setProject({
@@ -20,8 +20,8 @@ const NewProjectModal = (props) => {
 
     service.createProject(project)
     .then(response => {
-      setProject({title: null, description: null, image: null, team: null})
-      props.updateProject();
+      props.updateProject(response);
+      setProject({title: undefined, description: undefined, image: undefined, team: undefined})
       props.onClose();
     })
   }

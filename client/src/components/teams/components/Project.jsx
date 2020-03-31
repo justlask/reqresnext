@@ -8,7 +8,7 @@ const Project = (props) => {
   const service = new AuthService();
 
   const removeProject = (e) => {
-    service.removeProjectFromTeam(props.team._id, props.project._id)
+    service.removeProjectFromTeam(props.team, props.project)
     .then(response => {
       props.updateUser()
     })

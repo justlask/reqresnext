@@ -30,28 +30,12 @@ router.get('/:projectID', (req,res,next) => {
 });
 
 router.post('/byteam', (req,res,next) => {
-  console.log(req.user._id)
-  console.log(req.body)
 
   let select = (req.body.isCurrent === 'Current Projects') ? false : true
 
   if (!req.body.team) {
-    console.log('----------------------')
-    console.log('theres no team!')
-    //get everything
-    //all projects where user is owner
-    //all projects where team is in user.teams
-    // Project.find({ 
-    //   $and: [ 
-    //     { team: { $in: req.user.teams } }, 
-    //     { complete: select}]
-    //   })
-    //   .then(data => {
-    //     console.log(data)
-    //     res.json(data)
-    //   })
-
-
+    //get all projects that they own
+    // and all projects for the teams they belong to
       Project.find({ 
         $or: [
           { $and: [ 
@@ -147,18 +131,9 @@ router.post('/create', (req,res,next) => {
   .then(project => {
     if (req.body.team) {
       // adds project to team
-      Team.findByIdAndUpdate(req.body.team, {$push: {projects: project.id}})
+      Team.findByIdAndUpdate(req.body.team, {$push: {projects: project.id}}, {new:true})
       .then(response => {
-        // // adds the project to each member of the team
-        // response.members.forEach(member => {
-        //   User.findByIdAndUpdate(member, {$push: {projects: project.id}})
-        // })
-        // adds all members to the project members array
-        // Project.findByIdAndUpdate(project.id, {$push: {members: response.members}})
-        // .then(response => {
-        //   res.json(response)
-        // })
-        res.json(project)
+        res.json(response)
       })
     }
     else {
@@ -186,22 +161,18 @@ router.post('/update', (req,res,next) => {
 
 
 router.post('/delete/:projectID', (req,res,next) => {
+  console.log('lets delete')
   //gotta DELETE IT ALLLLL *pokemon voice*
+
 
   Project.findById(req.params.projectID)
   .then(project => {
+
     //if project has a team and the user trying to delete is the owner
-    if (project.team && req.user.id === project.owner) {
+    if (project.team && req.user._id.toString() === project.owner.toString()) {
       // remove project from team
       Team.findByIdAndUpdate(project.team, {$pull: {projects: req.params.projectID}})
       .then(response => {
-
-        // response.members.forEach(memeber => {
-        //   // remove project from all team members
-        //   User.findByIdAndUpdate(member, {$pull: {projects: req.params.projectID}})
-        //   .then(response => {
-        //   })
-        // })
 
         Project.findByIdAndDelete(req.params.projectID)
         .then(response => {
@@ -227,7 +198,8 @@ router.post('/delete/:projectID', (req,res,next) => {
       })
     }
     // else if the project doesn't have a team and the owner is the user
-    else if (!project.team && req.user.id === project.owner) {
+    else if (!project.team && req.user._id.toString() === project.owner.toString()) {
+
     Project.findByIdAndDelete(req.params.projectID)
     .then(response => {
 

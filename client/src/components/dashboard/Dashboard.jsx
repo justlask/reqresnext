@@ -37,26 +37,9 @@ const Dashboard = () => {
     ) : <p>No Projects to Show.</p>
   }
 
-
-  const handleProjects = (props) => {
-    if (team) {
-      console.log(props)
-      console.log(team._id)
-    }
-    else {
-      console.log(props)
-      console.log(team)
-    }
-  }
-
-  const updateProject = () => {
-    let userID = user._id
-    let select = false
-    
-    service.getProjects(select, userID)
-    .then(data => {
-      setProjects(data)
-    });
+  const updateProject = (team) => {
+    setTeam(team)
+    setType('Current Projects')
   }
 
   const toggleModal = () => {
@@ -71,8 +54,8 @@ const Dashboard = () => {
           <div className="projectNav">
             <Button onClick={() => toggleModal()} className="addproj" title="Add Project"></Button>
             <div className="projectbuttons">
-              <ProjectTypeButton type="Current Projects" handleProjects={handleProjects} setType={setType} isActive={type}/>
-              <ProjectTypeButton type="Past Projects" handleProjects={handleProjects} setType={setType} isActive={type}/>
+              <ProjectTypeButton type="Current Projects" setType={setType} isActive={type}/>
+              <ProjectTypeButton type="Past Projects" setType={setType} isActive={type}/>
             </div>
           </div>
           {showProjects()}
